@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd HH-mm", TimeZone.getTimeZone("UTC"))
+}
+
+android {
+    compileSdkVersion  rootProject.ext.versions.compileSdkVersion
+    defaultConfig {
+        applicationId "com.rivamed.orthopaedicacceptanceterminal"
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
+        versionCode rootProject.ext.versions.versionCode
+        versionName rootProject.ext.versions.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //MultiDex分包方法
+        multiDexEnabled true
+    }
+    signingConfigs {
+        debug_config {
+            storeFile file(PATH)
+            keyAlias KEY_ALIAS
+            storePassword STORE_PASSWORD
+            keyPassword KEY_PASSWORD
+            v2SigningEnabled true
+        }
+        release_config {
+            storeFile file(PATH)
+            keyAlias KEY_ALIAS
+            storePassword STORE_PASSWORD
+            keyPassword KEY_PASSWORD
+            v2SigningEnabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release_config
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "骨科v${defaultConfig.versionName}_${releaseTime()}.apk"
+                }
+            }
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug_config
+        }
+    }
+    aaptOptions { cruncherEnabled = false }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(':commonLib')
+    //黄油刀
+    annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
+}
