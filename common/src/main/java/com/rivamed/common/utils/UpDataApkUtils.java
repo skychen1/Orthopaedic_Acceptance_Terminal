@@ -43,11 +43,15 @@ public class UpDataApkUtils {
 
     /**
      * 版本检测
+     * @param context
+     * @param urlVersion 查询是否有更新的地址
+     * @param urlFileApk 如果有更新要下载的APK地址
+     * @param systemType    终端名称
      */
-    public static void getUpDataVersion(final Context context,String urlVersion,String urlFileApk,String sysName) {
+    public static void getUpDataVersion(final Context context,String urlVersion,String urlFileApk,String systemType) {
         mUrlVersion=urlVersion;
         mUrlFileApk=urlFileApk;
-        mSystemType=sysName;
+        mSystemType=systemType;
         HashMap<String, String> keyMap = new HashMap<>(1);
         keyMap.put("systemType", mSystemType);
         OkGoUtil.getRequest(mUrlVersion, context, keyMap, new JsonCallback<VersionBean>() {
