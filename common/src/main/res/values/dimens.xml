@@ -19,8 +19,10 @@
     <dimen name="font_size_24">24sp</dimen>
     <dimen name="font_size_25">25sp</dimen>
     <dimen name="font_size_26">26sp</dimen>
+    <dimen name="font_size_28">28sp</dimen>
     <dimen name="font_size_18sp">18sp</dimen>
     <dimen name="font_size_40sp">40sp</dimen>
+    <dimen name="font_size_32sp">32sp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_15dp">15dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>

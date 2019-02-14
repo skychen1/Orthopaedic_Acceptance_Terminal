@@ -46,6 +46,10 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
         super();
         initMyDialog(activity, hint);
     }
+    public DialogCallback(Activity activity) {
+        super();
+        initMyDialog(activity);
+    }
 
     @Override
     public void onStart(Request<T, ? extends Request> request) {

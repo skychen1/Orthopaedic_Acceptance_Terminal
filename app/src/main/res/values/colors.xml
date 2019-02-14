@@ -3,4 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bg_login">#e6ecf2</color>
+    <color name="color_login_orange">#ffff5a49</color>
+    <color name="text_black">#333333</color>
+    <color name="text_hint">#888888</color>
+    <color name="line_login_top">#ffdedede</color>
+    <color name="pop_selected">#00A98D</color>
+    <color name="text_sub_dark">#666666</color>
+    <color name="pg_bg">#edf1f6</color>
+    <color name="white">#ffffff</color>
+    <color name="text_color_0">#000000</color>
+    <color name="pg_block">#1C6573</color>
 </resources>

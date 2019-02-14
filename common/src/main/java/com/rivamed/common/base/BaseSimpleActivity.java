@@ -3,10 +3,8 @@ package com.rivamed.common.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +13,9 @@ import android.view.ViewStub;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.rivamed.common.R;
-import com.rivamed.common.R2;
 
 import java.lang.ref.WeakReference;
-
-import butterknife.BindView;
 
 /**
  * 项目名称:    Rivamed_High_2.5
@@ -33,26 +27,19 @@ import butterknife.BindView;
  * 更新者：     $$Author$$
  * 更新时间：   $$Date$$
  * 更新描述：   ${TODO}
+ * @author Administrator
  */
 
 public abstract class BaseSimpleActivity extends SimpleActivity {
-    @Nullable
-    @BindView(R2.id.base_tab_content)
+
     RelativeLayout baseTabContent;
-    @Nullable
-    @BindView(R2.id.toolbar)
     Toolbar toolbar;
-    @Nullable
-    @BindView(R2.id.appbar)
     AppBarLayout appbar;
-    @Nullable
-    @BindView(R2.id.view_stub_layout)
     ViewStub viewStubLayout;
     /**
      * 处理异常数据
      */
     ViewStub emptyView;
-
     /**
      * 控件集合
      */
@@ -75,11 +62,12 @@ public abstract class BaseSimpleActivity extends SimpleActivity {
         viewStubLayout = (ViewStub) findViewById(R.id.view_stub_layout);
         viewStubLayout.setLayoutResource(getContentLayoutId());
         viewStubLayout.inflate();
+        initAppBar(getAppBarLayoutId());
     }
 
     @Override
     public void bindEvent() {
-        initAppBar(getAppBarLayoutId());
+
     }
 
     @Override
@@ -92,7 +80,7 @@ public abstract class BaseSimpleActivity extends SimpleActivity {
         mViews = new SparseArray<>();
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mAppBarView = inflater.inflate(layoutSrc, null);
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mAppBarView.setLayoutParams(lp);
         if (baseTabContent != null && baseTabContent.getChildCount() > 0) {
             baseTabContent.removeAllViews();

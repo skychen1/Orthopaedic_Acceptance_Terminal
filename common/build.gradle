@@ -27,7 +27,7 @@ android {
 dependencies {
     //OS依赖
     // 在项目中的libs中的所有的.jar结尾的文件，都是依赖
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //把implementation 用api代替,它是对外部公开的, 所有其他的module就不需要添加该依赖
     api rootProject.ext.dependencies["appcompat_v7"]
     api rootProject.ext.dependencies["constraint_layout"]
@@ -50,4 +50,5 @@ dependencies {
     api rootProject.ext.dependencies["gson"]
     api rootProject.ext.dependencies["autosize"]
     api rootProject.ext.dependencies["easypermissions"]
+    implementation files('libs/immersionbar-2.3.1.jar')
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margin_20dp"
+    android:layout_marginRight="@dimen/margin_20dp"
+    android:paddingTop="@dimen/margin_28dp"
+    android:paddingBottom="@dimen/margin_15dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        app:cardElevation="5dp"
+        app:contentPadding="4dp"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/text_fb"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shap_white_rec"
+            android:orientation="vertical"
+            android:paddingLeft="70dp"
+            android:paddingTop="@dimen/margin_24dp"
+            android:paddingRight="70dp"
+            android:paddingBottom="@dimen/margin_24dp">
+
+            <ImageView
+                android:id="@+id/img_funcation"
+                android:layout_width="@dimen/margin_100dp"
+                android:layout_height="@dimen/margin_100dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/ic_main_order_application" />
+
+            <TextView
+                android:id="@+id/tv_funcation_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:background="@null"
+                android:hint="器械第三方的施工处审"
+                android:maxLines="1"
+                android:text="器械第三方"
+                android:textColor="#ff1c6573"
+                android:textSize="@dimen/font_size_24"
+                app:autoSizeMaxTextSize="24sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

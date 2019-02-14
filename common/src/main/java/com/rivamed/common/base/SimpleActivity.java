@@ -8,7 +8,9 @@ import android.content.res.Resources;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
 import me.yokeyword.fragmentation.SupportActivity;
+
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.lzy.okgo.OkGo;
 import com.rivamed.common.R;
 import com.rivamed.common.base.mvp.IPresent;
@@ -48,8 +51,7 @@ import butterknife.Unbinder;
  * 更新时间：   $$Date$$
  * 更新描述：   ${TODO}
  */
-public abstract class SimpleActivity<P extends IPresent> extends SupportActivity implements
-        IView<P> {
+public abstract class SimpleActivity<P extends IPresent> extends SupportActivity implements IView<P> {
 
     private VDelegate vDelegate;
     private P p;
@@ -68,10 +70,13 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //设置全屏
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if (getIsFullScreen()){
+            //设置全屏
+            this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            ImmersionBar.with(this).init();
+        }
         //屏幕常亮
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -84,7 +89,6 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
         }
         initDataAndEvent(savedInstanceState);
     }
-
 
 
     @Override
@@ -178,8 +182,8 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
         startActivity(intent);
     }
 
-    protected void startActivityForResult(Class<? extends Activity> cls,
-                                          Bundle bundle, int requestCode) {
+    protected void startActivityForResult(Class<? extends Activity> cls, Bundle bundle,
+                                          int requestCode) {
         Intent localIntent = new Intent();
         if (bundle != null) {
             localIntent.putExtras(bundle);
@@ -188,8 +192,7 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
         startActivityForResult(localIntent, requestCode);
     }
 
-    protected void startActivityForResult(Class<? extends Activity> cls, int
-            requestCode) {
+    protected void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
         startActivityForResult(cls, null, requestCode);
     }
 
@@ -241,6 +244,15 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
     }
 
     /**
+     * 是否全屏
+     *
+     * @return
+     */
+    public boolean getIsFullScreen() {
+        return true;
+    }
+
+    /**
      * 重写 getResource 方法，防止系统字体影响;禁止app字体大小跟随系统字体大小调节
      */
     @Override
@@ -277,7 +289,8 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
     }
 
     public void hideInputWindow(View v) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm =
+                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
@@ -292,8 +305,7 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
             int top = leftTop[1];
             int bottom = top + v.getHeight();
             int right = left + v.getWidth();
-            if (event.getX() > left && event.getX() < right
-                    && event.getY() > top && event.getY() < bottom) {
+            if (event.getX() > left && event.getX() < right && event.getY() > top && event.getY() < bottom) {
                 // 点击的是输入框区域，保留点击EditText的事件
                 return false;
             } else {
@@ -323,12 +335,9 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
         LayoutInflater inflater = getLayoutInflater();
         mTipView = inflater.inflate(R.layout.layout_network_tip, null); //提示View布局
         mWindowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        mLayoutParams = new WindowManager.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                PixelFormat.TRANSLUCENT);
+        mLayoutParams = new WindowManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_APPLICATION,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, PixelFormat.TRANSLUCENT);
         //使用非CENTER时，可以通过设置XY的值来改变View的位置
         mLayoutParams.gravity = Gravity.TOP;
         mLayoutParams.x = 0;

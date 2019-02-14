@@ -35,7 +35,7 @@ import java.util.HashMap;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class UpDataApkUtils {
+public class UpDateApkUtils {
     private static final String TAG = "UpDataApkUtils";
     private static  String mUrlVersion;
     private static  String mUrlFileApk;
@@ -48,7 +48,7 @@ public class UpDataApkUtils {
      * @param urlFileApk 如果有更新要下载的APK地址
      * @param systemType    终端名称
      */
-    public static void getUpDataVersion(final Context context,String urlVersion,String urlFileApk,String systemType) {
+    public static void getUpDateVersion(final Context context,String urlVersion,String urlFileApk,String systemType) {
         mUrlVersion=urlVersion;
         mUrlFileApk=urlFileApk;
         mSystemType=systemType;

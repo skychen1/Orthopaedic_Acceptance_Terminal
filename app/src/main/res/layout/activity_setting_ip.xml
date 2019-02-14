@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pg_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shap_line5"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_30dp"
+            android:layout_marginRight="@dimen/margin_30dp"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:background="@null"
+            android:hint="请输入如:192.168.2.100:8016"
+            android:paddingBottom="@dimen/margin_5dp"
+            android:paddingTop="@dimen/margin_5dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_hint"
+            android:textSize="@dimen/font_size_15" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_1dp"
+            android:layout_marginLeft="@dimen/margin_30dp"
+            android:layout_marginRight="@dimen/margin_30dp"
+            android:background="@color/line_login_top" />
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="@dimen/margin_80dp"
+            android:background="@drawable/shap_sure_btn"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_16" />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="@dimen/margin_40dp"
+            android:background="@drawable/shap_gray_rec_blue"
+            android:text="@string/cancel"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_size_16" />
+    </LinearLayout>
+</RelativeLayout>
