@@ -64,17 +64,20 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
     private View mTipView;
     private WindowManager mWindowManager;
     private WindowManager.LayoutParams mLayoutParams;
-    protected boolean mCheckNetWork = false; //默认不检查网络状态
+    //默认不检查网络状态
+    protected boolean mCheckNetWork = false;
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getIsFullScreen()){
+        if (getIsFullScreen()) {
             //设置全屏
             this.requestWindowFeature(Window.FEATURE_NO_TITLE);
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        if (getIsImmersionBar()){
             ImmersionBar.with(this).init();
         }
         //屏幕常亮
@@ -249,7 +252,15 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
      * @return
      */
     public boolean getIsFullScreen() {
-        return true;
+        return false;
+    }
+    /**
+     * 是否状态栏沉浸
+     *
+     * @return
+     */
+    public boolean getIsImmersionBar() {
+        return false;
     }
 
     /**

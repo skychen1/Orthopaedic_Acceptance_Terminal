@@ -12,6 +12,7 @@
     <color name="text_gray_8">#888B91</color>
     <color name="text_gray_c">#cccccc</color>
     <color name="text_gray_6">#666666</color>
+    <color name="text_gray_5">#555555</color>
     <color name="text_fb">#fbfbfb</color>
     <color name="text_00c2ff">#00c2ff</color>
     <color name="text_b2b6bd">#b2b6bd</color>
@@ -26,4 +27,5 @@
     <color name="line_de">#dedee0</color>
     <color name="bg_green">#1C6573</color>
     <color name="bg_056AC8">#056AC8</color>
+    <color name="bg_007FA9">#007FA9</color>
 </resources>

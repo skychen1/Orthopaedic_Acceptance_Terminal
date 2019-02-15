@@ -34,6 +34,11 @@ public class MainFuncationAdapter extends SimpleRecyclerAdapter<Object,
             return;
         }
         holder.imgFuncation.setBackgroundResource(R.mipmap.ic_main_order_application);
+        holder.mRoot.setOnClickListener((View v) -> {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(v, position);
+            }
+        });
     }
 
     static class MyHolder extends SimpleViewHolder {

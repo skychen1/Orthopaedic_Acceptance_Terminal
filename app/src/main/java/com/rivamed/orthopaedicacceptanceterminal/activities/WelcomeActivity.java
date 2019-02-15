@@ -48,7 +48,15 @@ public class WelcomeActivity extends SimpleActivity {
     public Object newP() {
         return null;
     }
-
+    /**
+     * 是否全屏
+     *
+     * @return
+     */
+    @Override
+    public boolean getIsFullScreen() {
+        return true;
+    }
     @Override
     protected void onDestroy() {
         if (mHandler != null) {

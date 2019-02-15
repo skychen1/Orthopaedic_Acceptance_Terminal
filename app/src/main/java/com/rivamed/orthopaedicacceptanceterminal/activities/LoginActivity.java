@@ -169,7 +169,15 @@ public class LoginActivity extends SimpleActivity {
             }
         });
     }
-
+    /**
+     * 是否状态栏沉浸
+     *
+     * @return
+     */
+    @Override
+    public boolean getIsImmersionBar() {
+        return true;
+    }
     /**
      * 点击次数
      */

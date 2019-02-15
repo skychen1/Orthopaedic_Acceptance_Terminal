@@ -24,7 +24,7 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class MainActivity extends OatBaseActivity {
+public class MainActivity extends OatMainTitleActivity {
 
     @BindView(R.id.rv_context)
     RecyclerView rvContext;
@@ -57,6 +57,15 @@ public class MainActivity extends OatBaseActivity {
         mMainFuncationList.add("1");
         mMainFuncationAdapter.setList(mMainFuncationList);
         mMainFuncationAdapter.notifyDataSetChanged();
+    }
+    /**
+     * 是否状态栏沉浸
+     *
+     * @return
+     */
+    @Override
+    public boolean getIsImmersionBar() {
+        return true;
     }
 
 }
