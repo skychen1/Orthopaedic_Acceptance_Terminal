@@ -17,6 +17,7 @@ import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.rivamed.common.BuildConfig;
+import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.utils.crash.CrashHandler;
 import com.rivamed.common.utils.crash.MyHttpLoggingInterceptor;
 
@@ -30,7 +31,7 @@ import okhttp3.OkHttpClient;
 /**
  * @author Administrator
  */
-public class BaseApplication extends Application {
+abstract public class BaseApplication extends Application {
     /**
      * 用于存放所有启动的Activity的集合
      */
@@ -47,17 +48,15 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mAllStackActivityList = new LinkedList<>();
-        registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks = new
-                AppActivityLifecycleCallbacks());
+        registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks =
+                new AppActivityLifecycleCallbacks());
         if (!BuildConfig.DEBUG) {
             CrashHandler crashHandler = CrashHandler.getInstance();
             crashHandler.init(this);
         } else {
             //开启严苛模式
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll()
-                    .penaltyLog().build());
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog()
-                    .build());
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
         }
         instance = this;
         initOkGo();
@@ -106,7 +105,7 @@ public class BaseApplication extends Application {
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)   //全局统一缓存时间，默认永不过期，可以不传
                 .setRetryCount(0);                              //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次
         // (一次原始请求，三次重连请求)，不需要可以设置为0
-
+        OkGoUtil.initRootUrl(getRootUrl());
     }
 
     /**
@@ -201,4 +200,12 @@ public class BaseApplication extends Application {
         }
         super.onConfigurationChanged(newConfig);
     }
+
+    /**
+     * 初始化根地址
+     *
+     * @return
+     */
+    protected abstract String getRootUrl();
+
 }

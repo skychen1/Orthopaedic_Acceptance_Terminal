@@ -8,7 +8,7 @@ import com.rivamed.common.base.app.BaseApplication;
  * @ProjectName: Orthopaedic_Acceptance_Terminal
  * @Package: com.rivamed.orthopaedicacceptanceterminal.app
  * @ClassName: OrthopaedicApplication
- * @Description: java类作用描述
+ * @Description: 骨科App
  * @Author: Amos_Bo
  * @CreateDate: 2019/1/30 9:29
  * @UpdateUser: 更新者
@@ -18,4 +18,9 @@ import com.rivamed.common.base.app.BaseApplication;
  */
 @SuppressLint("Registered")
 public class OrthopaedicApplication extends BaseApplication {
+
+    @Override
+    protected String getRootUrl() {
+        return UrlPath.ROOT_URL;
+    }
 }

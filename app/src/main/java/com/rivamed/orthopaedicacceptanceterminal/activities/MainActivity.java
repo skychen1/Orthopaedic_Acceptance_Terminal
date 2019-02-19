@@ -1,12 +1,16 @@
 package com.rivamed.orthopaedicacceptanceterminal.activities;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.adapter.MainFuncationAdapter;
+import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +33,9 @@ public class MainActivity extends OatMainTitleActivity {
     @BindView(R.id.rv_context)
     RecyclerView rvContext;
     private MainFuncationAdapter mMainFuncationAdapter;
-    private List<Object> mMainFuncationList;
+    private ArrayList<MianFuncationParam> mMainFuncationList;
+
+    private static final String FUNATION_DATA_TAG = "function_data_tag";
 
     @Override
     protected int getContentLayoutId() {
@@ -41,23 +47,24 @@ public class MainActivity extends OatMainTitleActivity {
         initData();
     }
 
-    private void initData() {
-        setCenterTitle("骨科耗材管理系统");
-        mMainFuncationList = new ArrayList<>();
-        mMainFuncationAdapter = new MainFuncationAdapter(this);
-        rvContext.setLayoutManager(new GridLayoutManager(this, 2));
-        rvContext.setAdapter(mMainFuncationAdapter);
-        testData();
+    public static void startMainActivity(Context context,
+                                         ArrayList<MianFuncationParam> funcationList) {
+        startActivityWithSerializable(context, MainActivity.class, FUNATION_DATA_TAG,
+                funcationList);
     }
 
-    private void testData() {
-        mMainFuncationList.add("1");
-        mMainFuncationList.add("1");
-        mMainFuncationList.add("1");
-        mMainFuncationList.add("1");
+    private void initData() {
+        setCenterTitle("骨科耗材管理系统");
+        mMainFuncationList =
+                (ArrayList<MianFuncationParam>) getBundleSerializableVaule(FUNATION_DATA_TAG,
+                        getIntent());
+        mMainFuncationAdapter = new MainFuncationAdapter(this);
         mMainFuncationAdapter.setList(mMainFuncationList);
-        mMainFuncationAdapter.notifyDataSetChanged();
+        rvContext.setLayoutManager(new GridLayoutManager(this, 2));
+        rvContext.setAdapter(mMainFuncationAdapter);
+
     }
+
     /**
      * 是否状态栏沉浸
      *

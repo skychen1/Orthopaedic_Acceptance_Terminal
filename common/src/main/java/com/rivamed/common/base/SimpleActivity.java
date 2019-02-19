@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
 import me.yokeyword.fragmentation.SupportActivity;
@@ -77,7 +78,7 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        if (getIsImmersionBar()){
+        if (getIsImmersionBar()) {
             ImmersionBar.with(this).init();
         }
         //屏幕常亮
@@ -199,6 +200,34 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
         startActivityForResult(cls, null, requestCode);
     }
 
+    protected static <T extends Parcelable> void startActivity(Context context, Class<?> actvity,
+                                                               String dataTag, T data) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(dataTag, data);
+        Intent intent = new Intent(context, actvity);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    protected static <T extends Serializable> void startActivityWithSerializable(Context context,
+                                                                                 Class<?> actvity
+            , String dataTag, T data) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(dataTag, data);
+        Intent intent = new Intent(context, actvity);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+    protected static <T extends Parcelable> void startActivityWithParcelable(Context context,
+                                                                             Class<?> actvity,
+                                                                             String dataTag,
+                                                                             T data) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(dataTag, data);
+        Intent intent = new Intent(context, actvity);
+        context.startActivity(intent);
+    }
+
     protected void setResult(Bundle bundle) {
         Intent intent = new Intent();
         if (bundle != null) {
@@ -254,6 +283,7 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
     public boolean getIsFullScreen() {
         return false;
     }
+
     /**
      * 是否状态栏沉浸
      *

@@ -1,5 +1,6 @@
 package com.rivamed.orthopaedicacceptanceterminal.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -17,10 +18,17 @@ import com.rivamed.common.base.SimpleActivity;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.common.utils.BaseUtils;
+import com.rivamed.common.utils.ToastUtils;
 import com.rivamed.orthopaedicacceptanceterminal.BuildConfig;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
+import com.rivamed.orthopaedicacceptanceterminal.bean.LoginRequestParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.LoginResponseParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -58,6 +66,7 @@ public class LoginActivity extends SimpleActivity {
         return R.layout.activity_login;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
         tvVersionCode.setText("v" + BuildConfig.VERSION_NAME);
@@ -66,23 +75,18 @@ public class LoginActivity extends SimpleActivity {
         BaseUtils.setInputLenWithNoBlank(mEtUsername, 16);
         BaseUtils.setInputLenWithNoBlank(mEtPassword, 16);
         mIvEye.setSelected(false);
-        mEtUsername.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                mEtUsername.setCursorVisible(true);
-                mIvUsername.setSelected(true);
-                mIvPassword.setSelected(false);
-                return false;
-            }
+        mEtUsername.setOnTouchListener((View view, MotionEvent motionEvent) -> {
+            mEtUsername.setCursorVisible(true);
+            mIvUsername.setSelected(true);
+            mIvPassword.setSelected(false);
+            return false;
         });
-        mEtPassword.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                mEtPassword.setCursorVisible(true);
-                mIvUsername.setSelected(false);
-                mIvPassword.setSelected(true);
-                return false;
-            }
+        mEtPassword.setOnTouchListener((View view, MotionEvent motionEvent) -> {
+            mEtPassword.setCursorVisible(true);
+            mIvUsername.setSelected(false);
+            mIvPassword.setSelected(true);
+            return false;
+
         });
         if (BuildConfig.DEBUG) {
             mEtUsername.setText("admin");
@@ -121,7 +125,7 @@ public class LoginActivity extends SimpleActivity {
                     mTvLoginTip.setText("账号或密码不能为空");
                     mTvLoginTip.setVisibility(View.VISIBLE);
                 } else {
-                    startActivity(MainActivity.class);
+                    login(userName, pass);
                 }
                 break;
             case R.id.btn_forget_password:
@@ -154,21 +158,64 @@ public class LoginActivity extends SimpleActivity {
      * 登录
      *
      * @param name
+     * @param pass
      */
-    private void login(String name, String pass, String departmentId) {
-
-        OkGoUtil.postJsonRequest("", this, "", new DialogCallback<Object>(this) {
+    private void login(String name, String pass) {
+        LoginRequestParam loginRequestParam = new LoginRequestParam();
+        loginRequestParam.setSystemType("OCI");
+        loginRequestParam.setAccount(new LoginRequestParam.AccountBean());
+        loginRequestParam.getAccount().setAccountName(name);
+        loginRequestParam.getAccount().setPassword(pass);
+        OkGoUtil.postJsonRequest(UrlPath.LOGIN_NAME_PASSWORD, this, loginRequestParam,
+                new DialogCallback<LoginResponseParam>(this) {
             @Override
-            public void onSuccess(Response<Object> response) {
-
+            public void onSuccess(Response<LoginResponseParam> response) {
+                if (response.body().isOperateSuccess()) {
+                    if (response.body().getAccessToken() != null && !TextUtils.isEmpty(response.body().getAccessToken().getTokenId())) {
+                        OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
+                        updateMainFunction(response.body().getAppAccountInfoVo().getAccountId());
+                    }
+                } else {
+                    ToastUtils.showShort("登录异常，请联系管理员!");
+                }
             }
 
             @Override
-            public void onError(Response<Object> response) {
+            public void onError(Response<LoginResponseParam> response) {
                 super.onError(response);
             }
         });
     }
+
+    /**
+     * 获取后端配置的主界面功能按钮接口
+     *
+     * @param accountId
+     */
+    private void updateMainFunction(String accountId) {
+        HashMap<String, String> requestKeyMap = new HashMap<>(2);
+        requestKeyMap.put("account.accountId", accountId);
+        requestKeyMap.put("systemType", "OCI");
+        OkGoUtil.getRequest(UrlPath.ACCOUNT_FUNCS, this, requestKeyMap,
+                new DialogCallback<List<MianFuncationParam>>(LoginActivity.this) {
+            @Override
+            public void onSuccess(Response<List<MianFuncationParam>> response) {
+                if (response.body() != null && response.body().size() > 0) {
+                    MainActivity.startMainActivity(mContext,
+                            (ArrayList<MianFuncationParam>) response.body());
+                    finish();
+                } else {
+                    ToastUtils.showShort("此账号未配置权限，请联系管理员!");
+                }
+            }
+
+            @Override
+            public void onError(Response<List<MianFuncationParam>> response) {
+                super.onError(response);
+            }
+        });
+    }
+
     /**
      * 是否状态栏沉浸
      *
@@ -178,6 +225,7 @@ public class LoginActivity extends SimpleActivity {
     public boolean getIsImmersionBar() {
         return true;
     }
+
     /**
      * 点击次数
      */
@@ -203,24 +251,4 @@ public class LoginActivity extends SimpleActivity {
             startActivity(intent);
         }
     }
-
-    /**
-     * 获取后端配置的主界面功能按钮接口
-     */
-    private void updateMainFunction() {
-        HashMap<String, String> requestKeyMap = new HashMap<>(1);
-        requestKeyMap.put("systemType", "HOCT");
-        OkGoUtil.getRequest("", "", requestKeyMap, new DialogCallback<Object>(LoginActivity.this) {
-            @Override
-            public void onSuccess(Response<Object> response) {
-
-            }
-
-            @Override
-            public void onError(Response<Object> response) {
-                super.onError(response);
-            }
-        });
-    }
-
 }

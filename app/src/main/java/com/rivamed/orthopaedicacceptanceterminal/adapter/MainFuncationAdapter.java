@@ -1,6 +1,7 @@
 package com.rivamed.orthopaedicacceptanceterminal.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
 
 import butterknife.BindView;
 
@@ -21,7 +23,7 @@ import butterknife.BindView;
  * @version: V1.0
  * @describe: 主界面功能
  */
-public class MainFuncationAdapter extends SimpleRecyclerAdapter<Object,
+public class MainFuncationAdapter extends SimpleRecyclerAdapter<MianFuncationParam,
         MainFuncationAdapter.MyHolder> {
 
     public MainFuncationAdapter(Context context) {
@@ -29,9 +31,14 @@ public class MainFuncationAdapter extends SimpleRecyclerAdapter<Object,
     }
 
     @Override
-    protected void convert(MyHolder holder, Object emergencyPatientInfo, final int position) {
-        if (emergencyPatientInfo == null || holder == null) {
+    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+        if (item == null || holder == null) {
             return;
+        }
+        if (!TextUtils.isEmpty(item.getTitle())) {
+            holder.tvFucationName.setText(item.getTitle());
+        } else {
+            holder.tvFucationName.setText("");
         }
         holder.imgFuncation.setBackgroundResource(R.mipmap.ic_main_order_application);
         holder.mRoot.setOnClickListener((View v) -> {
