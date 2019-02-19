@@ -1,8 +1,10 @@
 package com.rivamed.orthopaedicacceptanceterminal.app;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 
 import com.rivamed.common.base.app.BaseApplication;
+import com.rivamed.common.utils.SPUtils;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -21,6 +23,10 @@ public class OrthopaedicApplication extends BaseApplication {
 
     @Override
     protected String getRootUrl() {
-        return UrlPath.ROOT_URL;
+        String SysIP = SPUtils.getString(BaseApplication.getInstance(), Constants.SAVE_SYS_IP);
+        if (TextUtils.isEmpty(SysIP)) {
+            SysIP = UrlPath.ROOT_URL;
+        }
+        return SysIP;
     }
 }

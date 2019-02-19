@@ -6,17 +6,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.lzy.okgo.model.Response;
 import com.rivamed.common.base.SimpleActivity;
+import com.rivamed.common.base.app.BaseApplication;
+import com.rivamed.common.http.OkGoUtil;
+import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.common.utils.SPUtils;
 import com.rivamed.common.utils.ToastUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
+import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
+import com.rivamed.orthopaedicacceptanceterminal.bean.LoginRequestParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.LoginResponseParam;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *
  * @author Amos_Bo
  */
 public class SettingIpActivity extends SimpleActivity {
@@ -59,7 +65,8 @@ public class SettingIpActivity extends SimpleActivity {
                 final String newIP = etIp.getText().toString().trim();
                 if (!TextUtils.isEmpty(newIP)) {
                     if (checkAddress(newIP)) {
-
+                        OkGoUtil.initRootUrl(newIP);
+                        checkIpIsCanUse("SysTest", "SysTest", newIP);
                     } else {
                         ToastUtils.showShort("请输入合法IP和端口号");
                     }
@@ -77,10 +84,46 @@ public class SettingIpActivity extends SimpleActivity {
 
     /**
      * ip和端口号校验
+     *
      * @param s
      * @return
      */
     boolean checkAddress(String s) {
         return s.matches("^(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1," + "2}|1\\d\\d|2[0-4" + "]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1," + "2}|1\\d\\d|2" + "[0-4]\\d|25[0-5])\\:([0-9]|[1-9]\\d{1," + "3}|[1-5]\\d{4}|6[0-5]{2}[0-3][0-5])$");
+    }
+
+    /**
+     * 检查IP是否可用
+     *
+     * @param name
+     * @param pass
+     */
+    private void checkIpIsCanUse(String name, String pass, String newIp) {
+        LoginRequestParam loginRequestParam = new LoginRequestParam();
+        loginRequestParam.setSystemType("OCI");
+        loginRequestParam.setAccount(new LoginRequestParam.AccountBean());
+        loginRequestParam.getAccount().setAccountName(name);
+        loginRequestParam.getAccount().setPassword(pass);
+        OkGoUtil.postJsonRequest(UrlPath.LOGIN_NAME_PASSWORD, this, loginRequestParam,
+                new DialogCallback<LoginResponseParam>(this) {
+            @Override
+            public void onSuccess(Response<LoginResponseParam> response) {
+                if (!response.body().isOperateSuccess()) {
+                    SPUtils.putString(BaseApplication.getInstance(), Constants.SAVE_SYS_IP, newIp);
+                }
+            }
+
+            @Override
+            public void onError(Response<LoginResponseParam> response) {
+                ToastUtils.showShort("服务器连接不通!");
+                if (!TextUtils.isEmpty(SPUtils.getString(BaseApplication.getInstance(),
+                        Constants.SAVE_SYS_IP))) {
+                    OkGoUtil.initRootUrl(SPUtils.getString(BaseApplication.getInstance(),
+                            Constants.SAVE_SYS_IP));
+                } else {
+                    OkGoUtil.initRootUrl(UrlPath.ROOT_URL);
+                }
+            }
+        });
     }
 }
