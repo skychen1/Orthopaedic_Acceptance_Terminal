@@ -21,6 +21,7 @@ import com.rivamed.common.BuildConfig;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.TokenUtils;
 import com.rivamed.common.utils.crash.CrashHandler;
+import com.rivamed.common.utils.crash.LogcatHelper;
 import com.rivamed.common.utils.crash.MyHttpLoggingInterceptor;
 
 import java.util.LinkedList;
@@ -57,6 +58,7 @@ abstract public class BaseApplication extends Application {
         if (!BuildConfig.DEBUG) {
             CrashHandler crashHandler = CrashHandler.getInstance();
             crashHandler.init(this);
+            LogcatHelper.getInstance(this).start();
         } else {
             //开启严苛模式
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());

@@ -33,7 +33,7 @@ public class LogcatHelper {
     /**
      * 初始化目录
      */
-    public void init(Context context) {
+    private void init(Context context) {
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {// 优先保存到SD卡中
             PATH_LOGCAT = Environment.getExternalStorageDirectory()
