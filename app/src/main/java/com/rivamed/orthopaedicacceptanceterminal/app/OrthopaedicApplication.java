@@ -20,6 +20,11 @@ import com.rivamed.common.utils.SPUtils;
  */
 @SuppressLint("Registered")
 public class OrthopaedicApplication extends BaseApplication {
+
+    @Override
+    protected void initAppConfigure() {
+    }
+
     /***
      *  服务器地址配置
      * @return

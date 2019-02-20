@@ -173,6 +173,7 @@ public class LoginActivity extends SimpleActivity {
                 if (response.body().isOperateSuccess()) {
                     if (response.body().getAccessToken() != null && !TextUtils.isEmpty(response.body().getAccessToken().getTokenId())) {
                         OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
+                        OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
                         updateMainFunction(response.body().getAppAccountInfoVo().getAccountId());
                     }
                 } else {

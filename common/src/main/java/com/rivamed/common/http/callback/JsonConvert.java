@@ -15,15 +15,20 @@
  */
 package com.rivamed.common.http.callback;
 
+import android.text.TextUtils;
+
 import com.google.gson.stream.JsonReader;
 import com.lzy.okgo.convert.Converter;
 import com.rivamed.common.http.model.LzyResponse;
 import com.rivamed.common.http.model.SimpleResponse;
 
-
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -128,6 +133,9 @@ public class JsonConvert<T> implements Converter<T> {
         if (type == null) return null;
         ResponseBody body = response.body();
         if (body == null) return null;
+        if (TokenUtils.IS_USE_TOKEN) {
+            checkTokenTime(body.charStream());
+        }
         JsonReader jsonReader = new JsonReader(body.charStream());
 
         Type rawType = type.getRawType();                     // 泛型的实际类型
@@ -163,6 +171,27 @@ public class JsonConvert<T> implements Converter<T> {
                     throw new IllegalStateException("错误代码：" + code + "，错误信息：" + lzyResponse.msg);
                 }
             }
+        }
+    }
+
+    /**
+     * 检验Token 是否过期
+     *
+     * @param is
+     * @throws IOException
+     * @throws JSONException
+     */
+    private void checkTokenTime(Reader is) throws IOException, JSONException {
+
+        BufferedReader r = new BufferedReader(is);
+        StringBuilder b = new StringBuilder();
+        String line;
+        while ((line = r.readLine()) != null) {
+            b.append(line);
+        }
+        JSONObject jsonObject = new JSONObject(b.toString());
+        if (!TextUtils.isEmpty(jsonObject.getString(TokenUtils.TOKEN_TAG)) && jsonObject.getString(TokenUtils.TOKEN_TAG).equals(TokenUtils.TOKEN_INVALID_CODE)) {
+            throw new IllegalStateException("用户登录已过期");
         }
     }
 }

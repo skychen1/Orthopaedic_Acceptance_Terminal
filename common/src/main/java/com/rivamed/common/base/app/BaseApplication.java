@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 
 import com.lzy.okgo.OkGo;
@@ -18,6 +19,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.rivamed.common.BuildConfig;
 import com.rivamed.common.http.OkGoUtil;
+import com.rivamed.common.http.callback.TokenUtils;
 import com.rivamed.common.utils.crash.CrashHandler;
 import com.rivamed.common.utils.crash.MyHttpLoggingInterceptor;
 
@@ -38,6 +40,8 @@ abstract public class BaseApplication extends Application {
     private List<Activity> mAllStackActivityList;
     private static BaseApplication instance;
     private ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
+
+    private LoginInvalidListener mLoginInvalidListener;
 
     public static synchronized BaseApplication getInstance() {
         return instance;
@@ -60,6 +64,7 @@ abstract public class BaseApplication extends Application {
         }
         instance = this;
         initOkGo();
+        initAppConfigure();
     }
 
     @Override
@@ -192,6 +197,34 @@ abstract public class BaseApplication extends Application {
         return resources;
     }
 
+    /**
+     * 设置Token失效监听
+     *
+     * @param loginInvalidListener
+     * @param tokenTag             token检验关键字
+     * @param tokenInvalidCode     过期id标志码
+     */
+    public void addLoginInvalidListener(@NonNull LoginInvalidListener loginInvalidListener,
+                                        String tokenTag, String tokenInvalidCode) {
+        this.mLoginInvalidListener = loginInvalidListener;
+        TokenUtils.TOKEN_TAG = tokenTag;
+        TokenUtils.TOKEN_INVALID_CODE = tokenInvalidCode;
+        TokenUtils.IS_USE_TOKEN = true;
+    }
+
+    /**
+     * 设置Token失效监听
+     *
+     * @param loginInvalidListener
+     */
+    public void addLoginInvalidListener(@NonNull LoginInvalidListener loginInvalidListener) {
+        this.addLoginInvalidListener(loginInvalidListener, "opFlg", "1010");
+    }
+
+    public LoginInvalidListener getLoginInvalidListener() {
+        return mLoginInvalidListener;
+    }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         //非默认值
@@ -208,4 +241,8 @@ abstract public class BaseApplication extends Application {
      */
     protected abstract String getRootUrl();
 
+    /**
+     * 初始化配置
+     */
+    protected abstract void initAppConfigure();
 }

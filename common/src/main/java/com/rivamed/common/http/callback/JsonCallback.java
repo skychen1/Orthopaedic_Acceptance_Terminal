@@ -19,7 +19,10 @@ import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.exception.HttpException;
 import com.lzy.okgo.exception.StorageException;
 import com.lzy.okgo.request.base.Request;
+import com.rivamed.common.base.app.BaseApplication;
 import com.rivamed.common.utils.ToastUtils;
+
+import org.json.JSONException;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -63,9 +66,8 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         // 使用的设备信息
         // 可以随意添加,也可以什么都不传
         // 还可以在这里对所有的参数进行加密，均在这里实现
-        request.headers("header1", "HeaderValue1")
-                .params("params1", "ParamsValue1")
-                .params("token", "3215sdf13ad1f65asd4f3ads1f");
+        request.headers("header1", "HeaderValue1").params("params1", "ParamsValue1").params(
+                "token", "3215sdf13ad1f65asd4f3ads1f");
     }
 
     /**
@@ -112,7 +114,14 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
             ToastUtils.showShort("SD卡不存在或没有权限");
         } else if (exception instanceof BindException) {
             ToastUtils.showShort("服务器端口已经被占用");
-        }else {
+        } else if (exception instanceof IllegalStateException) {
+            if (exception.getMessage().contains("用户登录已过期")) {
+                ToastUtils.showShort("登录过期，请重新登录");
+                if (BaseApplication.getInstance().getLoginInvalidListener() != null) {
+                    BaseApplication.getInstance().getLoginInvalidListener().tokenInvalid();
+                }
+            }
+        } else {
             ToastUtils.showShort("未知异常");
         }
         super.onError(response);

@@ -209,6 +209,15 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
         context.startActivity(intent);
     }
 
+    /**
+     * 界面跳转传参
+     *
+     * @param context
+     * @param actvity 界面
+     * @param dataTag 数据标签
+     * @param data    传输数据
+     * @param <T>
+     */
     protected static <T extends Serializable> void startActivityWithSerializable(Context context,
                                                                                  Class<?> actvity
             , String dataTag, T data) {
@@ -218,6 +227,16 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
+
+    /**
+     * 界面跳转传参
+     *
+     * @param context
+     * @param actvity 界面
+     * @param dataTag 数据标签
+     * @param data    传输数据
+     * @param <T>
+     */
     protected static <T extends Parcelable> void startActivityWithParcelable(Context context,
                                                                              Class<?> actvity,
                                                                              String dataTag,
