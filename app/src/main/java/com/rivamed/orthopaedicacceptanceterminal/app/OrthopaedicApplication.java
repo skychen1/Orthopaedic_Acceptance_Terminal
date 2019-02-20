@@ -20,7 +20,10 @@ import com.rivamed.common.utils.SPUtils;
  */
 @SuppressLint("Registered")
 public class OrthopaedicApplication extends BaseApplication {
-
+    /***
+     *  服务器地址配置
+     * @return
+     */
     @Override
     protected String getRootUrl() {
         String SysIP = SPUtils.getString(BaseApplication.getInstance(), Constants.SAVE_SYS_IP);
