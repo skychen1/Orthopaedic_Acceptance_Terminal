@@ -6,12 +6,14 @@ import com.lzy.okgo.model.Response;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
+import com.rivamed.orthopaedicacceptanceterminal.bean.FindCstDetailResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderDetailResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderRequestParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderStatusResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindSuiteDetailCstResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindSuiteDetailResponseParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.SubmitCostReqestAndResponseParam;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -120,6 +122,7 @@ public class NetData {
             }
         });
     }
+
     /**
      * 获取套餐明细（耗材、器械）
      *
@@ -142,6 +145,7 @@ public class NetData {
             }
         });
     }
+
     /**
      * 获取订单状态
      *
@@ -158,6 +162,50 @@ public class NetData {
 
             @Override
             public void onError(Response<FindOrderStatusResponseParam> response) {
+                super.onError(response);
+            }
+        });
+    }
+
+    /**
+     * 计费提报
+     *
+     * @param context
+     * @param costData
+     */
+    private void submitCostData(Activity context, SubmitCostReqestAndResponseParam costData) {
+        OkGoUtil.postJsonRequest(UrlPath.ACCOUNT_CHARGING_FEE, this, costData,
+                new DialogCallback<SubmitCostReqestAndResponseParam>(context) {
+            @Override
+            public void onSuccess(Response<SubmitCostReqestAndResponseParam> response) {
+
+            }
+
+            @Override
+            public void onError(Response<SubmitCostReqestAndResponseParam> response) {
+                super.onError(response);
+            }
+        });
+    }
+
+    /**
+     * 耗材明细
+     *
+     * @param context
+     * @param orderId
+     */
+    private void FindCstDetailData(Activity context, String orderId) {
+        Map<String, String> map = new HashMap<>(1);
+        map.put("orderId", orderId);
+        OkGoUtil.getRequest(UrlPath.ACCOUNT_CST_DETAIL, this, map,
+                new DialogCallback<FindCstDetailResponseParam>(context) {
+            @Override
+            public void onSuccess(Response<FindCstDetailResponseParam> response) {
+
+            }
+
+            @Override
+            public void onError(Response<FindCstDetailResponseParam> response) {
                 super.onError(response);
             }
         });

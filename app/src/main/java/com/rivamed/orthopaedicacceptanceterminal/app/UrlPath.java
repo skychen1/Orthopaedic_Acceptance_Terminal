@@ -47,4 +47,13 @@ public class UrlPath {
      * 订单状态
      */
     public static final String ACCOUNT_ORDERSTATUS_LIST = "/basic/ociOrder/orderStatusList";
+    /**
+     * 计费提报
+     */
+    public static final String ACCOUNT_CHARGING_FEE = "/dhccApi/basic/ociFee/chargingFee";
+    /**
+     * 耗材明细
+     */
+    public static final String ACCOUNT_CST_DETAIL = "/basic/ociOrderDetail" +
+            "/findCstDetailByOrderId";
 }
