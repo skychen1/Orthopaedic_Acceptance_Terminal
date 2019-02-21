@@ -65,7 +65,7 @@ public class SettingIpActivity extends SimpleActivity {
                 final String newIP = etIp.getText().toString().trim();
                 if (!TextUtils.isEmpty(newIP)) {
                     if (checkAddress(newIP)) {
-                        OkGoUtil.initRootUrl(newIP);
+                        OkGoUtil.initRootUrl("http://" + newIP);
                         checkIpIsCanUse("SysTest", "SysTest", newIP);
                     } else {
                         ToastUtils.showShort("请输入合法IP和端口号");
@@ -109,7 +109,8 @@ public class SettingIpActivity extends SimpleActivity {
             @Override
             public void onSuccess(Response<LoginResponseParam> response) {
                 if (!response.body().isOperateSuccess()) {
-                    SPUtils.putString(BaseApplication.getInstance(), Constants.SAVE_SYS_IP, newIp);
+                    SPUtils.putString(BaseApplication.getInstance(), Constants.SAVE_SYS_IP, "http"
+                            + "://" + newIp);
                 }
             }
 

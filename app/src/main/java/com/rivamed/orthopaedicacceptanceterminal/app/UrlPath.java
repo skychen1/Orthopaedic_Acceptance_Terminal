@@ -23,4 +23,28 @@ public class UrlPath {
      */
     public static final String ACCOUNT_FUNCS = "/rmApi/userManage/func" +
             "/getFuncsTreeByAccountIdForPad";
+    /**
+     * 订单详情
+     */
+    public static final String ACCOUNT_FIND_ORDER_BYID = "/basic/ociOrderDetail/findById";
+    /**
+     * 订单查询
+     */
+    public static final String ACCOUNT_FIND_ORDER = "/basic/ociOrder/findOrder";
+    /**
+     * 套餐明细（无菌、复消，器械）
+     */
+    public static final String ACCOUNT_FINDBY_SUITEID = "/basic/ociSuiteDetail/findBySuiteId";
+    /**
+     * 订单操作
+     */
+    public static final String ACCOUNT_OPERATOR_ORDER = "/basic/ociOrder/operatorOrder";
+    /**
+     * 套餐明细（耗材、器械）
+     */
+    public static final String ACCOUNT_FINDBY_ID = "/basic/ociSuiteDetail/findById";
+    /**
+     * 订单状态
+     */
+    public static final String ACCOUNT_ORDERSTATUS_LIST = "/basic/ociOrder/orderStatusList";
 }
