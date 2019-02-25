@@ -2,37 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="64dp"
     android:background="@drawable/shap_gray_rec"
-    android:orientation="horizontal">
-    <Button
-        android:id="@+id/bt_bottom_left"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/white"
-        android:textColor="@color/text_gray_3"
-        android:textSize="@dimen/font_size_22"
-        tools:text="拒绝" />
-    <Button
-        android:id="@+id/bt_bottom_medium"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#007FA9"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_22"
-        tools:text="打印标签" />
-    <Button
-        android:id="@+id/bt_bottom_right"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#1C6573"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_22"
-        tools:text="确认提交" />
+    android:orientation="vertical"
+    android:paddingTop="@dimen/margin_14dp"
+    android:paddingBottom="@dimen/margin_14dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_bottom_left"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_bg_bottom_btn_left"
+            android:paddingLeft="@dimen/margin_50dp"
+            android:paddingTop="@dimen/margin_8dp"
+            android:paddingRight="@dimen/margin_50dp"
+            android:paddingBottom="@dimen/margin_8dp"
+            android:text="拒绝"
+            android:textColor="@color/text_gray_3"
+            android:textSize="@dimen/font_size_18" />
+
+        <Button
+            android:id="@+id/bt_bottom_medium"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_30dp"
+            android:background="@drawable/shape_bg_bottom_btn_center"
+            android:paddingLeft="@dimen/margin_25dp"
+            android:paddingTop="@dimen/margin_8dp"
+            android:paddingRight="@dimen/margin_25dp"
+            android:paddingBottom="@dimen/margin_8dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_18"
+            tools:text="打印标签" />
+
+        <Button
+            android:id="@+id/bt_bottom_right"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_30dp"
+            android:background="@drawable/shape_bg_bottom_btn_right"
+            android:paddingLeft="@dimen/margin_50dp"
+            android:paddingTop="@dimen/margin_8dp"
+            android:paddingRight="@dimen/margin_50dp"
+            android:paddingBottom="@dimen/margin_8dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_18"
+            tools:text="确认" />
+    </LinearLayout>
 </LinearLayout>

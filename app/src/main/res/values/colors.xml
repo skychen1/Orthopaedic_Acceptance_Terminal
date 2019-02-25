@@ -7,7 +7,7 @@
     <color name="color_login_orange">#ffff5a49</color>
     <color name="text_black">#333333</color>
     <color name="text_hint">#888888</color>
-    <color name="line_login_top">#ffdedede</color>
+    <color name="line_login_top">#C8CCD3</color>
     <color name="pop_selected">#00A98D</color>
     <color name="text_sub_dark">#666666</color>
     <color name="pg_bg">#edf1f6</color>

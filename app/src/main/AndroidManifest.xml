@@ -12,12 +12,14 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="design_width_in_dp"
-            android:value="600" />
+            android:value="960" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="960" />
+            android:value="600" />
 
-        <activity android:name=".activities.WelcomeActivity">
+        <activity
+            android:name=".activities.WelcomeActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -26,12 +28,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.LoginActivityNew"
+            android:configChanges="keyboard|orientation"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.MainActivity"
             android:configChanges="keyboard|orientation"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.HomeActivity"
+            android:screenOrientation="landscape" />
             android:configChanges="keyboard|orientation"
             android:exported="false"
             android:screenOrientation="portrait" />

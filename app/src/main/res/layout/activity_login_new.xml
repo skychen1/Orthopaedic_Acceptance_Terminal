@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_top_logo"
+        android:layout_width="125dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="@dimen/margin_56dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginBottom="@dimen/margin_18dp"
+        android:background="@mipmap/login_nav_logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@mipmap/bg_login_center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="470dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_64dp"
+            android:layout_marginTop="@dimen/margin_68dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="66dp"
+                android:text="骨科耗材管理系统"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_20" />
+
+            <ImageView
+                android:layout_width="470dp"
+                android:layout_height="300dp"
+                android:background="@mipmap/icon_login_center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="330dp"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_54dp"
+            android:background="@drawable/shap_white_rec"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:text="用户名登录"
+                android:textColor="@color/text_color_0"
+                android:textSize="@dimen/font_size_20" />
+
+            <TextView
+                android:id="@+id/tv_login_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:text="请输入正确的账号或密码"
+                android:textColor="@color/color_login_orange"
+                android:textSize="@dimen/font_size_13"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_username"
+                    android:layout_width="@dimen/margin_17dp"
+                    android:layout_height="@dimen/margin_17dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_18dp"
+                    android:src="@drawable/selector_user_name" />
+
+                <EditText
+                    android:id="@+id/et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_12dp"
+                    android:layout_marginRight="59dp"
+                    android:background="@null"
+                    android:digits="0123456789abcdefjhigklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM"
+                    android:hint="@string/please_input_user_name"
+                    android:inputType="text"
+                    android:textColor="@color/text_black"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="@dimen/font_size_18" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/margin_18dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_18dp"
+                android:background="@color/line_login_top" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_password"
+                    android:layout_width="@dimen/margin_17dp"
+                    android:layout_height="@dimen/margin_17dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_18dp"
+                    android:src="@drawable/selector_password" />
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_vertical"
+                    android:layout_marginLeft="@dimen/margin_13dp"
+                    android:layout_marginRight="@dimen/margin_18dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM"
+                    android:drawablePadding="16dp"
+                    android:hint="@string/please_input_password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/text_black"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="@dimen/font_size_18" />
+
+                <ImageView
+                    android:id="@+id/iv_login_eye"
+                    android:layout_width="@dimen/margin_17dp"
+                    android:layout_height="@dimen/margin_17dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="34dp"
+                    android:src="@drawable/selector_login_eye" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/margin_18dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_18dp"
+                android:background="@color/line_login_top" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/selector_bg_btn_login"
+                android:padding="@dimen/margin_8dp"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_18" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="20dp"
+                android:background="@mipmap/icon_login_copyright" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:text="Copyright ©Rivamed Corporation, All Rights Reserved"
+                android:textColor="@color/text_gray_6"
+                android:textSize="@dimen/font_size_12" />
+
+            <TextView
+                android:id="@+id/tv_version_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_22dp"
+                android:text="V1.0.1"
+                android:textColor="@color/text_gray_3"
+                android:textSize="@dimen/font_size_12" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -34,7 +34,7 @@ public class WelcomeActivity extends SimpleActivity {
     public void initDataAndEvent(Bundle savedInstanceState) {
         mHandler = new Handler();
         mHandler.postDelayed(() -> {
-            startActivity(LoginActivity.class);
+            startActivity(LoginActivityNew.class);
             finish();
         }, 2000);
     }

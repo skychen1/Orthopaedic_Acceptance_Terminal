@@ -174,22 +174,31 @@ public class AmosBoDialog extends Dialog {
      */
     @Override
     public void show() {
-        // Set the dialog to not focusable.
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        // Show the dialog with NavBar hidden.
+        // Dialog 在初始化时会生成新的 Window，先禁止 Dialog Window 获取焦点，等 Dialog 显示后对 Dialog Window 的 DecorView 设置 setSystemUiVisibility ，接着再获取焦点。 这样表面上看起来就没有退出沉浸模式。
+        // Set the dialog to not focusable (makes navigation ignore us adding the window)
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        //Show the dialog!
         super.show();
-//        // Set the dialog to focusable again.//TODO  放开会出现底部虚拟键BUG暂时保留
-//        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        //Set the dialog to immersive
+        fullScreenImmersive(getWindow().getDecorView());
+        //Clear the not focusable flag from the window
+        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
 
-    @SuppressLint("NewApi")
-    private void copySystemUiVisibility() {
+    /**
+     * 全屏显示，隐藏虚拟按钮
+     *
+     * @param view
+     */
+    private void fullScreenImmersive(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    this.getWindow().getDecorView().getSystemUiVisibility());
+            int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            view.setSystemUiVisibility(uiOptions);
         }
     }
 }

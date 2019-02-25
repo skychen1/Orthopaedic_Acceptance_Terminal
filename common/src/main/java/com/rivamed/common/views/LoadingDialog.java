@@ -104,6 +104,7 @@ public class LoadingDialog extends Dialog {
         // Show the dialog with NavBar hidden.
         super.show();
         // Set the dialog to focusable again.
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+       //
+        // getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="home_order_application" type="id">home_order_application</item>
+    <item name="home_order_audit" type="id">home_order_audit</item>
+    <item name="home_order_sure" type="id">home_order_sure</item>
+    <item name="home_order_apparatus_acceptance" type="id">home_order_apparatus_acceptance</item>
+    <item name="home_order_nose_acceptance" type="id">home_order_nose_acceptance</item>
+    <item name="home_order_supply_acceptance" type="id">home_order_supply_acceptance</item>
+    <item name="home_cst_submit" type="id">home_cst_submit</item>
+    <item name="home_order_lookup" type="id">home_order_lookup</item>
+</resources>

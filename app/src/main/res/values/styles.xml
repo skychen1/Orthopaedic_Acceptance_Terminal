@@ -11,4 +11,17 @@
         <item name="android:keepScreenOn">true</item>
     </style>
 
+    <style name="home_rb_style" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/selector_bg_home_rb</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/selector_bottom_tv_color_home</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:paddingTop">@dimen/margin_20dp</item>
+        <item name="android:paddingRight">@dimen/margin_18dp</item>
+        <item name="android:paddingBottom">@dimen/margin_20dp</item>
+        <item name="android:paddingLeft">@dimen/margin_10dp</item>
+        <item name="android:textSize">@dimen/font_size_18</item>
+    </style>
 </resources>

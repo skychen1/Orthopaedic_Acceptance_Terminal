@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/home_rb_style"
+    android:checked="true"
+    android:drawableTop="@drawable/selector_icon_home_rb_ddcx"
+    android:text="@string/home_funcation" />

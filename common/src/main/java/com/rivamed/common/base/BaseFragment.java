@@ -39,12 +39,6 @@ abstract public class BaseFragment extends AmosBoLazyFragment {
         return mRootView;
     }
 
-
-    @Override
-    public void initDataAndEvent(Bundle savedInstanceState) {
-
-    }
-
     @Override
     public void onBindViewBefore() {
 

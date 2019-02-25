@@ -23,6 +23,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:overScrollMode="never"
+            app:spanCount="2"
             app:layoutManager="android.support.v7.widget.GridLayoutManager"
             tools:listitem="@layout/item_mian_funcation" />
     </RelativeLayout>
