@@ -53,11 +53,6 @@ public abstract class BaseSimpleActivity extends SimpleActivity {
     }
 
     @Override
-    public void initDataAndEvent(Bundle savedInstanceState) {
-
-    }
-
-    @Override
     public void onBindViewBefore() {
         viewStubLayout = (ViewStub) findViewById(R.id.view_stub_layout);
         viewStubLayout.setLayoutResource(getContentLayoutId());

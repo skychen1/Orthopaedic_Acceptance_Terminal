@@ -44,6 +44,18 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.SelectOperationSuiteActivity"
+            android:screenOrientation="landscape" />
+            android:configChanges="keyboard|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.OptSuiteDetailsActivity"
+            android:screenOrientation="landscape" />
+            android:configChanges="keyboard|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.SettingIpActivity"
             android:configChanges="keyboard|orientation"
             android:exported="false"
