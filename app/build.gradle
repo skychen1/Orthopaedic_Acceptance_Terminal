@@ -10,7 +10,7 @@ def releaseTime() {
 }
 
 android {
-    compileSdkVersion  rootProject.ext.versions.compileSdkVersion
+    compileSdkVersion  27
     defaultConfig {
         applicationId "com.rivamed.orthopaedicacceptanceterminal"
         minSdkVersion rootProject.ext.versions.minSdkVersion

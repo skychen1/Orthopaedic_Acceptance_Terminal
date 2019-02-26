@@ -2,7 +2,6 @@ package com.rivamed.orthopaedicacceptanceterminal.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -10,9 +9,7 @@ import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.adapter.MainFuncationAdapter;
 import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -62,7 +59,6 @@ public class MainActivity extends OatMainTitleActivity {
         mMainFuncationAdapter.setList(mMainFuncationList);
         rvContext.setLayoutManager(new GridLayoutManager(this, 2));
         rvContext.setAdapter(mMainFuncationAdapter);
-
     }
 
     /**

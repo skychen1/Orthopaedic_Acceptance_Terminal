@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -172,6 +173,7 @@ public class LoginActivity extends SimpleActivity {
             public void onSuccess(Response<LoginResponseParam> response) {
                 if (response.body().isOperateSuccess()) {
                     if (response.body().getAccessToken() != null && !TextUtils.isEmpty(response.body().getAccessToken().getTokenId())) {
+                        Log.e(TAG, response.body().getAccessToken().getTokenId());
                         OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
                         OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
                         updateMainFunction(response.body().getAppAccountInfoVo().getAccountId());

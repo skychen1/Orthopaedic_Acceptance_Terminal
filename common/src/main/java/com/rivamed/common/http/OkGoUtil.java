@@ -11,8 +11,6 @@ import com.rivamed.common.http.callback.JsonCallback;
 
 import java.util.Map;
 
-import static com.lzy.okgo.OkGo.get;
-
 /***
  * 网络工具
  * @author Amos_BO
@@ -27,7 +25,7 @@ public class OkGoUtil {
      *
      * @param rootUrl
      */
-   synchronized public static void  initRootUrl(@NonNull String rootUrl) {
+    synchronized public static void initRootUrl(@NonNull String rootUrl) {
         ROOT_URL = rootUrl;
         if (gson == null) {
             gson = new Gson();
@@ -47,6 +45,15 @@ public class OkGoUtil {
     public static <T> void getRequest(String url, Object tag, Map<String, String> map,
                                       JsonCallback<T> callback) {
         GetRequest getRequest = OkGo.<T>get(ROOT_URL + url).tag(tag).params(map);
+        if (!TextUtils.isEmpty(TOKEN_ID)) {
+            getRequest.headers("tokenId", TOKEN_ID);
+        }
+        getRequest.execute(callback);
+    }
+
+    public static <T> void getRequest(String url, Object tag,
+                                      JsonCallback<T> callback) {
+        GetRequest getRequest = OkGo.<T>get(ROOT_URL + url).tag(tag);
         if (!TextUtils.isEmpty(TOKEN_ID)) {
             getRequest.headers("tokenId", TOKEN_ID);
         }
