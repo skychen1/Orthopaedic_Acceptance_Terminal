@@ -30,7 +30,7 @@ import butterknife.OnClick;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class OrderRequestFragment extends BaseFragment {
+public class HomeOrderRequestFragment extends BaseFragment {
     @BindView(R.id.rb_top_left)
     RadioButton rbTopLeft;
     @BindView(R.id.rb_top_right)
@@ -48,9 +48,9 @@ public class OrderRequestFragment extends BaseFragment {
 
     private List<Fragment> mFragmentList;
     public FragmentAdapter mFragmentAdapter;
-    public static  OrderRequestFragment newInstance() {
+    public static  HomeOrderRequestFragment newInstance() {
         Bundle args = new Bundle();
-        OrderRequestFragment fragment = new OrderRequestFragment();
+        HomeOrderRequestFragment fragment = new HomeOrderRequestFragment();
         fragment.setArguments(args);
         return fragment;
     }

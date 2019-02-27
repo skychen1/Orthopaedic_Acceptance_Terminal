@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pg_bg"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/margin_16dp">
+
+    <com.rivamed.orthopaedicacceptanceterminal.views.SearchView
+        android:id="@+id/view_top_search"
+        android:layout_width="350dp"
+        android:layout_height="@dimen/margin_40dp"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_45dp"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:background="#00354B"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="耗材名"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17" />
+
+        <View
+            android:layout_width="@dimen/margin_1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="耗材编码"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17" />
+
+        <View
+            android:layout_width="@dimen/margin_1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="规格/编号"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17" />
+
+        <View
+            android:layout_width="@dimen/margin_1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="批号"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17" />
+
+        <View
+            android:layout_width="@dimen/margin_1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="有效期"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17" />
+
+        <View
+            android:layout_width="@dimen/margin_1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="数量"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_context"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        tools:listitem="@layout/item_cstcost_sure" />
+    <include layout="@layout/layout_bottom_funcation_triple" />
+</LinearLayout>

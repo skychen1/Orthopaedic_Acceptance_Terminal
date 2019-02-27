@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -20,7 +21,9 @@ import com.rivamed.common.utils.ToastUtils;
 import com.rivamed.common.utils.UIUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
-import com.rivamed.orthopaedicacceptanceterminal.fragment.OrderRequestFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeCstCostSubmitFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeOrderLookUpFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeOrderRequestFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -57,7 +59,6 @@ public class HomeActivity extends SimpleActivity {
      * 再点一次退出程序时间设置
      */
     private static final long WAIT_TIME = 2000L;
-    private ArrayList<MianFuncationParam> mMainFuncationList;
 
     private static final String FUNATION_DATA_TAG = "function_data_tag";
 
@@ -85,115 +86,69 @@ public class HomeActivity extends SimpleActivity {
     }
 
     public static void startHomeActivity(Context context,
-                                         ArrayList<MianFuncationParam> funcationList) {
-        startActivityWithSerializable(context, HomeActivity.class, FUNATION_DATA_TAG,
-                funcationList);
+                                         ArrayList<MianFuncationParam> functionList) {
+        startActivityWithSerializable(context, HomeActivity.class, FUNATION_DATA_TAG, functionList);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initData() {
-        mMainFuncationList =
+        ArrayList<MianFuncationParam> mMainFunctionList =
                 (ArrayList<MianFuncationParam>) getBundleSerializableVaule(FUNATION_DATA_TAG,
                         getIntent());
         mFragmentMap = new HashMap<>(3);
         if (homeRg.getChildCount() > 0) {
             homeRg.removeAllViews();
         }
-        initPageFragment(mMainFuncationList);
+        initPageFragment(mMainFunctionList);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void initPageFragment(List<MianFuncationParam> mianFuncationParamList) {
-        if (mFragmentMap != null && mianFuncationParamList != null && mianFuncationParamList.size() > 0) {
-            mianFuncationParamList.forEach(item -> {
+    private void initPageFragment(List<MianFuncationParam> mianFunctionParamList) {
+        if (mFragmentMap != null && mianFunctionParamList != null && mianFunctionParamList.size() > 0) {
+            mianFunctionParamList.forEach(item -> {
                 switch (item.getTitle()) {
                     case "订单申请":
-                        mFragmentMap.put(R.id.home_order_application + "",
-                                OrderRequestFragment.newInstance());
-                        if (item.getTitle().equals(mianFuncationParamList.get(0).getTitle())) {
-                            addHomeFuncationRb(true, R.id.home_order_application,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddsq), item.getTitle());
-                        } else {
-                            addHomeFuncationRb(false, R.id.home_order_application,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddsq), item.getTitle());
-                        }
+                        setPageData(R.id.home_order_application,
+                                R.drawable.selector_icon_home_rb_ddsq, item.getTitle(),
+                                HomeOrderRequestFragment.newInstance());
                         break;
                     case "器械处审核订单":
                         //TODO 修改item
                         //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        if (item.getTitle().equals(mianFuncationParamList.get(0).getTitle())) {
-                            addHomeFuncationRb(true, R.id.home_order_audit,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_qxcsh), item.getTitle());
-                        } else {
-                            addHomeFuncationRb(false, R.id.home_order_audit,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_qxcsh), item.getTitle());
-                        }
+                        addHomeFuncationRb(false, R.id.home_order_audit,
+                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_qxcsh), item.getTitle());
                         break;
                     case "供应商确认订单":
                         //TODO 修改item
                         //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        if (item.getTitle().equals(mianFuncationParamList.get(0).getTitle())) {
-                            addHomeFuncationRb(true, R.id.home_order_sure,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
-                        } else {
-                            addHomeFuncationRb(false, R.id.home_order_sure,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
-                        }
+                        addHomeFuncationRb(false, R.id.home_order_sure,
+                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
                         break;
                     case "器械处验收订单":
                         //TODO 修改item
                         //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        if (item.getTitle().equals(mianFuncationParamList.get(0).getTitle())) {
-                            addHomeFuncationRb(true, R.id.home_order_apparatus_acceptance,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_qxcys), item.getTitle());
-                        } else {
-                            addHomeFuncationRb(false, R.id.home_order_apparatus_acceptance,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_qxcys), item.getTitle());
-                        }
+                        addHomeFuncationRb(false, R.id.home_order_apparatus_acceptance,
+                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_qxcys), item.getTitle());
                         break;
                     case "护士验收订单":
                         //TODO 修改item
                         //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        if (item.getTitle().equals(mianFuncationParamList.get(0).getTitle())) {
-                            addHomeFuncationRb(true, R.id.home_order_nose_acceptance,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_hsys), item.getTitle());
-                        } else {
-                            addHomeFuncationRb(false, R.id.home_order_nose_acceptance,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_hsys), item.getTitle());
-                        }
+                        addHomeFuncationRb(false, R.id.home_order_nose_acceptance,
+                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_hsys), item.getTitle());
                         break;
                     case "供应室验收订单":
                         //TODO 修改item
                         //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        if (item.getTitle().equals(mianFuncationParamList.get(0).getTitle())) {
-                            addHomeFuncationRb(true, R.id.home_order_supply_acceptance,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_gysys), item.getTitle());
-                        } else {
-                            addHomeFuncationRb(false, R.id.home_order_supply_acceptance,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_gysys), item.getTitle());
-                        }
+                        addHomeFuncationRb(false, R.id.home_order_supply_acceptance,
+                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_gysys), item.getTitle());
                         break;
                     case "耗材计费提报":
-                        //TODO 修改item
-                        //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        if (item.getTitle().equals(mianFuncationParamList.get(0).getTitle())) {
-                            addHomeFuncationRb(true, R.id.home_cst_submit,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_hcjftb), item.getTitle());
-                        } else {
-                            addHomeFuncationRb(false, R.id.home_cst_submit,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_hcjftb), item.getTitle());
-                        }
+                        setPageData(R.id.home_cst_submit, R.drawable.selector_icon_home_rb_hcjftb
+                                , item.getTitle(), HomeCstCostSubmitFragment.newInstance());
                         break;
                     case "订单查询":
-                        //TODO 修改item
-                        //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        if (item.getTitle().equals(mianFuncationParamList.get(0).getTitle())) {
-                            addHomeFuncationRb(true, R.id.home_order_lookup,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
-                        } else {
-                            addHomeFuncationRb(false, R.id.home_order_lookup,
-                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
-                        }
+                        setPageData(R.id.home_order_lookup, R.drawable.selector_icon_home_rb_ddcx
+                                , item.getTitle(), HomeOrderLookUpFragment.newInstance());
                         break;
                     default:
                         break;
@@ -204,6 +159,7 @@ public class HomeActivity extends SimpleActivity {
     }
 
     private void initCheckListener() {
+        ((RadioButton) homeRg.getChildAt(0)).setChecked(true);
         homeRg.setOnCheckedChangeListener((RadioGroup group, int checkedId) -> {
             switch (checkedId) {
                 case R.id.home_order_application:
@@ -229,14 +185,26 @@ public class HomeActivity extends SimpleActivity {
     }
 
     /**
+     * @param id           控件ID
+     * @param bgId         背景Id
+     * @param pageFragment 页面
+     */
+    private void setPageData(@IdRes int id, @DrawableRes int bgId, @NonNull String pageTitle,
+                             Fragment pageFragment) {
+        mFragmentMap.put(id + "", pageFragment);
+        addHomeFuncationRb(false, id, this.getResources().getDrawable(bgId), pageTitle);
+    }
+
+    /**
      * 左侧功能按钮
      *
      * @param drawableTop 图标
      * @param titleName   文字
      * @param isChecked   是否选中
      */
-    private void addHomeFuncationRb(boolean isChecked, @IdRes int id,
-                                    @NonNull Drawable drawableTop, @NonNull String titleName) {
+    private int addHomeFuncationRb(boolean isChecked, @IdRes int id,
+                                   @NonNull Drawable drawableTop, @NonNull String titleName) {
+        int resId = 0;
         if (homeRg != null) {
             RadioButton radioButton = (RadioButton) View.inflate(this, R.layout.layout_home_rb,
                     null);
@@ -246,7 +214,9 @@ public class HomeActivity extends SimpleActivity {
             radioButton.setChecked(isChecked);
             radioButton.setId(id);
             homeRg.addView(radioButton);
+            resId = id;
         }
+        return resId;
     }
 
 
@@ -271,13 +241,6 @@ public class HomeActivity extends SimpleActivity {
     @Override
     public boolean getIsImmersionBar() {
         return false;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.home_rg)
