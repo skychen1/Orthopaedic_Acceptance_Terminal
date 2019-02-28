@@ -95,15 +95,15 @@ public class HomeActivity extends SimpleActivity {
         ArrayList<MianFuncationParam> mMainFunctionList =
                 (ArrayList<MianFuncationParam>) getBundleSerializableVaule(FUNATION_DATA_TAG,
                         getIntent());
-        mFragmentMap = new HashMap<>(3);
-        if (homeRg.getChildCount() > 0) {
-            homeRg.removeAllViews();
-        }
         initPageFragment(mMainFunctionList);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initPageFragment(List<MianFuncationParam> mianFunctionParamList) {
+        mFragmentMap = new HashMap<>(3);
+        if (homeRg.getChildCount() > 0) {
+            homeRg.removeAllViews();
+        }
         if (mFragmentMap != null && mianFunctionParamList != null && mianFunctionParamList.size() > 0) {
             mianFunctionParamList.forEach(item -> {
                 switch (item.getTitle()) {
