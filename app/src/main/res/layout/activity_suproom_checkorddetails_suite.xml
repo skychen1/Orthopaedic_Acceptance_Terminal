@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pg_bg"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/margin_16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin_16dp"
+        android:paddingRight="@dimen/margin_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="套餐名称："
+            android:textColor="@color/text_color_0"
+            android:textSize="@dimen/font_size_18" />
+
+        <TextView
+            android:id="@+id/tv_suite_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_58"
+            android:textSize="@dimen/font_size_18"
+            tools:text="104732全膝PFCSigmaCS" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_45dp"
+            android:text="供应商："
+            android:textColor="@color/text_color_0"
+            android:textSize="@dimen/font_size_18" />
+
+        <TextView
+            android:id="@+id/tv_supplier_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_58"
+            android:textSize="@dimen/font_size_18"
+            tools:text="北京科园信海医药经营有限公司" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_content_tag"
+        android:layout_width="540dp"
+        android:layout_height="@dimen/margin_50dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_content_left"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/margin_50dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_top_tag"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:textColor="@drawable/selector_text_content_tag"
+            android:textSize="@dimen/font_size_20"
+            tools:text="复消类耗材【12】" />
+        <RadioButton
+            android:id="@+id/rb_content_center"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/margin_50dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_top_tag"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:textColor="@drawable/selector_text_content_tag"
+            android:textSize="@dimen/font_size_20"
+            tools:text="器械【2】" />
+
+        <RadioButton
+            android:id="@+id/rb_content_right"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/margin_50dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_top_tag"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:textColor="@drawable/selector_text_content_tag"
+            android:textSize="@dimen/font_size_20"
+            tools:text="无菌类耗材【6】" />
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <include layout="@layout/layout_bottom_funcation_triple" />
+</LinearLayout>

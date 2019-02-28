@@ -22,8 +22,12 @@ import com.rivamed.common.utils.UIUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
 import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeCstCostSubmitFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeHckDeptCheckOrderFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeHckDeptExamineOrderFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeNoseCheckOrderFragment;
 import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeOrderLookUpFragment;
 import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeOrderRequestFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeSupRoomCheckOrderFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,34 +117,27 @@ public class HomeActivity extends SimpleActivity {
                                 HomeOrderRequestFragment.newInstance());
                         break;
                     case "器械处审核订单":
-                        //TODO 修改item
-                        //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        addHomeFuncationRb(false, R.id.home_order_audit,
-                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_qxcsh), item.getTitle());
+                        setPageData(R.id.home_order_audit, R.drawable.selector_icon_home_rb_qxcsh
+                                , item.getTitle(), HomeHckDeptExamineOrderFragment.newInstance());
                         break;
                     case "供应商确认订单":
-                        //TODO 修改item
-                        //mFragmentMap.put("订单申请", 订单申请的Fragment);
                         addHomeFuncationRb(false, R.id.home_order_sure,
                                 this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
                         break;
                     case "器械处验收订单":
-                        //TODO 修改item
-                        //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        addHomeFuncationRb(false, R.id.home_order_apparatus_acceptance,
-                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_qxcys), item.getTitle());
+                        setPageData(R.id.home_order_apparatus_acceptance,
+                                R.drawable.selector_icon_home_rb_qxcys, item.getTitle(),
+                                HomeHckDeptCheckOrderFragment.newInstance());
                         break;
                     case "护士验收订单":
-                        //TODO 修改item
-                        //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        addHomeFuncationRb(false, R.id.home_order_nose_acceptance,
-                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_hsys), item.getTitle());
+                        setPageData(R.id.home_order_nose_acceptance,
+                                R.drawable.selector_icon_home_rb_hsys, item.getTitle(),
+                                HomeNoseCheckOrderFragment.newInstance());
                         break;
                     case "供应室验收订单":
-                        //TODO 修改item
-                        //mFragmentMap.put("订单申请", 订单申请的Fragment);
-                        addHomeFuncationRb(false, R.id.home_order_supply_acceptance,
-                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_gysys), item.getTitle());
+                        setPageData(R.id.home_order_supply_acceptance,
+                                R.drawable.selector_icon_home_rb_gysys, item.getTitle(),
+                                HomeSupRoomCheckOrderFragment.newInstance());
                         break;
                     case "耗材计费提报":
                         setPageData(R.id.home_cst_submit, R.drawable.selector_icon_home_rb_hcjftb

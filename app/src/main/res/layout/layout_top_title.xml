@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_top_root"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bg_1C6573"
     android:orientation="vertical">
 
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        tools:text="订单查询"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_20" />
+        android:textSize="@dimen/font_size_20"
+        tools:text="订单查询" />
 </RelativeLayout>
