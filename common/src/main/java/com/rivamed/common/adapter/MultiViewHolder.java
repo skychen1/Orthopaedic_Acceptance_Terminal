@@ -23,6 +23,8 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+
 /**
  * @ClassName
  * @Description
@@ -46,6 +48,7 @@ public class MultiViewHolder extends RecyclerView.ViewHolder {
     public MultiViewHolder(View itemView, int viewType) {
         super(itemView);
         mViewType = viewType;
+        ButterKnife.bind(this, itemView);
     }
 
 
@@ -59,7 +62,8 @@ public class MultiViewHolder extends RecyclerView.ViewHolder {
      */
     @Deprecated
     public <T extends View> T getView(int id) {
-        Log.e("MultiViewHolder", "Deprecated method 'getView(int)', please use 'findViewById(int)' instead.");
+        Log.e("MultiViewHolder", "Deprecated method 'getView(int)', please use 'findViewById(int)"
+                + "' instead.");
         return findViewById(id);
     }
 
@@ -73,14 +77,11 @@ public class MultiViewHolder extends RecyclerView.ViewHolder {
         View childView = childViews.get(id);
         if (childView == null) {
             childView = itemView.findViewById(id);
-            if (childView != null)
-                childViews.put(id, childView);
-            else
-                return null;
+            if (childView != null) childViews.put(id, childView);
+            else return null;
         }
         return (T) childView;
     }
-
 
 
     public MultiViewHolder setText(int viewId, CharSequence text) {
@@ -209,33 +210,33 @@ public class MultiViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-   
+
     public MultiViewHolder setAdapter(int viewId, RecyclerView.Adapter adapter) {
         RecyclerView view = findViewById(viewId);
         view.setAdapter(adapter);
         return this;
     }
 
-   
+
     public MultiViewHolder setChecked(int viewId, boolean checked) {
         Checkable view = findViewById(viewId);
         view.setChecked(checked);
         return this;
     }
 
-   
+
     public MultiViewHolder setOnClickListener(int viewId, View.OnClickListener listener) {
         findViewById(viewId).setOnClickListener(listener);
         return this;
     }
 
-   
+
     public MultiViewHolder setOnLongClickListener(int viewId, View.OnLongClickListener listener) {
         findViewById(viewId).setOnLongClickListener(listener);
         return this;
     }
 
-   
+
     public MultiViewHolder setOnTouchListener(int viewId, View.OnTouchListener listener) {
         findViewById(viewId).setOnTouchListener(listener);
         return this;

@@ -9,6 +9,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -30,9 +31,7 @@ import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeOrderRequestFragme
 import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeSupRoomCheckOrderFragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -65,8 +64,7 @@ public class HomeActivity extends SimpleActivity {
     private static final long WAIT_TIME = 2000L;
 
     private static final String FUNATION_DATA_TAG = "function_data_tag";
-
-    private Map<String, Fragment> mFragmentMap;
+    private SparseArray<Fragment> mFragmentMap;
 
     @Override
     public int getLayoutId() {
@@ -104,7 +102,7 @@ public class HomeActivity extends SimpleActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initPageFragment(List<MianFuncationParam> mianFunctionParamList) {
-        mFragmentMap = new HashMap<>(3);
+        mFragmentMap = new SparseArray<>(3);
         if (homeRg.getChildCount() > 0) {
             homeRg.removeAllViews();
         }
@@ -188,7 +186,7 @@ public class HomeActivity extends SimpleActivity {
      */
     private void setPageData(@IdRes int id, @DrawableRes int bgId, @NonNull String pageTitle,
                              Fragment pageFragment) {
-        mFragmentMap.put(id + "", pageFragment);
+        mFragmentMap.put(id, pageFragment);
         addHomeFuncationRb(false, id, this.getResources().getDrawable(bgId), pageTitle);
     }
 
