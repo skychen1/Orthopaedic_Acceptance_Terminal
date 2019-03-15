@@ -53,7 +53,7 @@ public class HomeOrderLookUpFragment extends BaseFragment {
     public static HomeOrderLookUpFragment newInstance() {
         Bundle args = new Bundle();
         HomeOrderLookUpFragment fragment = new HomeOrderLookUpFragment();
-        fragment.setArguments(args);
+//        fragment.setArguments(args);
         return fragment;
     }
 

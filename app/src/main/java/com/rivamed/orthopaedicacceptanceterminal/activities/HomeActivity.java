@@ -8,7 +8,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -35,6 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -64,7 +65,8 @@ public class HomeActivity extends SimpleActivity {
     private static final long WAIT_TIME = 2000L;
 
     private static final String FUNATION_DATA_TAG = "function_data_tag";
-    private SparseArray<Fragment> mFragmentMap;
+    private SparseArray<SupportFragment> mFragmentMap;
+    private int mShowingFragId;
 
     @Override
     public int getLayoutId() {
@@ -118,7 +120,7 @@ public class HomeActivity extends SimpleActivity {
                         setPageData(R.id.home_order_audit, R.drawable.selector_icon_home_rb_qxcsh
                                 , item.getTitle(), HomeHckDeptExamineOrderFragment.newInstance());
                         break;
-                    case "供应商确认订单":
+                    case "供应商确认订单"://该功能已取消
                         addHomeFuncationRb(false, R.id.home_order_sure,
                                 this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
                         break;
@@ -149,6 +151,18 @@ public class HomeActivity extends SimpleActivity {
                         break;
                 }
             });
+            mShowingFragId = mFragmentMap.keyAt(0);
+            //            showHideFragment(mFragmentMap.get(R.id.home_order_application));
+            Log.e("HomeActivity", "mFragmentMap.get(R.id.home_order_lookup):" + mFragmentMap.get(R.id.home_order_lookup));
+            loadMultipleRootFragment(R.id.fl_tab_container, 0,
+                    mFragmentMap.get(R.id.home_order_lookup),
+                    mFragmentMap.get(R.id.home_order_application),
+                    mFragmentMap.get(R.id.home_order_audit),
+                    mFragmentMap.get(R.id.home_order_apparatus_acceptance),
+                    mFragmentMap.get(R.id.home_order_nose_acceptance),
+                    mFragmentMap.get(R.id.home_order_supply_acceptance),
+                    mFragmentMap.get(R.id.home_cst_submit)
+            );
             initCheckListener();
         }
     }
@@ -157,21 +171,33 @@ public class HomeActivity extends SimpleActivity {
         ((RadioButton) homeRg.getChildAt(0)).setChecked(true);
         homeRg.setOnCheckedChangeListener((RadioGroup group, int checkedId) -> {
             switch (checkedId) {
-                case R.id.home_order_application:
+                case R.id.home_order_application://订单申请
+                    showHideFragment(mFragmentMap.get(R.id.home_order_application), mFragmentMap.get(mShowingFragId));
+                    mShowingFragId = R.id.home_order_application;
                     break;
-                case R.id.home_order_audit:
+                case R.id.home_order_audit://器械处审核订单
+                    showHideFragment(mFragmentMap.get(R.id.home_order_audit), mFragmentMap.get(mShowingFragId));
+                    mShowingFragId = R.id.home_order_audit;
                     break;
-                case R.id.home_order_sure:
+                case R.id.home_order_apparatus_acceptance://器械处验收订单
+                    showHideFragment(mFragmentMap.get(R.id.home_order_apparatus_acceptance), mFragmentMap.get(mShowingFragId));
+                    mShowingFragId = R.id.home_order_apparatus_acceptance;
                     break;
-                case R.id.home_order_apparatus_acceptance:
+                case R.id.home_order_nose_acceptance://护士验收订单
+                    showHideFragment(mFragmentMap.get(R.id.home_order_nose_acceptance), mFragmentMap.get(mShowingFragId));
+                    mShowingFragId = R.id.home_order_nose_acceptance;
                     break;
-                case R.id.home_order_nose_acceptance:
+                case R.id.home_order_supply_acceptance://供应室验收订单
+                    showHideFragment(mFragmentMap.get(R.id.home_order_supply_acceptance), mFragmentMap.get(mShowingFragId));
+                    mShowingFragId = R.id.home_order_supply_acceptance;
                     break;
-                case R.id.home_order_supply_acceptance:
+                case R.id.home_cst_submit://耗材计费提报
+                    showHideFragment(mFragmentMap.get(R.id.home_cst_submit), mFragmentMap.get(mShowingFragId));
+                    mShowingFragId = R.id.home_cst_submit;
                     break;
-                case R.id.home_cst_submit:
-                    break;
-                case R.id.home_order_lookup:
+                case R.id.home_order_lookup://订单查询
+                    showHideFragment(mFragmentMap.get(R.id.home_order_lookup), mFragmentMap.get(mShowingFragId));
+                    mShowingFragId = R.id.home_order_lookup;
                     break;
                 default:
                     break;
@@ -185,7 +211,7 @@ public class HomeActivity extends SimpleActivity {
      * @param pageFragment 页面
      */
     private void setPageData(@IdRes int id, @DrawableRes int bgId, @NonNull String pageTitle,
-                             Fragment pageFragment) {
+                             SupportFragment pageFragment) {
         mFragmentMap.put(id, pageFragment);
         addHomeFuncationRb(false, id, this.getResources().getDrawable(bgId), pageTitle);
     }

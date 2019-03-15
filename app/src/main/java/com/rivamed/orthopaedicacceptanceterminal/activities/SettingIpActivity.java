@@ -112,6 +112,7 @@ public class SettingIpActivity extends SimpleActivity {
                     SPUtils.putString(BaseApplication.getInstance(), Constants.SAVE_SYS_IP, "http"
                             + "://" + newIp);
                 }
+                finish();
             }
 
             @Override
