@@ -39,16 +39,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.HomeActivity"
-            android:screenOrientation="landscape" />
-        android:configChanges="keyboard|orientation"
-        android:exported="false"
-        android:screenOrientation="portrait" />
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            />
+
         <activity
             android:name=".activities.SelectOperationSuiteActivity"
-            android:screenOrientation="landscape" />
-        android:configChanges="keyboard|orientation"
-        android:exported="false"
-        android:screenOrientation="portrait" />
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".activities.OptSuiteDetailsActivity"
             android:configChanges="keyboard|orientation"
@@ -59,6 +60,23 @@
             android:configChanges="keyboard|orientation"
             android:exported="false"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.SelectOperationPlanActivity"
+            android:configChanges="keyboard|orientation"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.UrgentSelectPatintActivity"
+            android:configChanges="keyboard|orientation"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.UrgentSelectOptActivity"
+            android:configChanges="keyboard|orientation"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+
     </application>
 
 </manifest>

@@ -1,18 +1,19 @@
 package com.rivamed.orthopaedicacceptanceterminal.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.rivamed.common.base.BaseFragment;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.adapter.OperationSuiteCstDetailsAdapter;
+import com.rivamed.orthopaedicacceptanceterminal.bean.FindByIdResponseParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -26,9 +27,19 @@ import butterknife.Unbinder;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
+@SuppressLint("ValidFragment")
 public class OptSuiteCstFragment extends BaseFragment {
+    private List<FindByIdResponseParam.CstsBean> mCsts = new ArrayList<>();
     @BindView(R.id.rv_context)
     RecyclerView rvContext;
+
+    @SuppressLint("ValidFragment")
+    public OptSuiteCstFragment(List<FindByIdResponseParam.CstsBean> csts) {
+        super();
+        mCsts.clear();
+        mCsts.addAll(csts);
+    }
+
     private OperationSuiteCstDetailsAdapter mOperationSuiteCstDetailsAdapter;
 
     @Override
@@ -38,6 +49,9 @@ public class OptSuiteCstFragment extends BaseFragment {
 
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
-
+        mOperationSuiteCstDetailsAdapter = new OperationSuiteCstDetailsAdapter(getContext());
+        mOperationSuiteCstDetailsAdapter.setList(mCsts);
+        rvContext.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvContext.setAdapter(mOperationSuiteCstDetailsAdapter);
     }
 }

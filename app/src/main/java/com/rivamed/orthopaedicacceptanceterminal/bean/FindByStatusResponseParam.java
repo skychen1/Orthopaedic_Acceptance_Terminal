@@ -59,7 +59,7 @@ public class FindByStatusResponseParam implements Parcelable {
          * updator : null
          */
 
-        private String surgeryDictId;
+        private String surgeryDictId="";
         private String code;
         private String name;
         private Object remark;

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
-import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.GetAllPatientResponseParam;
 
 import butterknife.BindView;
 
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class UrgentSelectPatientAdapter extends SimpleRecyclerAdapter<MianFuncationParam,
+public class UrgentSelectPatientAdapter extends SimpleRecyclerAdapter<GetAllPatientResponseParam.PatientsBean,
         UrgentSelectPatientAdapter.MyHolder> {
 
     public UrgentSelectPatientAdapter(Context context) {
@@ -31,10 +31,12 @@ public class UrgentSelectPatientAdapter extends SimpleRecyclerAdapter<MianFuncat
     }
 
     @Override
-    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+    protected void convert(MyHolder holder, GetAllPatientResponseParam.PatientsBean item, final int position) {
         if (item == null || holder == null) {
             return;
         }
+        holder.tvPatientName.setText(item.getPatientName());
+        holder.tvPatientId.setText(item.getPatientId());
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);

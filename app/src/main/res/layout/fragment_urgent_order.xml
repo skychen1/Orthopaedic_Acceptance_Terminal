@@ -31,7 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1233222"
+                tools:text="1233222"
                 android:textColor="#ff585858"
                 android:textSize="18sp" />
 
@@ -61,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1233222"
+                tools:text="1233222"
                 android:textColor="#ff585858"
                 android:textSize="18sp" />
             <ImageView
@@ -90,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1233222"
+                tools:text="1233222"
                 android:textColor="#ff585858"
                 android:textSize="18sp" />
         </LinearLayout>

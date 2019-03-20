@@ -2,15 +2,12 @@ package com.rivamed.orthopaedicacceptanceterminal.adapter;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
-import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.SurgeryPatientResponseParam;
 
 import butterknife.BindView;
 
@@ -26,7 +23,7 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class SelectOperationPlanAdapter extends SimpleRecyclerAdapter<MianFuncationParam,
+public class SelectOperationPlanAdapter extends SimpleRecyclerAdapter<SurgeryPatientResponseParam.SurgeryPatientVosBean,
         SelectOperationPlanAdapter.MyHolder> {
 
     public SelectOperationPlanAdapter(Context context) {
@@ -34,10 +31,22 @@ public class SelectOperationPlanAdapter extends SimpleRecyclerAdapter<MianFuncat
     }
 
     @Override
-    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+    protected void convert(MyHolder holder, SurgeryPatientResponseParam.SurgeryPatientVosBean item, final int position) {
         if (item == null || holder == null) {
             return;
         }
+        holder.tvOptName.setText(item.getSurgeryName());
+        holder.tvPatientName.setText(item.getPatientName());
+        holder.tvPatientBrth.setText(item.getBirthday());
+        holder.tvPatientId.setText(item.getPatientId());
+        holder.tvPatientHigh.setText("--");
+        holder.tvMedicalRecordNumber.setText(item.getCaseNo());
+        holder.tvDoctorName.setText(item.getDoctorName());
+        holder.tvPatientSex.setText(item.getGender());
+        holder.tvOpTime.setText(item.getScheduleTime());
+        holder.tvOptRoom.setText(item.getRoomName());
+        holder.tvPatientBed.setText(item.getBedNo());
+
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);

@@ -143,7 +143,7 @@ public class HomeActivity extends SimpleActivity {
                         setPageData(R.id.home_cst_submit, R.drawable.selector_icon_home_rb_hcjftb
                                 , item.getTitle(), HomeCstCostSubmitFragment.newInstance());
                         break;
-                    case "订单查询":
+                    case " 订单查询":
                         setPageData(R.id.home_order_lookup, R.drawable.selector_icon_home_rb_ddcx
                                 , item.getTitle(), HomeOrderLookUpFragment.newInstance());
                         break;
@@ -155,13 +155,13 @@ public class HomeActivity extends SimpleActivity {
             //            showHideFragment(mFragmentMap.get(R.id.home_order_application));
             Log.e("HomeActivity", "mFragmentMap.get(R.id.home_order_lookup):" + mFragmentMap.get(R.id.home_order_lookup));
             loadMultipleRootFragment(R.id.fl_tab_container, 0,
-                    mFragmentMap.get(R.id.home_order_lookup),
                     mFragmentMap.get(R.id.home_order_application),
                     mFragmentMap.get(R.id.home_order_audit),
                     mFragmentMap.get(R.id.home_order_apparatus_acceptance),
                     mFragmentMap.get(R.id.home_order_nose_acceptance),
                     mFragmentMap.get(R.id.home_order_supply_acceptance),
-                    mFragmentMap.get(R.id.home_cst_submit)
+                    mFragmentMap.get(R.id.home_cst_submit),
+                    mFragmentMap.get(R.id.home_order_lookup)
             );
             initCheckListener();
         }

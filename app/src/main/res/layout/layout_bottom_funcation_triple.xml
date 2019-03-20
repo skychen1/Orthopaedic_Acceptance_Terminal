@@ -38,6 +38,7 @@
             android:paddingLeft="@dimen/margin_25dp"
             android:paddingTop="@dimen/margin_8dp"
             android:paddingRight="@dimen/margin_25dp"
+            android:visibility="gone"
             android:paddingBottom="@dimen/margin_8dp"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_18"

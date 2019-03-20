@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * @作者: 钱凯
  * @创建时间: 2019/2/21
@@ -29,12 +30,21 @@ public class FindByIdResponseParam implements Parcelable {
     private String suiteId;
     private String suiteName;
     private String vendorName;
+    private String mFrom = "";
     private int cstCount;
     private int instrumentCount;
     private int asepticCstCount;
     private int eliminationCstCount;
     private List<CstsBean> csts;
     private List<InstrumentsBean> instruments;
+
+    public String getFrom() {
+        return mFrom;
+    }
+
+    public void setFrom(String from) {
+        mFrom = from;
+    }
 
     public int getId() {
         return id;

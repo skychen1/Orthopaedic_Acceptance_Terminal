@@ -19,7 +19,7 @@ public class SaveOrderRequestBean implements Parcelable {
      */
 
     private OciOrderBean ociOrder;
-    private List<OciSuiteVosBean> ociSuiteVos;
+    private List<OciSuiteVosBean> ociSuiteVos = new ArrayList<>();
 
     public OciOrderBean getOciOrder() {
         return ociOrder;
@@ -47,6 +47,15 @@ public class SaveOrderRequestBean implements Parcelable {
         private String orderType;
         private String patientId;
         private String surgeryDictId;
+        private String surgeryId;
+
+        public String getSurgeryId() {
+            return surgeryId;
+        }
+
+        public void setSurgeryId(String surgeryId) {
+            this.surgeryId = surgeryId;
+        }
 
         public String getOrderType() {
             return orderType;

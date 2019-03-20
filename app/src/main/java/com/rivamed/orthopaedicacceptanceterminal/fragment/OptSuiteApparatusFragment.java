@@ -1,18 +1,19 @@
 package com.rivamed.orthopaedicacceptanceterminal.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.rivamed.common.base.BaseFragment;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.adapter.OperationSuiteApparatusDetailsAdapter;
+import com.rivamed.orthopaedicacceptanceterminal.bean.FindByIdResponseParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -26,9 +27,19 @@ import butterknife.Unbinder;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
+@SuppressLint("ValidFragment")
 public class OptSuiteApparatusFragment extends BaseFragment {
+    private final List<FindByIdResponseParam.InstrumentsBean> mInstruments = new ArrayList<>();
     @BindView(R.id.rv_context)
     RecyclerView rvContext;
+
+    @SuppressLint("ValidFragment")
+    public OptSuiteApparatusFragment(List<FindByIdResponseParam.InstrumentsBean> instruments) {
+        super();
+        mInstruments.clear();
+        mInstruments.addAll(instruments);
+    }
+
     private OperationSuiteApparatusDetailsAdapter mOperationSuiteApparatusDetailsAdapter;
 
     @Override
@@ -38,6 +49,9 @@ public class OptSuiteApparatusFragment extends BaseFragment {
 
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
-
+        mOperationSuiteApparatusDetailsAdapter = new OperationSuiteApparatusDetailsAdapter(getContext());
+        mOperationSuiteApparatusDetailsAdapter.setList(mInstruments);
+        rvContext.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvContext.setAdapter(mOperationSuiteApparatusDetailsAdapter);
     }
 }

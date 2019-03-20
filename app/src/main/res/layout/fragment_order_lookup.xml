@@ -159,6 +159,7 @@
                 android:paddingRight="@dimen/margin_10dp"
                 android:textColor="#7c8188"
                 android:textCursorDrawable="@null"
+                android:windowSoftInputMode="stateHidden"
                 android:textSize="@dimen/font_size_15" />
         </LinearLayout>
 

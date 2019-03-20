@@ -21,5 +21,6 @@
         android:overScrollMode="never"
         tools:listitem="@layout/item_select_optplan" />
 
-    <include layout="@layout/layout_bottom_funcation_triple" />
+    <include layout="@layout/layout_bottom_funcation_triple"
+        android:visibility="gone"/>
 </LinearLayout>

@@ -62,9 +62,9 @@
                         android:id="@+id/tv_patient_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -84,9 +84,9 @@
                         android:id="@+id/tv_patient_brth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -106,9 +106,9 @@
                         android:id="@+id/tv_patient_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -135,9 +135,9 @@
                         android:id="@+id/tv_patient_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -157,9 +157,9 @@
                         android:id="@+id/tv_patient_high"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -179,9 +179,9 @@
                         android:id="@+id/tv_opt_diagnosis"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -208,9 +208,9 @@
                         android:id="@+id/tv_medical_record_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -230,9 +230,9 @@
                         android:id="@+id/tv_opt_room"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -252,9 +252,9 @@
                         android:id="@+id/tv_doctor_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -281,9 +281,9 @@
                         android:id="@+id/tv_patient_sex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -303,9 +303,9 @@
                         android:id="@+id/tv_patient_bed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -325,9 +325,9 @@
                         android:id="@+id/tv_op_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="--"
                         android:textColor="@color/text_58"
-                        android:textSize="@dimen/font_size_18"
-                        tools:text="赵文" />
+                        android:textSize="@dimen/font_size_18" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

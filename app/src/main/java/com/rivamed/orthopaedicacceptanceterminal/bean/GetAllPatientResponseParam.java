@@ -52,7 +52,7 @@ public class GetAllPatientResponseParam implements Parcelable {
          * updateTime : 2019-02-19 13:43:13
          */
 
-        private String patientId;
+        private String patientId="";
         private String hisPatientId;
         private String patientName;
         private String pym;

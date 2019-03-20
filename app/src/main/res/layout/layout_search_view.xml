@@ -28,6 +28,8 @@
         android:textColor="@color/text_gray_3"
         android:textColorHint="@color/text_72"
         android:textSize="@dimen/font_size_18"
+        android:imeOptions="actionSearch"
+        android:windowSoftInputMode="stateHidden"
         tools:text="病案号、患者姓名、手术名称" />
 
     <ImageView

@@ -20,7 +20,6 @@ import com.rivamed.orthopaedicacceptanceterminal.bean.GetAllPatientResponseParam
 import com.rivamed.orthopaedicacceptanceterminal.bean.SaveOrderRequestBean;
 import com.rivamed.orthopaedicacceptanceterminal.bean.SaveOrderResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.SubmitCostReqestAndResponseParam;
-import com.rivamed.orthopaedicacceptanceterminal.bean.SurgeryPatientResponseParam;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -215,25 +214,7 @@ public class NetData {
                     }
                 });
     }
-    /**
-     * 获取手术排班患者
-     *
-     * @param context
-     */
-    private void getSurgeryPatient(Activity context) {
-        OkGoUtil.getRequest(UrlPath.ORDER_PATIENT_LIST, this,
-                new DialogCallback<SurgeryPatientResponseParam>(context) {
-                    @Override
-                    public void onSuccess(Response<SurgeryPatientResponseParam> response) {
 
-                    }
-
-                    @Override
-                    public void onError(Response<SurgeryPatientResponseParam> response) {
-                        super.onError(response);
-                    }
-                });
-    }
 
     /**
      * 套餐查询
@@ -282,7 +263,7 @@ public class NetData {
     }
 
     /**
-     * 套餐明细
+     * 手术信息查询
      *
      * @param context
      * @param status

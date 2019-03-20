@@ -2,6 +2,7 @@ package com.rivamed.common.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public abstract class SimpleRecyclerAdapter<T, S extends RecyclerView.ViewHolder
                     false);
             return (S) mConstructor.newInstance(itemView);
         } catch (Exception e) {
+            Log.e("SimpleRecyclerAdapter", e.getMessage().toString());
             throw new IllegalArgumentException("泛型错误");
         }
     }
@@ -89,6 +91,14 @@ public abstract class SimpleRecyclerAdapter<T, S extends RecyclerView.ViewHolder
      */
     public void setList(List<T> list) {
         this.mList = list;
+    }
+
+
+    /**
+     * 获取数据源-List
+     */
+    public List<T> getList(List<T> list) {
+        return this.mList;
     }
 
     /**

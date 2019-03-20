@@ -67,6 +67,8 @@ public class HomeHckDeptExamineOrderFragment extends BaseFragment {
     }
 
     private void initView() {
+        rbTopLeft.setText("待审核");
+        rbTopRight.setText("待确认撤销");
         mFragmentList = new ArrayList<>();
         mFragmentList.add(HckDeptUnExamineOrderFragment.newInstance());
         mFragmentList.add(HckDeptUnExamineOrderFragment.newInstance());
@@ -85,6 +87,26 @@ public class HomeHckDeptExamineOrderFragment extends BaseFragment {
                     break;
                 default:
                     break;
+            }
+        });
+        vpContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    rgTopTag.check(R.id.rb_top_left);
+                } else {
+                    rgTopTag.check(R.id.rb_top_right);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
     }

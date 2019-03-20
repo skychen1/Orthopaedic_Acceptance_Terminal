@@ -103,18 +103,27 @@ public class SurgeryPatientResponseParam implements Parcelable {
          * scheduleTime : 2019-02-19
          */
 
-        private String hisPatientId;
-        private String patientId;
-        private String surgeryId;
-        private String patientName;
-        private String gender;
-        private String caseNo;
-        private String roomName;
-        private String bedNo;
-        private String surgeryName;
-        private String doctorName;
-        private String birthday;
-        private String scheduleTime;
+        private String hisPatientId = "";
+        private String patientId = "";
+        private String surgeryId = "";
+        private String patientName = "";
+        private String gender = "";
+        private String caseNo = "";
+        private String roomName = "";
+        private String bedNo = "";
+        private String surgeryName = "";
+        private String doctorName = "";
+        private String birthday = "";
+        private String scheduleTime = "";
+        private String height = "";
+
+        public String getHeight() {
+            return height;
+        }
+
+        public void setHeight(String height) {
+            this.height = height;
+        }
 
         public String getHisPatientId() {
             return hisPatientId;

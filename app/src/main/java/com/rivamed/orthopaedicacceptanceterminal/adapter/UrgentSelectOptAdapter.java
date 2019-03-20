@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
-import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.FindByStatusResponseParam;
 
 import butterknife.BindView;
 
@@ -23,21 +23,19 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class UrgentSelectOptAdapter extends SimpleRecyclerAdapter<MianFuncationParam,
+public class UrgentSelectOptAdapter extends SimpleRecyclerAdapter<FindByStatusResponseParam.SurgeryDictsBean,
         UrgentSelectOptAdapter.MyHolder> {
-
-    @BindView(R.id.tv_opt_name)
-    TextView tvOptName;
 
     public UrgentSelectOptAdapter(Context context) {
         super(context, R.layout.item_urgent_selectopt);
     }
 
     @Override
-    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+    protected void convert(MyHolder holder, FindByStatusResponseParam.SurgeryDictsBean item, final int position) {
         if (item == null || holder == null) {
             return;
         }
+        holder.tvOptName.setText(item.getName());
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);

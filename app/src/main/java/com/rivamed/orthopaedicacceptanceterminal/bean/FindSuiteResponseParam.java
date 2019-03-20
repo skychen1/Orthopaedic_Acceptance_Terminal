@@ -67,7 +67,7 @@ public class FindSuiteResponseParam implements Parcelable {
         this.ociSuiteVos = ociSuiteVos;
     }
 
-    public static class OciSuiteVosBean {
+    public static class OciSuiteVosBean{
         /**
          * suiteId : 40288ba96903c456016904511d570003
          * cstBoxCount : 0
@@ -80,13 +80,31 @@ public class FindSuiteResponseParam implements Parcelable {
          */
 
         private String suiteId;
+        private String id="";
         private int cstBoxCount;
         private int instrumentBoxCount;
         private String suiteName;
         private String vendorName;
+        private String remark ="";
         private int cstCount;
         private int instrumentCount;
         private int num;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
 
         public String getSuiteId() {
             return suiteId;

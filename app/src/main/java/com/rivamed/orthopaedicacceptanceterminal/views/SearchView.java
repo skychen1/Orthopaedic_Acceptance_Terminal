@@ -69,13 +69,15 @@ public class SearchView extends LinearLayout implements View.OnClickListener, Te
             mImgClose.setVisibility(VISIBLE);
         } else {
             mImgClose.setVisibility(GONE);
+            if (mEmptyInputListener != null) {
+                mEmptyInputListener.OnEmptyInput();
+            }
         }
 
     }
 
     @Override
     public void afterTextChanged(Editable s) {
-
     }
 
     @Override
@@ -89,4 +91,20 @@ public class SearchView extends LinearLayout implements View.OnClickListener, Te
                 break;
         }
     }
+
+    public EditText getEtSeach() {
+        return mEtSeach;
+    }
+
+     //提供接口
+      public  OnEmptyInputListener mEmptyInputListener;
+
+      public interface OnEmptyInputListener {
+          void OnEmptyInput();
+      }
+
+      public  void setOnEmptyInputListener(OnEmptyInputListener onEmptyInputListener) {
+          mEmptyInputListener = onEmptyInputListener;
+      }
+
 }

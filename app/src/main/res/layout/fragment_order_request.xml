@@ -17,6 +17,7 @@
         layout="@layout/layout_bottom_funcation_triple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_alignParentBottom="true" />
 
     <android.support.v4.view.ViewPager
