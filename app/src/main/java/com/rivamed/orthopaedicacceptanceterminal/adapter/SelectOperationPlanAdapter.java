@@ -38,7 +38,7 @@ public class SelectOperationPlanAdapter extends SimpleRecyclerAdapter<SurgeryPat
         holder.tvOptName.setText(item.getSurgeryName());
         holder.tvPatientName.setText(item.getPatientName());
         holder.tvPatientBrth.setText(item.getBirthday());
-        holder.tvPatientId.setText(item.getPatientId());
+        holder.tvPatientId.setText(item.getHisPatientId());
         holder.tvPatientHigh.setText("--");
         holder.tvMedicalRecordNumber.setText(item.getCaseNo());
         holder.tvDoctorName.setText(item.getDoctorName());

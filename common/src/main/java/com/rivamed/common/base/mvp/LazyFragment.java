@@ -74,6 +74,9 @@ public class LazyFragment extends SupportFragment {
 
                 View view = getPreviewLayout(mInflater, layout);
                 if (view != null) {
+                    if(view.getParent() != null) {
+                        ((ViewGroup)view.getParent()).removeView(view); // <- fix
+                    }
                     layout.addView(view);
                 }
                 layout.setLayoutParams(
@@ -114,6 +117,9 @@ public class LazyFragment extends SupportFragment {
         if (isLazyEnable && getRootView() != null && getRootView().getParent() != null) {
             layout.removeAllViews();
             View view = layoutInflater.inflate(layoutResID, layout, false);
+            if(view.getParent() != null) {
+                ((ViewGroup)view.getParent()).removeView(view); // <- fix
+            }
             layout.addView(view);
         } else {
             rootView = layoutInflater.inflate(layoutResID, container, false);
@@ -123,6 +129,9 @@ public class LazyFragment extends SupportFragment {
     protected void setContentView(View view) {
         if (isLazyEnable && getRootView() != null && getRootView().getParent() != null) {
             layout.removeAllViews();
+            if(view.getParent() != null) {
+                ((ViewGroup)view.getParent()).removeView(view); // <- fix
+            }
             layout.addView(view);
         } else {
             rootView = view;

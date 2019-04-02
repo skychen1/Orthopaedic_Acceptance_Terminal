@@ -6,7 +6,6 @@ import com.lzy.okgo.model.Response;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
-import com.rivamed.orthopaedicacceptanceterminal.bean.FindByIdResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindByStatusResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindCstDetailResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderDetailResponseParam;
@@ -239,28 +238,6 @@ public class NetData {
                 });
     }
 
-    /**
-     * 套餐明细
-     *
-     * @param context
-     * @param suiteId
-     */
-    private void findById(Activity context, String suiteId) {
-        Map<String, String> map = new HashMap<>(1);
-        map.put("suiteId", suiteId);
-        OkGoUtil.getRequest(UrlPath.ORDER_FIND_BY_ID, this, map,
-                new DialogCallback<FindByIdResponseParam>(context) {
-                    @Override
-                    public void onSuccess(Response<FindByIdResponseParam> response) {
-
-                    }
-
-                    @Override
-                    public void onError(Response<FindByIdResponseParam> response) {
-                        super.onError(response);
-                    }
-                });
-    }
 
     /**
      * 手术信息查询

@@ -33,7 +33,16 @@ public class FindOrderResponseParam implements Parcelable {
     private String term;
     private String startDate;
     private String endDate;
+    private String msg;
     private List<OciOrderVosBean> ociOrderVos;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getId() {
         return id;
@@ -99,6 +108,15 @@ public class FindOrderResponseParam implements Parcelable {
         private String surgeryName;
         private String createTime;
         private String status;
+        private String orderNo;
+
+        public String getOrderNo() {
+            return orderNo;
+        }
+
+        public void setOrderNo(String orderNo) {
+            this.orderNo = orderNo;
+        }
 
         public String getOrderId() {
             return orderId;

@@ -33,7 +33,7 @@ import com.rivamed.orthopaedicacceptanceterminal.R;
 public class AddAndSubAmountView extends LinearLayout implements View.OnClickListener, TextWatcher {
 
     private TextView mTvAmount;
-    private Button mBtnSub;
+    protected Button mBtnSub;
     private Button mBtnAdd;
     private int mAmount = 10;
     private int mMaxAmount = 100;
@@ -126,6 +126,9 @@ public class AddAndSubAmountView extends LinearLayout implements View.OnClickLis
                     mBtnSub.setBackgroundColor(Color.parseColor("#B7BCC8"));
                     mBtnSub.setClickable(false);
                 }
+                if (mAmountChangeListener != null) {
+                    mAmountChangeListener.OnAmountChange(mAmount);
+                }
                 break;
             case R.id.btn_add:
                 if (mAmount == mMinAmount) {
@@ -140,6 +143,9 @@ public class AddAndSubAmountView extends LinearLayout implements View.OnClickLis
                     mTvAmount.setText("" + mMaxAmount);
                     mBtnAdd.setBackgroundColor(Color.parseColor("#B7BCC8"));
                     mBtnAdd.setClickable(false);
+                }
+                if (mAmountChangeListener != null) {
+                    mAmountChangeListener.OnAmountChange(mAmount);
                 }
                 break;
             default:
@@ -173,4 +179,27 @@ public class AddAndSubAmountView extends LinearLayout implements View.OnClickLis
     public int getAmount() {
         return mAmount;
     }
+
+    /**
+     * 获取数量
+     *
+     * @return
+     */
+    public void setAmount(int amount) {
+        mAmount = amount;
+        mTvAmount.setText("" + mAmount);
+    }
+
+    //提供接口
+    public  OnAmountChangeListener mAmountChangeListener;
+
+    public interface OnAmountChangeListener {
+        void OnAmountChange(int amount);
+    }
+
+    public void setOnAmountChangeListener(OnAmountChangeListener onAmountChangeListener) {
+        mAmountChangeListener = onAmountChangeListener;
+    }
+
+
 }

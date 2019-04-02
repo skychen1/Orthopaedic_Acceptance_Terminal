@@ -37,7 +37,7 @@ public class SupRoomCheckOrderAdapter extends SimpleRecyclerAdapter<FindOrderRes
         holder.tvOptName.setText(item.getSurgeryName());
         holder.tvPatientName.setText(item.getPatientName());
         holder.tvPatientCaseId.setText(item.getCaseNo());
-        holder.tvOrderId.setText(item.getOrderId());
+        holder.tvOrderId.setText(item.getOrderNo());
         holder.tvUseTime.setText(item.getCreateTime());
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {

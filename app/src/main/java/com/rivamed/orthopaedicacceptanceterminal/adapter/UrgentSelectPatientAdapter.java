@@ -36,7 +36,7 @@ public class UrgentSelectPatientAdapter extends SimpleRecyclerAdapter<GetAllPati
             return;
         }
         holder.tvPatientName.setText(item.getPatientName());
-        holder.tvPatientId.setText(item.getPatientId());
+        holder.tvPatientId.setText(item.getHisPatientId());
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);

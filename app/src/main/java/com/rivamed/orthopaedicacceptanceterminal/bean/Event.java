@@ -49,4 +49,18 @@ public class Event {
             data = bean;
         }
     }
+
+    /**
+     * 订单操作
+     */
+    public static class EventOrderOpt {
+
+        public String mFrom="";
+
+        public EventOrderOpt(String from) {
+            mFrom = from;
+        }
+    }
+
+
 }

@@ -12,7 +12,7 @@ import butterknife.BindView;
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
  * @Package: com.rivamed.orthopaedicacceptanceterminal.fragment
- * @ClassName: OrderLookUpSuiteDetailsCstSterilsFragment
+ * @ClassName: AsepticFragment
  * @Description: 供应商验收-套餐明细-无菌类耗材
  * @Author: Amos_Bo
  * @CreateDate: 2019/2/27 15:22

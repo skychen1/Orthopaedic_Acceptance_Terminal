@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
-import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.FindCstDetailResponseParam;
 import com.rivamed.orthopaedicacceptanceterminal.views.AddAndSubAmountView;
 
 import butterknife.BindView;
@@ -24,7 +24,7 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class CstCostDetailsEliminationAdapter extends SimpleRecyclerAdapter<MianFuncationParam,
+public class CstCostDetailsEliminationAdapter extends SimpleRecyclerAdapter<FindCstDetailResponseParam.EliminationCstsBean,
         CstCostDetailsEliminationAdapter.MyHolder> {
 
 
@@ -33,10 +33,23 @@ public class CstCostDetailsEliminationAdapter extends SimpleRecyclerAdapter<Mian
     }
 
     @Override
-    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+    protected void convert(MyHolder holder, FindCstDetailResponseParam.EliminationCstsBean item, final int position) {
         if (item == null || holder == null) {
             return;
         }
+        holder.tvCstName.setText(item.getCstName());
+        holder.tvCstCode.setText(item.getCstCode());
+        holder.tvCstModule.setText(item.getCstSpec());
+        holder.tvCstBatch.setText(item.getBatchNo());
+        holder.tvCstNumber.setAmount(item.getNum());
+        holder.tvCstNumber.setMaxAmount(item.getMaxNum());
+        holder.tvCstNumber.setOnAmountChangeListener(new AddAndSubAmountView.OnAmountChangeListener() {
+            @Override
+            public void OnAmountChange(int amount) {
+                item.setNum(amount);
+                notifyDataSetChanged();
+            }
+        });
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);
@@ -53,7 +66,6 @@ public class CstCostDetailsEliminationAdapter extends SimpleRecyclerAdapter<Mian
         TextView tvCstModule;
         @BindView(R.id.tv_cst_batch)
         TextView tvCstBatch;
-
         @BindView(R.id.aas_cst_number)
         AddAndSubAmountView tvCstNumber;
 

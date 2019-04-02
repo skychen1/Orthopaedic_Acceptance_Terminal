@@ -3,6 +3,7 @@ package com.rivamed.orthopaedicacceptanceterminal.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class SubmitCostReqestAndResponseParam implements Parcelable {
     private int id;
     private String msg;
     private String orderId;
-    private List<SuiteVosBean> suiteVos;
+    private List<SuiteVosBean> suiteVos = new ArrayList<>();
 
     public boolean isOperateSuccess() {
         return operateSuccess;

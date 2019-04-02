@@ -35,8 +35,8 @@ public class FindByIdResponseParam implements Parcelable {
     private int instrumentCount;
     private int asepticCstCount;
     private int eliminationCstCount;
-    private List<CstsBean> csts;
-    private List<InstrumentsBean> instruments;
+    private List<CstsBean> csts=new ArrayList<>();
+    private List<InstrumentsBean> instruments=new ArrayList<>();
 
     public String getFrom() {
         return mFrom;

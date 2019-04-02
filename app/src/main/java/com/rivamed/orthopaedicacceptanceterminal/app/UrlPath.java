@@ -59,15 +59,11 @@ public class UrlPath {
     /**
      * 获取手术排班患者
      */
-    public static final String ORDER_PATIENT_LIST = "/patient/surgeryInfo/getSurgeryPatient";
+    public static final String ORDER_PATIENT_LIST = "/consumables/surgeryInfo/getSurgeryPatient";
     /**
      * 套餐查询
      */
     public static final String ORDER_FIND_SUITE = "/basic/ociSuite/findSuite";
-    /**
-     * 套餐明细
-     */
-    public static final String ORDER_FIND_BY_ID = "/basic/ociSuiteDetail/findById";
     /**
      * 手术信息查询
      */

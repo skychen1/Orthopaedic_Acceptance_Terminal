@@ -3,6 +3,7 @@ package com.rivamed.orthopaedicacceptanceterminal.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class FindOrderStatusResponseParam implements Parcelable {
      */
 
     private int id;
-    private List<DictsBean> dicts;
+    private List<DictsBean> dicts = new ArrayList<>();
 
     public int getId() {
         return id;

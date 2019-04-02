@@ -710,4 +710,29 @@ public class BaseUtils {
         lastClickTime = currentClickTime;
         return flag;
     }
+
+    public static void hideInputWindow(Context context,View v) {
+        InputMethodManager imm =
+                (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
+    }
+    /**
+     * 获取当前屏幕宽度px(像素)
+     */
+    public static int getScreenWidth(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int width = wm.getDefaultDisplay().getWidth();
+        return width;
+    }
+
+    /**
+     * 获取当前屏幕高度px(像素)
+     */
+    public static int getScreenHeight(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        return height;
+    }
 }

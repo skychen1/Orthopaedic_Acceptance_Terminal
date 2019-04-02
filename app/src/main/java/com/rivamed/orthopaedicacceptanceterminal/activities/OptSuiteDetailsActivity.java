@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -60,10 +61,12 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
     Button btBottomMedium;
     @BindView(R.id.bt_bottom_right)
     Button btBottomRight;
+    @BindView(R.id.ll_bottom_root)
+    LinearLayout mLlBottomRoot;
     private List<Fragment> mFragments = new ArrayList<>();
     private FragmentAdapter mFragmentAdapter;
     private FindByIdResponseParam mBody;
-    private String mFrom="";
+    private String mFrom = "";
 
     @Override
     protected int getContentLayoutId() {
@@ -78,6 +81,10 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
         btBottomLeft.setVisibility(View.GONE);
         String suiteId = getIntent().getStringExtra("suiteId");
         mFrom = getIntent().getStringExtra("from");
+        if (mFrom.contains("HckDeptUnExamineOrderFragment")) {
+            //器械处审核订单--订单详情
+            mLlBottomRoot.setVisibility(View.GONE);
+        }
         findById(suiteId);
     }
 
@@ -89,15 +96,17 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
     private void findById(String suiteId) {
         Map<String, String> map = new HashMap<>(1);
         map.put("suiteId", suiteId);
-        OkGoUtil.getRequest(UrlPath.ORDER_FIND_BY_ID, this, map,
+        OkGoUtil.getRequest(UrlPath.ACCOUNT_FINDBY_ID, this, map,
                 new DialogCallback<FindByIdResponseParam>(this) {
                     @Override
                     public void onSuccess(Response<FindByIdResponseParam> response) {
                         mBody = response.body();
-                        btBottomRight.setVisibility(View.VISIBLE);
-                        tvSuiteName.setText(mBody.getSuiteName());
-                        tvSupplierName.setText(response.body().getVendorName());
-                        initFrag(response.body());
+                        if (mBody != null) {
+                            btBottomRight.setVisibility(View.VISIBLE);
+                            tvSuiteName.setText(mBody.getSuiteName());
+                            tvSupplierName.setText(response.body().getVendorName());
+                            initFrag(response.body());
+                        }
                     }
 
                     @Override

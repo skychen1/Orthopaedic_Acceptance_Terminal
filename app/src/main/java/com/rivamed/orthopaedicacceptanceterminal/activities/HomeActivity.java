@@ -67,6 +67,7 @@ public class HomeActivity extends SimpleActivity {
     private static final String FUNATION_DATA_TAG = "function_data_tag";
     private SparseArray<SupportFragment> mFragmentMap;
     private int mShowingFragId;
+    private boolean isFirst = true;
 
     @Override
     public int getLayoutId() {
@@ -120,10 +121,10 @@ public class HomeActivity extends SimpleActivity {
                         setPageData(R.id.home_order_audit, R.drawable.selector_icon_home_rb_qxcsh
                                 , item.getTitle(), HomeHckDeptExamineOrderFragment.newInstance());
                         break;
-                    case "供应商确认订单"://该功能已取消
-                        addHomeFuncationRb(false, R.id.home_order_sure,
-                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
-                        break;
+                    //                    case "供应商确认订单"://该功能已取消
+                    //                        addHomeFuncationRb(false, R.id.home_order_sure,
+                    //                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
+                    //                        break;
                     case "器械处验收订单":
                         setPageData(R.id.home_order_apparatus_acceptance,
                                 R.drawable.selector_icon_home_rb_qxcys, item.getTitle(),
@@ -151,7 +152,10 @@ public class HomeActivity extends SimpleActivity {
                         break;
                 }
             });
-            mShowingFragId = mFragmentMap.keyAt(0);
+            for (int i = 0; i < mFragmentMap.size(); i++) {
+                Log.e("HomeActivity", "mFragmentMap.keyAt(i):" + mFragmentMap.keyAt(i));
+            }
+            Log.e("HomeActivity", "mShowingFragId:" + mShowingFragId);
             //            showHideFragment(mFragmentMap.get(R.id.home_order_application));
             Log.e("HomeActivity", "mFragmentMap.get(R.id.home_order_lookup):" + mFragmentMap.get(R.id.home_order_lookup));
             loadMultipleRootFragment(R.id.fl_tab_container, 0,
@@ -188,10 +192,12 @@ public class HomeActivity extends SimpleActivity {
                     mShowingFragId = R.id.home_order_nose_acceptance;
                     break;
                 case R.id.home_order_supply_acceptance://供应室验收订单
+                    Log.e("HomeActivity", "mShowingFragId:" + mShowingFragId);
                     showHideFragment(mFragmentMap.get(R.id.home_order_supply_acceptance), mFragmentMap.get(mShowingFragId));
                     mShowingFragId = R.id.home_order_supply_acceptance;
                     break;
                 case R.id.home_cst_submit://耗材计费提报
+                    Log.e("HomeActivity", "mShowingFragId:" + mShowingFragId);
                     showHideFragment(mFragmentMap.get(R.id.home_cst_submit), mFragmentMap.get(mShowingFragId));
                     mShowingFragId = R.id.home_cst_submit;
                     break;
@@ -212,6 +218,10 @@ public class HomeActivity extends SimpleActivity {
      */
     private void setPageData(@IdRes int id, @DrawableRes int bgId, @NonNull String pageTitle,
                              SupportFragment pageFragment) {
+        if (isFirst) {
+            mShowingFragId = id;
+            isFirst = false;
+        }
         mFragmentMap.put(id, pageFragment);
         addHomeFuncationRb(false, id, this.getResources().getDrawable(bgId), pageTitle);
     }

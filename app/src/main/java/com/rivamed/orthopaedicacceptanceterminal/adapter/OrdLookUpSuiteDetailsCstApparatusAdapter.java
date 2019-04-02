@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
-import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.FindSuiteDetailResponseParam;
 
 import butterknife.BindView;
 
@@ -15,7 +15,7 @@ import butterknife.BindView;
  * @ProjectName: Orthopaedic_Acceptance_Terminal
  * @Package: com.rivamed.orthopaedicacceptanceterminal.fragment
  * @ClassName: OperationPlanFragment
- * @Description: 订单查询-套餐明细-器械类耗材
+ * @Description: 器械类耗材adapter
  * @Author: Amos_Bo
  * @CreateDate: 2019/2/25 18:18
  * @UpdateUser: 更新者
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class OrdLookUpSuiteDetailsCstApparatusAdapter extends SimpleRecyclerAdapter<MianFuncationParam, OrdLookUpSuiteDetailsCstApparatusAdapter.MyHolder> {
+public class OrdLookUpSuiteDetailsCstApparatusAdapter extends SimpleRecyclerAdapter<FindSuiteDetailResponseParam.InstrumentsBean, OrdLookUpSuiteDetailsCstApparatusAdapter.MyHolder> {
 
 
     public OrdLookUpSuiteDetailsCstApparatusAdapter(Context context) {
@@ -31,10 +31,13 @@ public class OrdLookUpSuiteDetailsCstApparatusAdapter extends SimpleRecyclerAdap
     }
 
     @Override
-    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+    protected void convert(MyHolder holder, FindSuiteDetailResponseParam.InstrumentsBean item, final int position) {
         if (item == null || holder == null) {
             return;
         }
+        holder.tvApparatusName.setText(item.getName());
+        holder.tvApparatusCode.setText(item.getCode());
+        holder.tvApparatusNumber.setText(item.getNum()+"");
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);

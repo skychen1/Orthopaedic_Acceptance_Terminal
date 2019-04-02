@@ -32,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -60,6 +61,7 @@ public class HomeOrderRequestFragment extends BaseFragment {
     Button btBottomRight;
     @BindView(R.id.vp_content)
     ViewPager vpContent;
+    Unbinder unbinder;
 
     private List<Fragment> mFragmentList;
     public FragmentAdapter mFragmentAdapter;
@@ -85,6 +87,7 @@ public class HomeOrderRequestFragment extends BaseFragment {
 
     private void initView() {
         btBottomLeft.setVisibility(View.GONE);
+        btBottomRight.setVisibility(View.VISIBLE);
         mFragmentList = new ArrayList<>();
         mOperationPlanFragment = OperationPlanFragment.newInstance();
         mOperationUrgentFragment = OperationUrgentFragment.newInstance();
@@ -174,7 +177,7 @@ public class HomeOrderRequestFragment extends BaseFragment {
                     }
                     if (TextUtils.isEmpty(mOperationUrgentFragment.mSurgeryDictId)) {
                         ToastUtils.showShort("请选择手术");
-                    }else if (TextUtils.isEmpty(mOperationUrgentFragment.mPatientId)) {
+                    } else if (TextUtils.isEmpty(mOperationUrgentFragment.mPatientId)) {
                         ToastUtils.showShort("请选择患者");
                     } else if (mOperationUrgentFragment.listSuit.size() == 0 | IsAllEmpty) {
                         ToastUtils.showShort("请选择套餐");
@@ -221,16 +224,17 @@ public class HomeOrderRequestFragment extends BaseFragment {
                                 ToastUtils.showShort("申请失败");
                             }
                             if (response.body().isOperateSuccess()) {
+                                EventBusUtils.post(new Event.EventOrderOpt("HomeOrderRequestFragment"));
                                 if (type == 1) {
                                     EventBusUtils.post(new Event.EventSelectOperationPlan(new SurgeryPatientResponseParam.SurgeryPatientVosBean()));
                                     FindByIdResponseParam findByIdResponseParam = new FindByIdResponseParam();
-                                    findByIdResponseParam.setFrom("OperationPlanFragment");
+                                    findByIdResponseParam.setFrom("OperationPlanFragmentSubmit");
                                     EventBusUtils.post(new Event.EventSelectSuit(findByIdResponseParam));
                                 } else if (type == 2) {
                                     EventBusUtils.post(new Event.EventSelectOpt(new FindByStatusResponseParam.SurgeryDictsBean()));
                                     EventBusUtils.post(new Event.EventSelectPatint(new GetAllPatientResponseParam.PatientsBean()));
                                     FindByIdResponseParam findByIdResponseParam = new FindByIdResponseParam();
-                                    findByIdResponseParam.setFrom("OperationUrgentFragment");
+                                    findByIdResponseParam.setFrom("OperationUrgentFragmentSubmit");
                                     EventBusUtils.post(new Event.EventSelectSuit(findByIdResponseParam));
                                 }
                             }

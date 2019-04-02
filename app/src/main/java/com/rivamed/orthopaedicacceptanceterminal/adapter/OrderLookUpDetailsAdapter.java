@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
-import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderDetailResponseParam;
 
 import butterknife.BindView;
 
@@ -23,20 +23,31 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class OrderLookUpDetailsAdapter extends SimpleRecyclerAdapter<MianFuncationParam,
+public class OrderLookUpDetailsAdapter extends SimpleRecyclerAdapter<FindOrderDetailResponseParam.OciSuiteVosBean,
         OrderLookUpDetailsAdapter.MyHolder> {
     public OrderLookUpDetailsAdapter(Context context) {
         super(context, R.layout.item_order_lookup_details);
     }
 
     @Override
-    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+    protected void convert(MyHolder holder, FindOrderDetailResponseParam.OciSuiteVosBean item, final int position) {
         if (item == null || holder == null) {
             return;
         }
+        holder.tvOpName.setText(item.getSuiteName());
+        holder.tvSupplier.setText(item.getVendorName());
+        holder.tvRemark.setText(item.getRemark());
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);
+            }
+        });
+        holder.tvDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mSuitDetailClickListener != null) {
+                    mSuitDetailClickListener.OnSuitDetailClick(position);
+                }
             }
         });
     }
@@ -55,4 +66,16 @@ public class OrderLookUpDetailsAdapter extends SimpleRecyclerAdapter<MianFuncati
             super(itemView);
         }
     }
+
+    //提供点击接口
+    public OnSuitDetailClickListener mSuitDetailClickListener;
+
+    public interface OnSuitDetailClickListener {
+        void OnSuitDetailClick(int position);
+    }
+
+    public void setOnSuitDetailClickListener(OnSuitDetailClickListener onSuitDetailClickListener) {
+        mSuitDetailClickListener = onSuitDetailClickListener;
+    }
+
 }

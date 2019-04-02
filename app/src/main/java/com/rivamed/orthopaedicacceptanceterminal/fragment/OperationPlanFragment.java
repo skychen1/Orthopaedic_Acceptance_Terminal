@@ -128,7 +128,7 @@ public class OperationPlanFragment extends BaseFragment {
             tvOpName.setText(item.getSurgeryName());
             tvPatientName.setText(item.getPatientName());
             tvPatientBrth.setText(item.getBirthday());
-            tvPatientId.setText(item.getPatientId());
+            tvPatientId.setText(item.getHisPatientId());
             tvPatientHigh.setText(item.getHeight());
             tvPatientCaseId.setText(item.getCaseNo());
             tvPatientSex.setText(item.getGender());
@@ -162,6 +162,10 @@ public class OperationPlanFragment extends BaseFragment {
             listSuit.get(mSelectSuitPosition).setSuiteName(event.data.getSuiteName());
             listSuit.get(mSelectSuitPosition).setVendorName(event.data.getVendorName());
             listSuit.get(mSelectSuitPosition).setSuiteId(event.data.getSuiteId());
+            mOperationPlanSuiteAdapter.notifyDataSetChanged();
+        }else if (event.data != null&& event.data.getFrom().equals("OperationPlanFragmentSubmit")) {
+            listSuit.clear();
+            listSuit.add(new FindSuiteResponseParam.OciSuiteVosBean());
             mOperationPlanSuiteAdapter.notifyDataSetChanged();
         }
     }

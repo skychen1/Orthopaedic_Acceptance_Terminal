@@ -132,6 +132,10 @@ public class OperationUrgentFragment extends BaseFragment {
             listSuit.get(mSelectSuitPosition).setVendorName(event.data.getVendorName());
             listSuit.get(mSelectSuitPosition).setSuiteId(event.data.getSuiteId());
             mOperationPlanSuiteAdapter.notifyDataSetChanged();
+        }else if (event.data != null && event.data.getFrom().equals("OperationUrgentFragmentSubmit")) {
+            listSuit.clear();
+            listSuit.add(new FindSuiteResponseParam.OciSuiteVosBean());
+            mOperationPlanSuiteAdapter.notifyDataSetChanged();
         }
     }
 

@@ -36,8 +36,10 @@ public class OptSuiteCstFragment extends BaseFragment {
     @SuppressLint("ValidFragment")
     public OptSuiteCstFragment(List<FindByIdResponseParam.CstsBean> csts) {
         super();
-        mCsts.clear();
-        mCsts.addAll(csts);
+        if (mCsts != null) {
+            mCsts.clear();
+            mCsts.addAll(csts);
+        }
     }
 
     private OperationSuiteCstDetailsAdapter mOperationSuiteCstDetailsAdapter;

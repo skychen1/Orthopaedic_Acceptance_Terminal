@@ -1,14 +1,12 @@
 package com.rivamed.orthopaedicacceptanceterminal.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.rivamed.common.adapter.FragmentAdapter;
 import com.rivamed.common.base.BaseFragment;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 
@@ -17,6 +15,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Unbinder;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -43,11 +43,11 @@ public class HomeHckDeptExamineOrderFragment extends BaseFragment {
     Button btBottomMedium;
     @BindView(R.id.bt_bottom_right)
     Button btBottomRight;
-    @BindView(R.id.vp_content)
-    ViewPager vpContent;
+    @BindView(R.id.fl_tab_container)
+    FrameLayout mFlTabContainer;
+    Unbinder unbinder;
 
-    private List<Fragment> mFragmentList;
-    public FragmentAdapter mFragmentAdapter;
+    private List<SupportFragment> mFragmentList;
 
     public static HomeHckDeptExamineOrderFragment newInstance() {
         Bundle args = new Bundle();
@@ -58,7 +58,7 @@ public class HomeHckDeptExamineOrderFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_order_request;
+        return R.layout.fragment_examine_order;
     }
 
     @Override
@@ -70,43 +70,23 @@ public class HomeHckDeptExamineOrderFragment extends BaseFragment {
         rbTopLeft.setText("待审核");
         rbTopRight.setText("待确认撤销");
         mFragmentList = new ArrayList<>();
-        mFragmentList.add(HckDeptUnExamineOrderFragment.newInstance());
-        mFragmentList.add(HckDeptUnExamineOrderFragment.newInstance());
-        mFragmentAdapter = new FragmentAdapter(_mActivity.getSupportFragmentManager(),
-                mFragmentList);
-        vpContent.setAdapter(mFragmentAdapter);
-        vpContent.setCurrentItem(0);
+        mFragmentList.add(new HckDeptUnExamineOrderFragment(1));
+        mFragmentList.add(new HckDeptUnExamineOrderFragment(2));
         rgTopTag.check(R.id.rb_top_left);
+        loadMultipleRootFragment(R.id.fl_tab_container, 0,
+                mFragmentList.get(0),
+                mFragmentList.get(1)
+        );
         rgTopTag.setOnCheckedChangeListener((RadioGroup group, int checkedId) -> {
             switch (checkedId) {
                 case R.id.rb_top_left:
-                    vpContent.setCurrentItem(0);
+                    showHideFragment( mFragmentList.get(0),  mFragmentList.get(1));
                     break;
                 case R.id.rb_top_right:
-                    vpContent.setCurrentItem(1);
+                    showHideFragment( mFragmentList.get(1),  mFragmentList.get(0));
                     break;
                 default:
                     break;
-            }
-        });
-        vpContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0) {
-                    rgTopTag.check(R.id.rb_top_left);
-                } else {
-                    rgTopTag.check(R.id.rb_top_right);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
     }

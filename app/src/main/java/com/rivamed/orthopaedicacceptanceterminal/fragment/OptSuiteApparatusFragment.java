@@ -29,7 +29,7 @@ import butterknife.BindView;
  */
 @SuppressLint("ValidFragment")
 public class OptSuiteApparatusFragment extends BaseFragment {
-    private final List<FindByIdResponseParam.InstrumentsBean> mInstruments = new ArrayList<>();
+    private  List<FindByIdResponseParam.InstrumentsBean> mInstruments = new ArrayList<>();
     @BindView(R.id.rv_context)
     RecyclerView rvContext;
 

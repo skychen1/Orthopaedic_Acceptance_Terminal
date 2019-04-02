@@ -3,6 +3,7 @@ package com.rivamed.orthopaedicacceptanceterminal.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class FindOrderDetailResponseParam implements Parcelable {
     private String orderId;
     private String status;
     private SurgeryPatientVoBean surgeryPatientVo;
-    private List<OciSuiteVosBean> ociSuiteVos;
+    private List<OciSuiteVosBean> ociSuiteVos = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -88,13 +89,22 @@ public class FindOrderDetailResponseParam implements Parcelable {
          * birthday : 2019-01-09
          */
 
-        private String hisPatientId;
-        private String patientName;
-        private String gender;
-        private String caseNo;
-        private String surgeryName;
-        private String doctorName;
-        private String birthday;
+        private String hisPatientId = "";
+        private String patientName = "";
+        private String gender = "";
+        private String caseNo = "";
+        private String surgeryName = "";
+        private String doctorName = "";
+        private String birthday = "";
+        private String scheduleTime = "";
+
+        public String getScheduleTime() {
+            return scheduleTime;
+        }
+
+        public void setScheduleTime(String scheduleTime) {
+            this.scheduleTime = scheduleTime;
+        }
 
         public String getHisPatientId() {
             return hisPatientId;
@@ -362,14 +372,14 @@ public class FindOrderDetailResponseParam implements Parcelable {
 
     public static final Parcelable.Creator<FindOrderDetailResponseParam> CREATOR =
             new Parcelable.Creator<FindOrderDetailResponseParam>() {
-        @Override
-        public FindOrderDetailResponseParam createFromParcel(Parcel source) {
-            return new FindOrderDetailResponseParam(source);
-        }
+                @Override
+                public FindOrderDetailResponseParam createFromParcel(Parcel source) {
+                    return new FindOrderDetailResponseParam(source);
+                }
 
-        @Override
-        public FindOrderDetailResponseParam[] newArray(int size) {
-            return new FindOrderDetailResponseParam[size];
-        }
-    };
+                @Override
+                public FindOrderDetailResponseParam[] newArray(int size) {
+                    return new FindOrderDetailResponseParam[size];
+                }
+            };
 }

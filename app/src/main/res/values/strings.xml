@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OrthopaedicAcceptanceTerminal</string>
+    <string name="app_name">骨科耗材管理系统</string>
     <string name="press_again_exit">再按一次退出</string>
     <string name="please_input_user_name">请输入账号</string>
     <string name="please_input_password">请输入密码</string>

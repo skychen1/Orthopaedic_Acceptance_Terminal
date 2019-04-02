@@ -28,13 +28,13 @@ public class FindSuiteDetailResponseParam {
      * asepticCstCount : 1
      * eliminationCstCount : 1
      * asepticCsts : [{"cstBoxCount":0,"instrumentBoxCount":0,"cstCount":0,"instrumentCount":0,
-     * "cstName":"载玻片（世泰）","cstCode":"2014wg00401897","cstSpec":"fddddfsd","cstType":"1",
-     * "expireDate":"2019-02-14","batchNo":"222","cstNumber":"qwe","num":3}]
+      "cstName":"载玻片（世泰）","cstCode":"2014wg00401897","cstSpec":"fddddfsd","cstType":"1",
+     "expireDate":"2019-02-14","batchNo":"222","cstNumber":"qwe","num":3}]
      * instruments : [{"cstBoxCount":0,"instrumentBoxCount":0,"cstCount":0,"instrumentCount":0,
      * "name":"螺丝刀","code":"1001","num":444}]
-     * eliminationCsts : [{"cstBoxCount":0,"instrumentBoxCount":0,"cstCount":0,
-     * "instrumentCount":0,"cstName":"咽喉镜","cstCode":"2014wg00401977","cstSpec":"cvcx",
-     * "cstType":"0","expireDate":"2019-02-14","batchNo":"ww","cstNumber":"ss","num":4}]
+      eliminationCsts : [{"cstBoxCount":0,"instrumentBoxCount":0,"cstCount":0,
+      "instrumentCount":0,"cstName":"咽喉镜","cstCode":"2014wg00401977","cstSpec":"cvcx",
+      "cstType":"0","expireDate":"2019-02-14","batchNo":"ww","cstNumber":"ss","num":4}]
      */
 
     private int id;

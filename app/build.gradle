@@ -65,6 +65,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(':commonLib')
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5'
     //黄油刀
     annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
 }

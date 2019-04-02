@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
-import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderResponseParam;
 
 import butterknife.BindView;
 
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class OrderLookUpAdapter extends SimpleRecyclerAdapter<MianFuncationParam,
+public class OrderLookUpAdapter extends SimpleRecyclerAdapter<FindOrderResponseParam.OciOrderVosBean,
         OrderLookUpAdapter.MyHolder> {
 
     public OrderLookUpAdapter(Context context) {
@@ -31,10 +31,16 @@ public class OrderLookUpAdapter extends SimpleRecyclerAdapter<MianFuncationParam
     }
 
     @Override
-    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+    protected void convert(MyHolder holder, FindOrderResponseParam.OciOrderVosBean item, final int position) {
         if (item == null || holder == null) {
             return;
         }
+        holder.tvOptName.setText(item.getSurgeryName());
+        holder.tvPatientName.setText(item.getPatientName());
+        holder.tvPatientCaseId.setText(item.getCaseNo());
+        holder.tvOrderId.setText(item.getOrderNo());
+        holder.tvUseTime.setText(item.getCreateTime());
+        holder.tvState.setText(item.getStatus());
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.adapter.SimpleViewHolder;
 import com.rivamed.orthopaedicacceptanceterminal.R;
-import com.rivamed.orthopaedicacceptanceterminal.bean.MianFuncationParam;
+import com.rivamed.orthopaedicacceptanceterminal.bean.CstsBean;
 
 import butterknife.BindView;
 
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class CstCostSureAdapter extends SimpleRecyclerAdapter<MianFuncationParam,
+public class CstCostSureAdapter extends SimpleRecyclerAdapter<CstsBean,
         CstCostSureAdapter.MyHolder> {
 
     public CstCostSureAdapter(Context context) {
@@ -31,10 +31,17 @@ public class CstCostSureAdapter extends SimpleRecyclerAdapter<MianFuncationParam
     }
 
     @Override
-    protected void convert(MyHolder holder, MianFuncationParam item, final int position) {
+    protected void convert(MyHolder holder, CstsBean item, final int position) {
         if (item == null || holder == null) {
             return;
         }
+        holder.tvCstName.setText(item.getCstName());
+        holder.tvCstCode.setText(item.getCstCode());
+        holder.tvCstModule.setText(item.getCstSpec());
+        holder.tvCstBatch.setText(item.getBatchNo());
+        holder.tvCstValidityTime.setText(item.getExpireDate());
+        holder.tvCstNumber.setText("" + item.getNum());
+
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);
