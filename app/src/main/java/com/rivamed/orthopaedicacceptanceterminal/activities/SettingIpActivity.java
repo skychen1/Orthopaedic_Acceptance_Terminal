@@ -41,7 +41,7 @@ public class SettingIpActivity extends SimpleActivity {
 
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
-        String ip = SPUtils.getString(this, Constants.SAVE_SYS_IP, "");
+        String ip = SPUtils.getString(this, Constants.SAVE_SYS_IP_WITHOUT_HTTP, "");
         if (!TextUtils.isEmpty(ip)) {
             etIp.setText(ip);
         }
@@ -111,6 +111,7 @@ public class SettingIpActivity extends SimpleActivity {
                 if (!response.body().isOperateSuccess()) {
                     SPUtils.putString(BaseApplication.getInstance(), Constants.SAVE_SYS_IP, "http"
                             + "://" + newIp);
+                    SPUtils.putString(BaseApplication.getInstance(), Constants.SAVE_SYS_IP_WITHOUT_HTTP, newIp);
                 }
                 finish();
             }

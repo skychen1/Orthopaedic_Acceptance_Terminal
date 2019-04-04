@@ -19,9 +19,12 @@ import com.rivamed.common.base.BaseFragment;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.JsonCallback;
 import com.rivamed.common.utils.EventBusUtils;
+import com.rivamed.common.utils.SPUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.activities.LoginActivityNew;
 import com.rivamed.orthopaedicacceptanceterminal.activities.OrderDetailsActivity;
 import com.rivamed.orthopaedicacceptanceterminal.adapter.SupRoomCheckOrderAdapter;
+import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderRequestParam;
@@ -72,6 +75,10 @@ public class HomeHckDeptCheckOrderFragment extends BaseFragment {
     SmartRefreshLayout mRefreshLayout;
     Unbinder unbinder;
     private String mContent;
+    @BindView(R.id.tv_top_username)
+    TextView mTvTopUsername;
+    @BindView(R.id.rl_logout)
+    RelativeLayout mRlLogout;
 
     public static HomeHckDeptCheckOrderFragment newInstance() {
         Bundle args = new Bundle();
@@ -90,6 +97,13 @@ public class HomeHckDeptCheckOrderFragment extends BaseFragment {
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
         EventBusUtils.register(this);
+        mTvTopUsername.setText(SPUtils.getString(getContext(), Constants.ORTHOPAEDIC_USER_NNAME, ""));
+        mRlLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut(LoginActivityNew.class);
+            }
+        });
         mTvCenterTitle.setText("器械处验收订单");
         mSupRoomCheckOrderAdapter = new SupRoomCheckOrderAdapter(getContext());
         mSupRoomCheckOrderAdapter.setList(listData);

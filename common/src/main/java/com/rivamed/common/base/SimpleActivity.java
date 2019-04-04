@@ -3,15 +3,13 @@ package com.rivamed.common.base;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-
-import me.yokeyword.fragmentation.SupportActivity;
-
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,6 +25,7 @@ import android.widget.EditText;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lzy.okgo.OkGo;
 import com.rivamed.common.R;
+import com.rivamed.common.base.app.BaseApplication;
 import com.rivamed.common.base.mvp.IPresent;
 import com.rivamed.common.base.mvp.IView;
 import com.rivamed.common.base.mvp.KnifeKit;
@@ -34,11 +33,12 @@ import com.rivamed.common.base.mvp.VDelegate;
 import com.rivamed.common.base.mvp.VDelegateBase;
 import com.rivamed.common.utils.EventBusUtils;
 import com.rivamed.common.utils.UIUtils;
+import com.rivamed.common.views.TwoDialog;
 
 import java.io.Serializable;
 
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.SupportActivity;
 
 
 /**
@@ -92,6 +92,7 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
             bindEvent();
         }
         initDataAndEvent(savedInstanceState);
+//        BaseApplication.getInstance().addActivity_(this);
     }
 
 
@@ -429,5 +430,26 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
             mWindowManager.removeView(mTipView);
         }
         super.finish();
+    }
+
+    protected void logOut(final Class<?> cls) {
+        TwoDialog.Builder builder = new TwoDialog.Builder(mContext, 1);
+        builder.setTwoMsg("您确认要退出登录吗?");
+        builder.setMsg("温馨提示");
+        builder.setLeft("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+            }
+        });
+        builder.setRight("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                startActivity(new Intent(mContext, cls));
+                BaseApplication.getInstance().removeALLActivity_();
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }

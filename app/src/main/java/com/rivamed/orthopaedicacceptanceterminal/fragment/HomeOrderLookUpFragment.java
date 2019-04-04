@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -24,10 +22,13 @@ import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.common.http.callback.JsonCallback;
 import com.rivamed.common.utils.BaseUtils;
 import com.rivamed.common.utils.EventBusUtils;
+import com.rivamed.common.utils.SPUtils;
 import com.rivamed.common.utils.ToastUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.activities.LoginActivityNew;
 import com.rivamed.orthopaedicacceptanceterminal.activities.OrderDetailsActivity;
 import com.rivamed.orthopaedicacceptanceterminal.adapter.OrderLookUpAdapter;
+import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderRequestParam;
@@ -47,7 +48,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -93,7 +93,10 @@ public class HomeOrderLookUpFragment extends BaseFragment {
     MaterialHeader mHeader;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-    Unbinder unbinder1;
+    @BindView(R.id.tv_top_username)
+    TextView mTvTopUsername;
+    @BindView(R.id.rl_logout)
+    RelativeLayout mRlLogout;
 
     private OrderLookUpAdapter mOrderLookUpAdapter;
     private Calendar mCa;
@@ -119,6 +122,13 @@ public class HomeOrderLookUpFragment extends BaseFragment {
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
         EventBusUtils.register(this);
+        mTvTopUsername.setText(SPUtils.getString(getContext(), Constants.ORTHOPAEDIC_USER_NNAME, ""));
+        mRlLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut(LoginActivityNew.class);
+            }
+        });
         mCa = Calendar.getInstance();
         tvCenterTitle.setText("订单查询");
         mYear = mCa.get(Calendar.YEAR);
@@ -306,18 +316,4 @@ public class HomeOrderLookUpFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        EventBusUtils.unregister(this);
-        unbinder1.unbind();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 }

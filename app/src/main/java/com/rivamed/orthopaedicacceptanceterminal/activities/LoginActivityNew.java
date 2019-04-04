@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +19,12 @@ import com.rivamed.common.base.SimpleActivity;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.common.utils.BaseUtils;
+import com.rivamed.common.utils.SPUtils;
 import com.rivamed.common.utils.ToastUtils;
+import com.rivamed.common.utils.UIUtils;
 import com.rivamed.orthopaedicacceptanceterminal.BuildConfig;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.LoginRequestParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.LoginResponseParam;
@@ -91,6 +95,25 @@ public class LoginActivityNew extends SimpleActivity {
             mEtUsername.setText("admin");
             mEtPassword.setText("000000");
         }
+        mEtPassword.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    if (!UIUtils.isFastDoubleClick()) {
+                        String userName = mEtUsername.getText().toString().trim();
+                        String pass = mEtPassword.getText().toString().trim();
+                        if (TextUtils.isEmpty(pass) | TextUtils.isEmpty(userName)) {
+                            mTvLoginTip.setText("账号或密码不能为空");
+                            mTvLoginTip.setVisibility(View.VISIBLE);
+                        } else {
+                            login(userName, pass);
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -167,6 +190,7 @@ public class LoginActivityNew extends SimpleActivity {
                     if (response.body().getAccessToken() != null && !TextUtils.isEmpty(response.body().getAccessToken().getTokenId())) {
                         OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
                         OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
+                        SPUtils.putString(mContext, Constants.ORTHOPAEDIC_USER_NNAME, response.body().getAppAccountInfoVo().getUserName());
                         updateMainFunction(response.body().getAppAccountInfoVo().getAccountId());
                     }
                 } else {

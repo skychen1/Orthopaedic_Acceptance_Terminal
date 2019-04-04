@@ -38,7 +38,7 @@ abstract public class BaseApplication extends Application {
     /**
      * 用于存放所有启动的Activity的集合
      */
-    private List<Activity> mAllStackActivityList;
+    private List<Activity> mAllStackActivityList = new LinkedList<>();
     private static BaseApplication instance;
     private ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
 
@@ -52,7 +52,6 @@ abstract public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mAllStackActivityList = new LinkedList<>();
         registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks =
                 new AppActivityLifecycleCallbacks());
         if (!BuildConfig.DEBUG) {

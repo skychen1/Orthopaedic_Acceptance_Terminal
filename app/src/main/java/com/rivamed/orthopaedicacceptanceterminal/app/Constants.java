@@ -19,8 +19,18 @@ public class Constants {
      */
     public static final String SAVE_SYS_IP = "save_sys_ip";
 
+  /**
+     * 设置页面-保存IP
+     */
+    public static final String SAVE_SYS_IP_WITHOUT_HTTP = "save_sys_ip_without_http";
+
     /**
      * 设置保存--tokenId
      */
     public static final String SAVE_TOKEN_ID = "tokenId";
+
+    /**
+     * 用户名
+     */
+    public static final String ORTHOPAEDIC_USER_NNAME = "orthopaedic_user_nname";
 }

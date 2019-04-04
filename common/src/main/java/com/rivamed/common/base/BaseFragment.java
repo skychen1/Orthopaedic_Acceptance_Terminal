@@ -1,7 +1,8 @@
 package com.rivamed.common.base;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.view.ViewStub;
 import android.widget.TextView;
 
 import com.rivamed.common.R;
+import com.rivamed.common.base.app.BaseApplication;
+import com.rivamed.common.views.TwoDialog;
 
 /**
  * @ProjectName: AmosBoCommon
@@ -101,4 +104,24 @@ abstract public class BaseFragment extends AmosBoLazyFragment {
 
     }
 
+    protected void logOut(final Class<?> cls) {
+        TwoDialog.Builder builder = new TwoDialog.Builder(getActivity(), 1);
+        builder.setTwoMsg("您确认要退出登录吗?");
+        builder.setMsg("温馨提示");
+        builder.setLeft("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+            }
+        });
+        builder.setRight("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                startActivity(new Intent(getActivity(), cls));
+                BaseApplication.getInstance().removeALLActivity_();
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 }

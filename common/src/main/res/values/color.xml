@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#df0922</color>
+    <color name="bg_color">#e6ecf2</color>
+    <color name="bg_1C6573">#1C6573</color>
+    <color name="bg_c">#cccccc</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="white_e">#FEFFFF</color>
+    <color name="text_gray_8">#888B91</color>
+    <color name="text_gray_c">#cccccc</color>
+    <color name="text_gray_6">#666666</color>
+    <color name="text_gray_5">#555555</color>
+    <color name="text_fb">#fbfbfb</color>
+    <color name="text_00c2ff">#00c2ff</color>
+    <color name="text_b2b6bd">#b2b6bd</color>
+    <color name="text_01dae9">#01dae9</color>
+    <color name="text_86a1ac">#86a1ac</color>
+    <color name="text_007fa9">#007fa9</color>
+    <color name="text_gray_3">#333333</color>
+    <color name="text_00a98d">#00a98d</color>
+    <color name="text_f04134">#f04134</color>
+    <color name="bg_0">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="line_de">#dedee0</color>
+    <color name="bg_green">#1C6573</color>
+    <color name="bg_056AC8">#056AC8</color>
+    <color name="bg_007FA9">#007FA9</color>
+    <color name="text_72">#727272</color>
+    <color name="text_58">#585858</color>
+</resources>

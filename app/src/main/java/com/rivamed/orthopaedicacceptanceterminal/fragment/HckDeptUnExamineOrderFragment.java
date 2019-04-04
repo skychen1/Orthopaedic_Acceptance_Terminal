@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.lzy.okgo.model.Response;
 import com.rivamed.common.adapter.SimpleRecyclerAdapter;
@@ -59,10 +57,7 @@ import butterknife.Unbinder;
 public class HckDeptUnExamineOrderFragment extends BaseFragment {
 
     private final int mType;//1为待审核 2为待确认撤销
-    @BindView(R.id.tv_center_title)
-    TextView mTvCenterTitle;
-    @BindView(R.id.ll_top_root)
-    RelativeLayout mLlTopRoot;
+
     @BindView(R.id.view_top_search)
     SearchView mViewTopSearch;
     @BindView(R.id.rv_context)
@@ -76,7 +71,6 @@ public class HckDeptUnExamineOrderFragment extends BaseFragment {
     SmartRefreshLayout mRefreshLayout;
     Unbinder unbinder1;
 
-
     private SupRoomCheckOrderAdapter mSupRoomCheckOrderAdapter;
     private String mContent;
 
@@ -86,7 +80,7 @@ public class HckDeptUnExamineOrderFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_suproom_checkord;
+        return R.layout.fragment_hck_dept_examine;
     }
 
     @Override

@@ -21,8 +21,18 @@ import com.rivamed.common.utils.SPUtils;
 @SuppressLint("Registered")
 public class OrthopaedicApplication extends BaseApplication {
 
+    private static OrthopaedicApplication instance;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+    }
+
     @Override
     protected void initAppConfigure() {
+    }
+    public static synchronized OrthopaedicApplication getInstance() {
+        return instance;
     }
 
     /***
@@ -37,4 +47,5 @@ public class OrthopaedicApplication extends BaseApplication {
         }
         return SysIP;
     }
+
 }

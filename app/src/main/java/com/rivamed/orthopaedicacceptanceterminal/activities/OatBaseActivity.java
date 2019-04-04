@@ -8,7 +8,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rivamed.common.base.BaseSimpleActivity;
+import com.rivamed.common.utils.SPUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
+
+import butterknife.BindView;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -26,6 +30,10 @@ abstract public class OatBaseActivity extends BaseSimpleActivity implements View
     TextView tvCenterTitle;
     RelativeLayout rlBack;
     ImageView imgBack;
+    @BindView(R.id.tv_top_username)
+    TextView mTvTopUsername;
+    @BindView(R.id.rl_logout)
+    RelativeLayout mRlLogout;
 
     @Override
     protected int getAppBarLayoutId() {
@@ -38,6 +46,13 @@ abstract public class OatBaseActivity extends BaseSimpleActivity implements View
         imgBack = (ImageView) findViewById(R.id.img_back);
         tvCenterTitle = (TextView) findViewById(R.id.tv_center_title);
         rlBack.setOnClickListener(this);
+        mTvTopUsername.setText(SPUtils.getString(getApplicationContext(), Constants.ORTHOPAEDIC_USER_NNAME, ""));
+        mRlLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut(LoginActivityNew.class);
+            }
+        });
     }
 
     /**
@@ -53,6 +68,7 @@ abstract public class OatBaseActivity extends BaseSimpleActivity implements View
 
     /**
      * 设置状态栏左侧按钮背景图片
+     *
      * @param resId
      */
     public void setLeftImageViewSrc(int resId) {
@@ -71,4 +87,5 @@ abstract public class OatBaseActivity extends BaseSimpleActivity implements View
                 break;
         }
     }
+
 }

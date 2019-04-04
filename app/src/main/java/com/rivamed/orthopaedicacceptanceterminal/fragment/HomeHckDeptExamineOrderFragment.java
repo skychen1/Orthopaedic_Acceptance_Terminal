@@ -6,16 +6,20 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.rivamed.common.base.BaseFragment;
+import com.rivamed.common.utils.SPUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.activities.LoginActivityNew;
+import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -45,7 +49,10 @@ public class HomeHckDeptExamineOrderFragment extends BaseFragment {
     Button btBottomRight;
     @BindView(R.id.fl_tab_container)
     FrameLayout mFlTabContainer;
-    Unbinder unbinder;
+    @BindView(R.id.tv_top_username)
+    TextView mTvTopUsername;
+    @BindView(R.id.rl_logout)
+    RelativeLayout mRlLogout;
 
     private List<SupportFragment> mFragmentList;
 
@@ -67,6 +74,13 @@ public class HomeHckDeptExamineOrderFragment extends BaseFragment {
     }
 
     private void initView() {
+        mTvTopUsername.setText(SPUtils.getString(getContext(), Constants.ORTHOPAEDIC_USER_NNAME, ""));
+        mRlLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut(LoginActivityNew.class);
+            }
+        });
         rbTopLeft.setText("待审核");
         rbTopRight.setText("待确认撤销");
         mFragmentList = new ArrayList<>();

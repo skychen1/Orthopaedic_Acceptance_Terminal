@@ -66,8 +66,9 @@ public class HomeActivity extends SimpleActivity {
 
     private static final String FUNATION_DATA_TAG = "function_data_tag";
     private SparseArray<SupportFragment> mFragmentMap;
+    List<SupportFragment> llContainer = new ArrayList<SupportFragment>();
+    SupportFragment[] mFragmentMapArr;
     private int mShowingFragId;
-    private boolean isFirst = true;
 
     @Override
     public int getLayoutId() {
@@ -95,7 +96,6 @@ public class HomeActivity extends SimpleActivity {
         startActivityWithSerializable(context, HomeActivity.class, FUNATION_DATA_TAG, functionList);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initData() {
         ArrayList<MianFuncationParam> mMainFunctionList =
                 (ArrayList<MianFuncationParam>) getBundleSerializableVaule(FUNATION_DATA_TAG,
@@ -103,14 +103,13 @@ public class HomeActivity extends SimpleActivity {
         initPageFragment(mMainFunctionList);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initPageFragment(List<MianFuncationParam> mianFunctionParamList) {
         mFragmentMap = new SparseArray<>(3);
         if (homeRg.getChildCount() > 0) {
             homeRg.removeAllViews();
         }
         if (mFragmentMap != null && mianFunctionParamList != null && mianFunctionParamList.size() > 0) {
-            mianFunctionParamList.forEach(item -> {
+            for (MianFuncationParam item : mianFunctionParamList) {
                 switch (item.getTitle()) {
                     case "订单申请":
                         setPageData(R.id.home_order_application,
@@ -121,10 +120,10 @@ public class HomeActivity extends SimpleActivity {
                         setPageData(R.id.home_order_audit, R.drawable.selector_icon_home_rb_qxcsh
                                 , item.getTitle(), HomeHckDeptExamineOrderFragment.newInstance());
                         break;
-                    //                    case "供应商确认订单"://该功能已取消
-                    //                        addHomeFuncationRb(false, R.id.home_order_sure,
-                    //                                this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
-                    //                        break;
+//                                        case "供应商确认订单"://该功能已取消
+//                                            addHomeFuncationRb(false, R.id.home_order_sure,
+//                                                    this.getResources().getDrawable(R.drawable.selector_icon_home_rb_ddcx), item.getTitle());
+//                                            break;
                     case "器械处验收订单":
                         setPageData(R.id.home_order_apparatus_acceptance,
                                 R.drawable.selector_icon_home_rb_qxcys, item.getTitle(),
@@ -151,22 +150,19 @@ public class HomeActivity extends SimpleActivity {
                     default:
                         break;
                 }
-            });
-            for (int i = 0; i < mFragmentMap.size(); i++) {
-                Log.e("HomeActivity", "mFragmentMap.keyAt(i):" + mFragmentMap.keyAt(i));
+
             }
-            Log.e("HomeActivity", "mShowingFragId:" + mShowingFragId);
-            //            showHideFragment(mFragmentMap.get(R.id.home_order_application));
-            Log.e("HomeActivity", "mFragmentMap.get(R.id.home_order_lookup):" + mFragmentMap.get(R.id.home_order_lookup));
-            loadMultipleRootFragment(R.id.fl_tab_container, 0,
-                    mFragmentMap.get(R.id.home_order_application),
-                    mFragmentMap.get(R.id.home_order_audit),
-                    mFragmentMap.get(R.id.home_order_apparatus_acceptance),
-                    mFragmentMap.get(R.id.home_order_nose_acceptance),
-                    mFragmentMap.get(R.id.home_order_supply_acceptance),
-                    mFragmentMap.get(R.id.home_cst_submit),
-                    mFragmentMap.get(R.id.home_order_lookup)
-            );
+            mFragmentMapArr = new SupportFragment[llContainer.size()];
+            for (int i = 0; i < llContainer.size(); i++) {
+                SupportFragment supportFragment = llContainer.get(i);
+                mFragmentMapArr[i] = supportFragment;
+            }
+            if (mFragmentMapArr.length > 0) {
+                mShowingFragId = mFragmentMap.keyAt(0);
+                loadMultipleRootFragment(R.id.fl_tab_container, 0,
+                        mFragmentMapArr
+                );
+            }
             initCheckListener();
         }
     }
@@ -218,12 +214,9 @@ public class HomeActivity extends SimpleActivity {
      */
     private void setPageData(@IdRes int id, @DrawableRes int bgId, @NonNull String pageTitle,
                              SupportFragment pageFragment) {
-        if (isFirst) {
-            mShowingFragId = id;
-            isFirst = false;
-        }
         mFragmentMap.put(id, pageFragment);
         addHomeFuncationRb(false, id, this.getResources().getDrawable(bgId), pageTitle);
+        llContainer.add(pageFragment);
     }
 
     /**

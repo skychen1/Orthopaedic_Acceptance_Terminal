@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:background="@color/bg_1C6573"
-    android:orientation="vertical"
     android:paddingTop="@dimen/margin_10dp"
     android:paddingBottom="@dimen/margin_10dp">
 
     <RadioGroup
         android:id="@+id/rg_top_tag"
+        android:layout_centerInParent="true"
         android:layout_width="300dp"
         android:layout_height="@dimen/margin_36dp"
-        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="@dimen/margin_24dp"
         android:layout_marginRight="@dimen/margin_24dp"
         android:orientation="horizontal">
@@ -43,4 +42,36 @@
             android:textSize="@dimen/font_size_20"
             tools:text="加急订单" />
     </RadioGroup>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:layout_alignParentRight="true"
+        >
+        <TextView
+            android:id="@+id/tv_top_username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            tools:text="aaaaa"
+            android:textColor="@color/white"
+            android:textSize="19sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_logout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_logout" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

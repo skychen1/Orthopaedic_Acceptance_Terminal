@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lzy.okgo.model.Response;
 import com.rivamed.common.adapter.FragmentAdapter;
@@ -15,8 +17,11 @@ import com.rivamed.common.base.BaseFragment;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.common.utils.EventBusUtils;
+import com.rivamed.common.utils.SPUtils;
 import com.rivamed.common.utils.ToastUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.activities.LoginActivityNew;
+import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindByIdResponseParam;
@@ -32,7 +37,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -61,7 +65,10 @@ public class HomeOrderRequestFragment extends BaseFragment {
     Button btBottomRight;
     @BindView(R.id.vp_content)
     ViewPager vpContent;
-    Unbinder unbinder;
+    @BindView(R.id.tv_top_username)
+    TextView mTvTopUsername;
+    @BindView(R.id.rl_logout)
+    RelativeLayout mRlLogout;
 
     private List<Fragment> mFragmentList;
     public FragmentAdapter mFragmentAdapter;
@@ -86,6 +93,13 @@ public class HomeOrderRequestFragment extends BaseFragment {
     }
 
     private void initView() {
+        mTvTopUsername.setText(SPUtils.getString(getContext(), Constants.ORTHOPAEDIC_USER_NNAME, ""));
+        mRlLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut(LoginActivityNew.class);
+            }
+        });
         btBottomLeft.setVisibility(View.GONE);
         btBottomRight.setVisibility(View.VISIBLE);
         mFragmentList = new ArrayList<>();
@@ -217,13 +231,14 @@ public class HomeOrderRequestFragment extends BaseFragment {
                     public void onSuccess(Response<SaveOrderResponseParam> response) {
 
                         if (response.body() != null) {
-                            String msg = response.body().getMsg();
-                            if (!TextUtils.isEmpty(msg)) {
-                                ToastUtils.showShort(msg);
-                            } else {
-                                ToastUtils.showShort("申请失败");
-                            }
+//                            String msg = response.body().getMsg();
+//                            if (!TextUtils.isEmpty(msg)) {
+//                                ToastUtils.showShort(msg);
+//                            } else {
+//                                ToastUtils.showShort("申请失败");
+//                            }
                             if (response.body().isOperateSuccess()) {
+                                ToastUtils.showShort("申请成功");
                                 EventBusUtils.post(new Event.EventOrderOpt("HomeOrderRequestFragment"));
                                 if (type == 1) {
                                     EventBusUtils.post(new Event.EventSelectOperationPlan(new SurgeryPatientResponseParam.SurgeryPatientVosBean()));
@@ -237,6 +252,8 @@ public class HomeOrderRequestFragment extends BaseFragment {
                                     findByIdResponseParam.setFrom("OperationUrgentFragmentSubmit");
                                     EventBusUtils.post(new Event.EventSelectSuit(findByIdResponseParam));
                                 }
+                            }else {
+                                ToastUtils.showShort("申请失败");
                             }
                         }
 

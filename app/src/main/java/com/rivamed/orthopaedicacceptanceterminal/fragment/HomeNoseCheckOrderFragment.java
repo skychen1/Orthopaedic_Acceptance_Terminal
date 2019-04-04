@@ -6,9 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,9 +17,12 @@ import com.rivamed.common.base.BaseFragment;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.JsonCallback;
 import com.rivamed.common.utils.EventBusUtils;
+import com.rivamed.common.utils.SPUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
+import com.rivamed.orthopaedicacceptanceterminal.activities.LoginActivityNew;
 import com.rivamed.orthopaedicacceptanceterminal.activities.OrderDetailsActivity;
 import com.rivamed.orthopaedicacceptanceterminal.adapter.SupRoomCheckOrderAdapter;
+import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderRequestParam;
@@ -39,7 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -69,8 +69,10 @@ public class HomeNoseCheckOrderFragment extends BaseFragment {
     MaterialHeader mHeader;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-    Unbinder unbinder1;
-
+    @BindView(R.id.tv_top_username)
+    TextView mTvTopUsername;
+    @BindView(R.id.rl_logout)
+    RelativeLayout mRlLogout;
     public static HomeNoseCheckOrderFragment newInstance() {
         Bundle args = new Bundle();
         HomeNoseCheckOrderFragment fragment = new HomeNoseCheckOrderFragment();
@@ -90,6 +92,13 @@ public class HomeNoseCheckOrderFragment extends BaseFragment {
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
         EventBusUtils.register(this);
+        mTvTopUsername.setText(SPUtils.getString(getContext(), Constants.ORTHOPAEDIC_USER_NNAME, ""));
+        mRlLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut(LoginActivityNew.class);
+            }
+        });
         mTvCenterTitle.setText("护士验收订单");
         mSupRoomCheckOrderAdapter = new SupRoomCheckOrderAdapter(getContext());
         mSupRoomCheckOrderAdapter.setList(listData);
@@ -152,7 +161,7 @@ public class HomeNoseCheckOrderFragment extends BaseFragment {
      * @param findOrderRequestParam
      */
     private void findOrder(FindOrderRequestParam findOrderRequestParam) {
-        findOrderRequestParam.setStatus("4");
+        findOrderRequestParam.setStatus("4,10");
         OkGoUtil.postJsonRequest(UrlPath.ACCOUNT_FIND_ORDER, this, findOrderRequestParam,
                 new JsonCallback<FindOrderResponseParam>() {
                     @Override
@@ -190,18 +199,5 @@ public class HomeNoseCheckOrderFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        EventBusUtils.unregister(this);
-        unbinder1.unbind();
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 }
