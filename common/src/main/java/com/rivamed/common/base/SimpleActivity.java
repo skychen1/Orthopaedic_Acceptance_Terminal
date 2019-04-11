@@ -92,7 +92,7 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
             bindEvent();
         }
         initDataAndEvent(savedInstanceState);
-//        BaseApplication.getInstance().addActivity_(this);
+        BaseApplication.getInstance().addActivity_(this);
     }
 
 

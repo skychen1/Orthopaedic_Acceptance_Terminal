@@ -184,25 +184,34 @@ public class LoginActivityNew extends SimpleActivity {
         loginRequestParam.getAccount().setPassword(pass);
         OkGoUtil.postJsonRequest(UrlPath.LOGIN_NAME_PASSWORD, this, loginRequestParam,
                 new DialogCallback<LoginResponseParam>(this) {
-            @Override
-            public void onSuccess(Response<LoginResponseParam> response) {
-                if (response.body().isOperateSuccess()) {
-                    if (response.body().getAccessToken() != null && !TextUtils.isEmpty(response.body().getAccessToken().getTokenId())) {
-                        OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
-                        OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
-                        SPUtils.putString(mContext, Constants.ORTHOPAEDIC_USER_NNAME, response.body().getAppAccountInfoVo().getUserName());
-                        updateMainFunction(response.body().getAppAccountInfoVo().getAccountId());
+                    @Override
+                    public void onSuccess(Response<LoginResponseParam> response) {
+                        if (response.body().isOperateSuccess()) {
+                            if (response.body().getAccessToken() != null && !TextUtils.isEmpty(response.body().getAccessToken().getTokenId())) {
+                                OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
+                                OkGoUtil.updateTokenId(response.body().getAccessToken().getTokenId());
+                                SPUtils.putString(mContext, Constants.ORTHOPAEDIC_USER_NNAME, response.body().getAppAccountInfoVo().getUserName());
+                                List<LoginResponseParam.AppAccountInfoVoBean.RolesBean> roles = response.body().getAppAccountInfoVo().getRoles();
+                                boolean isDoctor = false;
+                                if (roles != null) {
+                                    for (LoginResponseParam.AppAccountInfoVoBean.RolesBean role : roles) {
+                                        isDoctor = isDoctor | role.getRoleCode().equals("1");
+                                    }
+                                }
+                                SPUtils.putBoolean(mContext, Constants.ORTHOPAEDIC_IS_DOCTOR, isDoctor);
+                                updateMainFunction(response.body().getAppAccountInfoVo().getAccountId());
+                            }
+                        } else {
+                            mTvLoginTip.setText(response.body().getMsg());
+                            mTvLoginTip.setVisibility(View.VISIBLE);
+                        }
                     }
-                } else {
-                    ToastUtils.showShort("登录异常，请联系管理员!");
-                }
-            }
 
-            @Override
-            public void onError(Response<LoginResponseParam> response) {
-                super.onError(response);
-            }
-        });
+                    @Override
+                    public void onError(Response<LoginResponseParam> response) {
+                        super.onError(response);
+                    }
+                });
     }
 
     /**
@@ -216,22 +225,22 @@ public class LoginActivityNew extends SimpleActivity {
         requestKeyMap.put("systemType", "OCI");
         OkGoUtil.getRequest(UrlPath.ACCOUNT_FUNCS, this, requestKeyMap,
                 new DialogCallback<List<MianFuncationParam>>(LoginActivityNew.this) {
-            @Override
-            public void onSuccess(Response<List<MianFuncationParam>> response) {
-                if (response.body() != null && response.body().size() > 0) {
-                    HomeActivity.startHomeActivity(mContext,
-                            (ArrayList<MianFuncationParam>) response.body());
-                    finish();
-                } else {
-                    ToastUtils.showShort("此账号未配置权限，请联系管理员!");
-                }
-            }
+                    @Override
+                    public void onSuccess(Response<List<MianFuncationParam>> response) {
+                        if (response.body() != null && response.body().size() > 0) {
+                            HomeActivity.startHomeActivity(mContext,
+                                    (ArrayList<MianFuncationParam>) response.body());
+                            finish();
+                        } else {
+                            ToastUtils.showShort("此账号未配置权限，请联系管理员!");
+                        }
+                    }
 
-            @Override
-            public void onError(Response<List<MianFuncationParam>> response) {
-                super.onError(response);
-            }
-        });
+                    @Override
+                    public void onError(Response<List<MianFuncationParam>> response) {
+                        super.onError(response);
+                    }
+                });
     }
 
     /**

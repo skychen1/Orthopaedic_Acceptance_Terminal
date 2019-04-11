@@ -97,6 +97,8 @@ public class HomeOrderLookUpFragment extends BaseFragment {
     TextView mTvTopUsername;
     @BindView(R.id.rl_logout)
     RelativeLayout mRlLogout;
+    @BindView(R.id.recyclerview_null)
+    RelativeLayout mRecyclerviewNull;
 
     private OrderLookUpAdapter mOrderLookUpAdapter;
     private Calendar mCa;
@@ -148,6 +150,7 @@ public class HomeOrderLookUpFragment extends BaseFragment {
                 Intent intent = new Intent(getActivity(), OrderDetailsActivity.class);
                 intent.putExtra("orderId", listData.get(position).getOrderId());
                 intent.putExtra("from", "HomeOrderLookUpFragment");
+                intent.putExtra("orderStatus", listData.get(position).getStatus());
                 startActivity(intent);
             }
 
@@ -231,6 +234,13 @@ public class HomeOrderLookUpFragment extends BaseFragment {
                             listData.clear();
                             listData.addAll(response.body().getOciOrderVos());
                             mOrderLookUpAdapter.notifyDataSetChanged();
+                            if (listData.size() > 0) {
+                                mRecyclerviewNull.setVisibility(View.GONE);
+                                mRefreshLayout.setVisibility(View.VISIBLE);
+                            }else {
+                                mRecyclerviewNull.setVisibility(View.VISIBLE);
+                                mRefreshLayout.setVisibility(View.GONE);
+                            }
                         } else {
                             String msg = response.body().getMsg();
                             if (!TextUtils.isEmpty(msg)) {
@@ -269,8 +279,13 @@ public class HomeOrderLookUpFragment extends BaseFragment {
                         if (response.body() != null && response.body().getDicts() != null) {
                             mDicts.clear();
                             mDicts.addAll(response.body().getDicts());
-                            if (isShowPop) {
-                                showPop();
+                            if (mDicts.size() > 0) {
+                                if (isShowPop) {
+                                    showPop();
+                                } else {
+                                    tvState.setText(mDicts.get(0).getDesc());
+                                    mValue = mDicts.get(0).getValue();
+                                }
                             }
                         }
                     }

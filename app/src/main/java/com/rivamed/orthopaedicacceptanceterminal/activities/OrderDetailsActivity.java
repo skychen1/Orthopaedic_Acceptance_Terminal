@@ -14,9 +14,11 @@ import com.lzy.okgo.model.Response;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.common.utils.EventBusUtils;
+import com.rivamed.common.utils.SPUtils;
 import com.rivamed.common.utils.ToastUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.adapter.OrderLookUpDetailsAdapter;
+import com.rivamed.orthopaedicacceptanceterminal.app.Constants;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderDetailResponseParam;
@@ -158,8 +160,12 @@ public class OrderDetailsActivity extends OatBaseActivity {
             //订单查询
             btBottomLeft.setVisibility(View.GONE);
             btBottomRight.setText("撤销订单");
+            String orderStatus = getIntent().getStringExtra("orderStatus");
+            boolean isDoctor = SPUtils.getBoolean(mContext, Constants.ORTHOPAEDIC_IS_DOCTOR, false);
+            if ((!isDoctor)|(orderStatus!=null&&!orderStatus.equals("已下单"))) {
+                btBottomRight.setVisibility(View.GONE);
+            }
         }
-
     }
 
     /**

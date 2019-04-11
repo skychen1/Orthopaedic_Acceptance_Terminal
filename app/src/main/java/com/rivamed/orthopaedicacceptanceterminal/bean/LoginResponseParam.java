@@ -43,6 +43,7 @@ public class LoginResponseParam implements Parcelable {
     private boolean operateSuccess;
     private int id;
     private String opFlg;
+    private String msg = "";
     private int pageNo;
     private int pageSize;
     private UserFeatureInfoBean userFeatureInfo;
@@ -50,6 +51,14 @@ public class LoginResponseParam implements Parcelable {
     private String systemType;
     private String loginTime;
     private AccessTokenBean accessToken;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public boolean isOperateSuccess() {
         return operateSuccess;
@@ -177,16 +186,16 @@ public class LoginResponseParam implements Parcelable {
 
         public static final Parcelable.Creator<UserFeatureInfoBean> CREATOR =
                 new Parcelable.Creator<UserFeatureInfoBean>() {
-            @Override
-            public UserFeatureInfoBean createFromParcel(Parcel source) {
-                return new UserFeatureInfoBean(source);
-            }
+                    @Override
+                    public UserFeatureInfoBean createFromParcel(Parcel source) {
+                        return new UserFeatureInfoBean(source);
+                    }
 
-            @Override
-            public UserFeatureInfoBean[] newArray(int size) {
-                return new UserFeatureInfoBean[size];
-            }
-        };
+                    @Override
+                    public UserFeatureInfoBean[] newArray(int size) {
+                        return new UserFeatureInfoBean[size];
+                    }
+                };
     }
 
     public static class AppAccountInfoVoBean implements Parcelable {
@@ -225,7 +234,7 @@ public class LoginResponseParam implements Parcelable {
         private String sex;
         private String useState;
         private String emergencyPwd;
-        private List<RolesBean> roles;
+        private List<RolesBean> roles = new ArrayList<>();
 
         public String getClientId() {
             return clientId;
@@ -362,7 +371,7 @@ public class LoginResponseParam implements Parcelable {
              * funcs : []
              */
 
-            private String roleCode;
+            private String roleCode = "";
             private String roleName;
             private List<String> funcs;
 
@@ -424,7 +433,7 @@ public class LoginResponseParam implements Parcelable {
             };
         }
 
-     
+
         public AppAccountInfoVoBean() {
         }
 

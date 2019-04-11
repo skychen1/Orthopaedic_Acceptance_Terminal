@@ -143,14 +143,13 @@ public class HomeActivity extends SimpleActivity {
                         setPageData(R.id.home_cst_submit, R.drawable.selector_icon_home_rb_hcjftb
                                 , item.getTitle(), HomeCstCostSubmitFragment.newInstance());
                         break;
-                    case " 订单查询":
+                    case "订单查询":
                         setPageData(R.id.home_order_lookup, R.drawable.selector_icon_home_rb_ddcx
                                 , item.getTitle(), HomeOrderLookUpFragment.newInstance());
                         break;
                     default:
                         break;
                 }
-
             }
             mFragmentMapArr = new SupportFragment[llContainer.size()];
             for (int i = 0; i < llContainer.size(); i++) {

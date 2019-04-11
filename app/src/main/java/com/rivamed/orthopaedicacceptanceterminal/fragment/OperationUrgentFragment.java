@@ -162,7 +162,7 @@ public class OperationUrgentFragment extends BaseFragment {
         if (event.data != null) {
             tvPatientName.setText(event.data.getPatientName());
             mPatientId = event.data.getPatientId();
-            tvPatientId.setText(mPatientId);
+            tvPatientId.setText(event.data.getHisPatientId());
         }
     }
 

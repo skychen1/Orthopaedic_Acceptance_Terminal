@@ -160,13 +160,13 @@ public class HomeOrderRequestFragment extends BaseFragment {
                 int currentItem = vpContent.getCurrentItem();
                 if (currentItem == 0) {
                     //手术排班
-                    boolean IsAllEmpty = true;
+                    boolean IsHaveEmpty = false;
                     for (FindSuiteResponseParam.OciSuiteVosBean ociSuiteVosBean : mOperationPlanFragment.listSuit) {
-                        IsAllEmpty = TextUtils.isEmpty(ociSuiteVosBean.getSuiteId()) && IsAllEmpty;
+                        IsHaveEmpty = TextUtils.isEmpty(ociSuiteVosBean.getSuiteId()) || IsHaveEmpty;
                     }
                     if (TextUtils.isEmpty(mOperationPlanFragment.mPatientId) | TextUtils.isEmpty(mOperationPlanFragment.mSurgeryId)) {
                         ToastUtils.showShort("请选择手术排班");
-                    } else if (mOperationPlanFragment.listSuit.size() == 0 | IsAllEmpty) {
+                    } else if (mOperationPlanFragment.listSuit.size() == 0 | IsHaveEmpty) {
                         ToastUtils.showShort("请选择套餐");
                     } else {
                         SaveOrderRequestBean saveOrderRequestBean = new SaveOrderRequestBean();
@@ -185,15 +185,15 @@ public class HomeOrderRequestFragment extends BaseFragment {
                     }
                 } else {
                     //加急订单
-                    boolean IsAllEmpty = true;
+                    boolean IsHaveEmpty = false;
                     for (FindSuiteResponseParam.OciSuiteVosBean ociSuiteVosBean : mOperationUrgentFragment.listSuit) {
-                        IsAllEmpty = TextUtils.isEmpty(ociSuiteVosBean.getSuiteId()) && IsAllEmpty;
+                        IsHaveEmpty = TextUtils.isEmpty(ociSuiteVosBean.getSuiteId()) || IsHaveEmpty;
                     }
                     if (TextUtils.isEmpty(mOperationUrgentFragment.mSurgeryDictId)) {
                         ToastUtils.showShort("请选择手术");
                     } else if (TextUtils.isEmpty(mOperationUrgentFragment.mPatientId)) {
                         ToastUtils.showShort("请选择患者");
-                    } else if (mOperationUrgentFragment.listSuit.size() == 0 | IsAllEmpty) {
+                    } else if (mOperationUrgentFragment.listSuit.size() == 0 | IsHaveEmpty) {
                         ToastUtils.showShort("请选择套餐");
                     } else {
                         SaveOrderRequestBean saveOrderRequestBean = new SaveOrderRequestBean();
@@ -231,14 +231,13 @@ public class HomeOrderRequestFragment extends BaseFragment {
                     public void onSuccess(Response<SaveOrderResponseParam> response) {
 
                         if (response.body() != null) {
-//                            String msg = response.body().getMsg();
-//                            if (!TextUtils.isEmpty(msg)) {
-//                                ToastUtils.showShort(msg);
-//                            } else {
-//                                ToastUtils.showShort("申请失败");
-//                            }
+                            String msg = response.body().getMsg();
+                            if (!TextUtils.isEmpty(msg)) {
+                                ToastUtils.showShort(msg);
+                            } else {
+                                ToastUtils.showShort("申请失败");
+                            }
                             if (response.body().isOperateSuccess()) {
-                                ToastUtils.showShort("申请成功");
                                 EventBusUtils.post(new Event.EventOrderOpt("HomeOrderRequestFragment"));
                                 if (type == 1) {
                                     EventBusUtils.post(new Event.EventSelectOperationPlan(new SurgeryPatientResponseParam.SurgeryPatientVosBean()));
@@ -252,8 +251,6 @@ public class HomeOrderRequestFragment extends BaseFragment {
                                     findByIdResponseParam.setFrom("OperationUrgentFragmentSubmit");
                                     EventBusUtils.post(new Event.EventSelectSuit(findByIdResponseParam));
                                 }
-                            }else {
-                                ToastUtils.showShort("申请失败");
                             }
                         }
 

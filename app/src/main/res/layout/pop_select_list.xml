@@ -18,7 +18,6 @@
         android:divider="@null"
         android:layout_gravity="right"
         android:listSelector="#1C6573"
-        android:scrollbars="none"
         ></ListView>
     <TextView
         android:id="@+id/tv_right"

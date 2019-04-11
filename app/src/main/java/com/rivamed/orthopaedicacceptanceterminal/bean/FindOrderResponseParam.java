@@ -107,7 +107,7 @@ public class FindOrderResponseParam implements Parcelable {
         private String caseNo;
         private String surgeryName;
         private String createTime;
-        private String status;
+        private String status="";
         private String orderNo;
 
         public String getOrderNo() {

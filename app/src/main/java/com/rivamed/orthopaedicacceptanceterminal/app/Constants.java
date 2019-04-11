@@ -33,4 +33,9 @@ public class Constants {
      * 用户名
      */
     public static final String ORTHOPAEDIC_USER_NNAME = "orthopaedic_user_nname";
+
+    /**
+     * 是否为医生
+     */
+    public static final String ORTHOPAEDIC_IS_DOCTOR = "orthopaedic_is_doctor";
 }

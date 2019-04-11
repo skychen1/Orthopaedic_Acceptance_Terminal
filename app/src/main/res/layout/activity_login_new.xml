@@ -60,21 +60,11 @@
                 android:textColor="@color/text_color_0"
                 android:textSize="@dimen/font_size_20" />
 
-            <TextView
-                android:id="@+id/tv_login_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:text="请输入正确的账号或密码"
-                android:textColor="@color/color_login_orange"
-                android:textSize="@dimen/font_size_13"
-                android:visibility="invisible" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="40dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -161,12 +151,22 @@
                 android:layout_marginRight="@dimen/margin_18dp"
                 android:background="@color/line_login_top" />
 
+            <TextView
+                android:id="@+id/tv_login_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:text="用户名或者密码错误！"
+                android:gravity="center"
+                android:textColor="@color/color_login_orange"
+                android:textSize="@dimen/font_size_13"
+                android:visibility="invisible" />
+
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="39dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="43dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/selector_bg_btn_login"
                 android:gravity="center"
