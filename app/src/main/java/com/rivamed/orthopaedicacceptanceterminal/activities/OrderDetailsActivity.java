@@ -214,7 +214,7 @@ public class OrderDetailsActivity extends OatBaseActivity {
                         operatorOrder("3");
                         break;
                     case "HckDeptUnExamineOrderFragment2"://器械处审核订单--待确认撤销
-                        operatorOrder("2");
+                        operatorOrder("1");
                         break;
                     case "HomeHckDeptCheckOrderFragment"://器械处验收订单
                         operatorOrder("5");

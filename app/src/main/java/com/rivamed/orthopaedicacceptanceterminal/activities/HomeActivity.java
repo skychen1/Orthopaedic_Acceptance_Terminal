@@ -8,7 +8,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -69,6 +68,7 @@ public class HomeActivity extends SimpleActivity {
     List<SupportFragment> llContainer = new ArrayList<SupportFragment>();
     SupportFragment[] mFragmentMapArr;
     private int mShowingFragId;
+    private boolean isFirst = true;
 
     @Override
     public int getLayoutId() {
@@ -157,7 +157,6 @@ public class HomeActivity extends SimpleActivity {
                 mFragmentMapArr[i] = supportFragment;
             }
             if (mFragmentMapArr.length > 0) {
-                mShowingFragId = mFragmentMap.keyAt(0);
                 loadMultipleRootFragment(R.id.fl_tab_container, 0,
                         mFragmentMapArr
                 );
@@ -187,12 +186,10 @@ public class HomeActivity extends SimpleActivity {
                     mShowingFragId = R.id.home_order_nose_acceptance;
                     break;
                 case R.id.home_order_supply_acceptance://供应室验收订单
-                    Log.e("HomeActivity", "mShowingFragId:" + mShowingFragId);
                     showHideFragment(mFragmentMap.get(R.id.home_order_supply_acceptance), mFragmentMap.get(mShowingFragId));
                     mShowingFragId = R.id.home_order_supply_acceptance;
                     break;
                 case R.id.home_cst_submit://耗材计费提报
-                    Log.e("HomeActivity", "mShowingFragId:" + mShowingFragId);
                     showHideFragment(mFragmentMap.get(R.id.home_cst_submit), mFragmentMap.get(mShowingFragId));
                     mShowingFragId = R.id.home_cst_submit;
                     break;
@@ -216,6 +213,10 @@ public class HomeActivity extends SimpleActivity {
         mFragmentMap.put(id, pageFragment);
         addHomeFuncationRb(false, id, this.getResources().getDrawable(bgId), pageTitle);
         llContainer.add(pageFragment);
+        if (isFirst) {
+            mShowingFragId = id;
+            isFirst = false;
+        }
     }
 
     /**

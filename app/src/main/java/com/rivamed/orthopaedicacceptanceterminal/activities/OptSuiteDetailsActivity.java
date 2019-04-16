@@ -126,7 +126,7 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
                 mFragments);
         vpContext.setAdapter(mFragmentAdapter);
         vpContext.setCurrentItem(0);
-        rgContentTag.check(R.id.rb_top_left);
+        rgContentTag.check(R.id.rb_content_left);
         rgContentTag.setOnCheckedChangeListener((RadioGroup group, int checkedId) -> {
             switch (checkedId) {
                 case R.id.rb_content_left:
@@ -139,7 +139,7 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
                     break;
             }
         });
-
+        vpContext.setOffscreenPageLimit(3);
         vpContext.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

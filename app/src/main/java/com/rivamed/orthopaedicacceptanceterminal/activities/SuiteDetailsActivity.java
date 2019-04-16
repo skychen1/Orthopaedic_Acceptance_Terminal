@@ -38,7 +38,7 @@ import butterknife.OnClick;
  * @ProjectName: Orthopaedic_Acceptance_Terminal
  * @Package: com.rivamed.orthopaedicacceptanceterminal.activities
  * @ClassName: SuiteDetailsActivity
- * @Description: 套餐明细(无菌, 复消, 器械)
+ * @Description: 套餐明细页面(无菌, 复消, 器械)
  * @Author: Amos_Bo
  * @CreateDate: 2019/2/27 14:46
  * @UpdateUser: 更新者
@@ -148,7 +148,7 @@ public class SuiteDetailsActivity extends OatBaseActivity {
                 mFragments);
         vpContent.setAdapter(mFragmentAdapter);
         vpContent.setCurrentItem(0);
-        rgContentTag.check(R.id.rb_top_left);
+        rgContentTag.check(R.id.rb_content_left);
         rgContentTag.setOnCheckedChangeListener((RadioGroup group, int checkedId) -> {
             switch (checkedId) {
                 case R.id.rb_content_left:
@@ -164,7 +164,7 @@ public class SuiteDetailsActivity extends OatBaseActivity {
                     break;
             }
         });
-
+        vpContent.setOffscreenPageLimit(3);
         vpContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

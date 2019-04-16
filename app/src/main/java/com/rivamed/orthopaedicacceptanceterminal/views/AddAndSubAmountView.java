@@ -115,7 +115,7 @@ public class AddAndSubAmountView extends LinearLayout implements View.OnClickLis
             case R.id.btn_sub:
                 if (mAmount == mMaxAmount) {
                     mBtnAdd.setClickable(true);
-                    mBtnAdd.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBtnAdd.setBackground(getResources().getDrawable(R.drawable.shape_bg_addandsub_view));
                 }
                 if (mAmount > mMinAmount) {
                     mAmount--;
@@ -133,7 +133,7 @@ public class AddAndSubAmountView extends LinearLayout implements View.OnClickLis
             case R.id.btn_add:
                 if (mAmount == mMinAmount) {
                     mBtnSub.setClickable(true);
-                    mBtnSub.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    mBtnSub.setBackground(getResources().getDrawable(R.drawable.shape_bg_addandsub_view));
                 }
                 if (mAmount < mMaxAmount) {
                     mAmount++;

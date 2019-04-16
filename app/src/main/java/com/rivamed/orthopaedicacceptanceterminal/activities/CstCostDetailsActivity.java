@@ -41,7 +41,7 @@ import butterknife.BindView;
  * @ProjectName: Orthopaedic_Acceptance_Terminal
  * @Package: com.rivamed.orthopaedicacceptanceterminal.activities
  * @ClassName: CstCostSureActivity
- * @Description: 计费耗材--耗材明细
+ * @Description: 计费耗材--耗材明细页面
  * @Author: Amos_Bo
  * @CreateDate: 2019/2/27 16:34
  * @UpdateUser: 更新者
@@ -197,6 +197,7 @@ public class CstCostDetailsActivity extends OatBaseActivity {
         mVpContent.setAdapter(mFragmentAdapter);
         mVpContent.setCurrentItem(0);
         mRgContentTag.check(R.id.rb_top_left);
+        mVpContent.setOffscreenPageLimit(3);
         mRgContentTag.setOnCheckedChangeListener((RadioGroup group, int checkedId) -> {
             switch (checkedId) {
                 case R.id.rb_content_left:
