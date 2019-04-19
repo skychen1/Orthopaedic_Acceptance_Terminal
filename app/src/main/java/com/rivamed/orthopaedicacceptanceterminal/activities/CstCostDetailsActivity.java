@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -87,6 +88,7 @@ public class CstCostDetailsActivity extends OatBaseActivity {
     private List<Fragment> mFragments = new ArrayList<>();
     private CstCostDetailsSterilsFragment mCstCostDetailsSterilsFragment;
     private CstCostDetailsEliminationFragment mCstCostDetailsEliminationFragment;
+    private String mOrderSuiteId;
 
     @Override
     protected int getContentLayoutId() {
@@ -123,13 +125,15 @@ public class CstCostDetailsActivity extends OatBaseActivity {
         mBtBottomRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<FindCstDetailResponseParam.AsepticCstsBean> mCstCostDetailsSterilsFragmentListData = mCstCostDetailsSterilsFragment.getListData();
-                List<FindCstDetailResponseParam.EliminationCstsBean> mCstCostDetailsEliminationFragmentListData = mCstCostDetailsEliminationFragment.getListData();
-                Intent intent = new Intent(CstCostDetailsActivity.this, CstCostSureActivity.class);
-                intent.putExtra("orderId", mOrderId);
-                intent.putExtra("mCstCostDetailsSterilsFragmentListData", (Serializable) mCstCostDetailsSterilsFragmentListData);
-                intent.putExtra("mCstCostDetailsEliminationFragmentListData", (Serializable) mCstCostDetailsEliminationFragmentListData);
-                startActivity(intent);
+                if (!TextUtils.isEmpty(mOrderSuiteId)) {
+                    List<FindCstDetailResponseParam.AsepticCstsBean> mCstCostDetailsSterilsFragmentListData = mCstCostDetailsSterilsFragment.getListData();
+                    List<FindCstDetailResponseParam.EliminationCstsBean> mCstCostDetailsEliminationFragmentListData = mCstCostDetailsEliminationFragment.getListData();
+                    Intent intent = new Intent(CstCostDetailsActivity.this, CstCostSureActivity.class);
+                    intent.putExtra("mOrderSuiteId", mOrderSuiteId);
+                    intent.putExtra("mCstCostDetailsSterilsFragmentListData", (Serializable) mCstCostDetailsSterilsFragmentListData);
+                    intent.putExtra("mCstCostDetailsEliminationFragmentListData", (Serializable) mCstCostDetailsEliminationFragmentListData);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -177,6 +181,7 @@ public class CstCostDetailsActivity extends OatBaseActivity {
     }
 
     private void reSetData(FindCstDetailResponseParam body) {
+        mOrderSuiteId = body.getOrderSuiteId();
         mRbContentLeft.setText("无菌类耗材" + "【" + body.getAsepticCsts().size() + "】");
         mRbContentRight.setText("复消类耗材" + "【" + body.getEliminationCsts().size() + "】");
         mCstCostDetailsSterilsFragment.setData(body.getAsepticCsts());

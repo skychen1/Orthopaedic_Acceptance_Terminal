@@ -28,9 +28,18 @@ public class FindCstDetailResponseParam implements Serializable {
 
     private int id;
     private String orderId;
+    private String orderSuiteId;
     private SurgeryPatientVoBean surgeryPatientVo;
     private List<AsepticCstsBean> asepticCsts = new ArrayList<>();
     private List<EliminationCstsBean> eliminationCsts = new ArrayList<>();
+
+    public String getOrderSuiteId() {
+        return orderSuiteId;
+    }
+
+    public void setOrderSuiteId(String orderSuiteId) {
+        this.orderSuiteId = orderSuiteId;
+    }
 
     public int getId() {
         return id;

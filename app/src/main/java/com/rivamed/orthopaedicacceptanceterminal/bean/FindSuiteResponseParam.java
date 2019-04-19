@@ -86,9 +86,18 @@ public class FindSuiteResponseParam implements Parcelable {
         private String suiteName;
         private String vendorName;
         private String remark ="";
+        private String vendorId ="";
         private int cstCount;
         private int instrumentCount;
         private int num;
+
+        public String getVendorId() {
+            return vendorId;
+        }
+
+        public void setVendorId(String vendorId) {
+            this.vendorId = vendorId;
+        }
 
         public String getId() {
             return id;

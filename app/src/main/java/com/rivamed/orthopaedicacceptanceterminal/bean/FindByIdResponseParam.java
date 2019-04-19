@@ -30,6 +30,7 @@ public class FindByIdResponseParam implements Parcelable {
     private String suiteId;
     private String suiteName;
     private String vendorName;
+    private String vendorId;
     private String mFrom = "";
     private int cstCount;
     private int instrumentCount;
@@ -37,6 +38,14 @@ public class FindByIdResponseParam implements Parcelable {
     private int eliminationCstCount;
     private List<CstsBean> csts=new ArrayList<>();
     private List<InstrumentsBean> instruments=new ArrayList<>();
+
+    public String getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(String vendorId) {
+        this.vendorId = vendorId;
+    }
 
     public String getFrom() {
         return mFrom;

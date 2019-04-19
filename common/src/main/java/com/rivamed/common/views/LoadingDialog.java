@@ -78,14 +78,12 @@ public class LoadingDialog extends Dialog {
             }
             mDialog.addContentView(layout,
                     new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT));
+                            ViewGroup.LayoutParams.WRAP_CONTENT));
             Window window = mDialog.getWindow();
             if (mDialog != null && window != null) {
                 WindowManager.LayoutParams attr = window.getAttributes();
                 if (attr != null) {
-                    attr.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                    attr.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    attr.gravity = Gravity.CENTER;//设置dialog 在布局中的位置
+                    attr.gravity = Gravity.CENTER_VERTICAL;//设置dialog 在布局中的位置
                 }
             }
             mAnimationDrawable = (AnimationDrawable) mLoading.getBackground();

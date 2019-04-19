@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/text"
-            android:layout_height="39dp"
+            android:layout_height="49dp"
             android:layout_width="match_parent"
             android:text="内容"
             android:layout_gravity="center"

@@ -105,6 +105,8 @@ public class SuiteDetailsActivity extends OatBaseActivity {
             mLlBottomRoot.setVisibility(View.GONE);
         }
         findSuiteDetailBySuiteId(suiteId);
+        mBtBottomRight.setVisibility(View.GONE);
+        mBtBottomLeft.setVisibility(View.GONE);
     }
 
 

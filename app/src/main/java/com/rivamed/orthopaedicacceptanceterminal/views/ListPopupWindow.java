@@ -45,6 +45,7 @@ public class ListPopupWindow {
     private LinearLayout.LayoutParams mLayoutParams3;
     private View mView;
     private int mWidthType;
+    private int mTextSize = 15;
 
 
     public ListPopupWindow(Context mContext, List<String> data, View parentView, IPopCallBack callback) {
@@ -114,28 +115,30 @@ public class ListPopupWindow {
         popwindow.setAnimationStyle(R.style.social_pop_anim);
 
         //显示的位置
-        switch (windowLoaction) {
-            //在屏幕中央
-            case 0:
-                popwindow.showAtLocation(parentView, Gravity.CENTER, 0, 0);
-                break;
-            //在屏幕底部
-            case 1:
-                popwindow.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
-                break;
-            //在控件下面
-            case 2:
-                popwindow.showAsDropDown(parentView, 0, 0);
-                break;
+        if (!popwindow.isShowing()) {
+            switch (windowLoaction) {
+                //在屏幕中央
+                case 0:
+                    popwindow.showAtLocation(parentView, Gravity.CENTER, 0, 0);
+                    break;
+                //在屏幕底部
+                case 1:
+                    popwindow.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
+                    break;
+                //在控件下面
+                case 2:
+                    popwindow.showAsDropDown(parentView, 0, 0);
+                    break;
+            }
         }
         //        popwindow.showAtLocation(parentView, Gravity.CENTER,200,(parentView.getHeight()-popwindow.getHeight())/2);
         setListener();
     }
 
     /**
-     * @param widthType 0:宽度充满屏幕  1:和父控件等宽
+     * @param widthType     0:宽度充满屏幕  1:和父控件等宽
      * @param rightDistence 距离右侧距离(px)
-     * @param leftDistence 距离左侧距离(px)
+     * @param leftDistence  距离左侧距离(px)
      */
     @SuppressLint("NewApi")
     public void showPopup(int windowLoaction, int widthType, int rightDistence, int leftDistence) {
@@ -231,6 +234,14 @@ public class ListPopupWindow {
             default:
                 break;
         }
+        return this;
+    }
+
+    /**
+     * @param textSize 字体大小
+     */
+    public ListPopupWindow setTextSize(int textSize) {
+        mTextSize = textSize;
         return this;
     }
 
@@ -331,6 +342,7 @@ public class ListPopupWindow {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
+            holder.poptext.setTextSize(mTextSize);
             holder.poptext.setText(list.get(position));
 
             return convertView;

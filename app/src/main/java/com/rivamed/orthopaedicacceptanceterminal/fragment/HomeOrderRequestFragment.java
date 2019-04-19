@@ -240,11 +240,13 @@ public class HomeOrderRequestFragment extends BaseFragment {
                             if (response.body().isOperateSuccess()) {
                                 EventBusUtils.post(new Event.EventOrderOpt("HomeOrderRequestFragment"));
                                 if (type == 1) {
+                                    OperationPlanFragment.mVendorId = "";
                                     EventBusUtils.post(new Event.EventSelectOperationPlan(new SurgeryPatientResponseParam.SurgeryPatientVosBean()));
                                     FindByIdResponseParam findByIdResponseParam = new FindByIdResponseParam();
                                     findByIdResponseParam.setFrom("OperationPlanFragmentSubmit");
                                     EventBusUtils.post(new Event.EventSelectSuit(findByIdResponseParam));
                                 } else if (type == 2) {
+                                    OperationUrgentFragment.mVendorId = "";
                                     EventBusUtils.post(new Event.EventSelectOpt(new FindByStatusResponseParam.SurgeryDictsBean()));
                                     EventBusUtils.post(new Event.EventSelectPatint(new GetAllPatientResponseParam.PatientsBean()));
                                     FindByIdResponseParam findByIdResponseParam = new FindByIdResponseParam();

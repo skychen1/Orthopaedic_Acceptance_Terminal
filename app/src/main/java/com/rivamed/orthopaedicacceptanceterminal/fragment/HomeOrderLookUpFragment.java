@@ -311,6 +311,7 @@ public class HomeOrderLookUpFragment extends BaseFragment {
         })
                 .setWidthType(1)
                 .setRightDistence(BaseUtils.dip2px(getActivity(), 16))
+                .setTextSize(17)
                 .showPopup(2);
     }
 

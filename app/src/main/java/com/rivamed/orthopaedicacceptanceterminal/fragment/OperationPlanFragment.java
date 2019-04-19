@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * @ProjectName: Orthopaedic_Acceptance_Terminal
@@ -63,13 +62,13 @@ public class OperationPlanFragment extends BaseFragment {
     TextView tvOpTime;
     @BindView(R.id.rv_suit)
     RecyclerView rvSuit;
-    Unbinder unbinder;
 
     private OperationPlanSuiteAdapter mOperationPlanSuiteAdapter;
     ArrayList<FindSuiteResponseParam.OciSuiteVosBean> listSuit = new ArrayList<>();
     private int mSelectSuitPosition;
     protected String mPatientId;
     protected String mSurgeryId;
+    public static String mVendorId="";
 
     public static OperationPlanFragment newInstance() {
         Bundle args = new Bundle();
@@ -163,6 +162,7 @@ public class OperationPlanFragment extends BaseFragment {
             listSuit.get(mSelectSuitPosition).setVendorName(event.data.getVendorName());
             listSuit.get(mSelectSuitPosition).setSuiteId(event.data.getSuiteId());
             mOperationPlanSuiteAdapter.notifyDataSetChanged();
+            mVendorId = event.data.getVendorId();
         }else if (event.data != null&& event.data.getFrom().equals("OperationPlanFragmentSubmit")) {
             listSuit.clear();
             listSuit.add(new FindSuiteResponseParam.OciSuiteVosBean());

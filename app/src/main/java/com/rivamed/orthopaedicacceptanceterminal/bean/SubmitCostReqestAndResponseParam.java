@@ -37,7 +37,16 @@ public class SubmitCostReqestAndResponseParam implements Parcelable {
     private int id;
     private String msg;
     private String orderId;
+    private String orderSuiteId;
     private List<SuiteVosBean> suiteVos = new ArrayList<>();
+
+    public String getOrderSuiteId() {
+        return orderSuiteId;
+    }
+
+    public void setOrderSuiteId(String orderSuiteId) {
+        this.orderSuiteId = orderSuiteId;
+    }
 
     public boolean isOperateSuccess() {
         return operateSuccess;

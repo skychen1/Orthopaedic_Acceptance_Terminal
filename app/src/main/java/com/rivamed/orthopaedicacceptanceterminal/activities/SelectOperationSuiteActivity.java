@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +21,8 @@ import com.rivamed.orthopaedicacceptanceterminal.adapter.SelectOperationSuiteAda
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindSuiteResponseParam;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.OperationPlanFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.OperationUrgentFragment;
 import com.rivamed.orthopaedicacceptanceterminal.views.SearchView;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -51,6 +55,8 @@ public class SelectOperationSuiteActivity extends OatBaseActivity {
     RecyclerView rvContext;
     private SelectOperationSuiteAdapter mSelectOperationSuiteAdapter;
     List<FindSuiteResponseParam.OciSuiteVosBean> listData = new ArrayList<>();
+    private String mFrom = "";
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_select_optsuite;
@@ -58,7 +64,7 @@ public class SelectOperationSuiteActivity extends OatBaseActivity {
 
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
-        String from = getIntent().getStringExtra("from");
+        mFrom = getIntent().getStringExtra("from");
         EventBusUtils.register(this);
         tvCenterTitle.setText("选择套餐");
         mSelectOperationSuiteAdapter = new SelectOperationSuiteAdapter(getApplicationContext());
@@ -70,10 +76,12 @@ public class SelectOperationSuiteActivity extends OatBaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(SelectOperationSuiteActivity.this, OptSuiteDetailsActivity.class);
-                intent.putExtra("suiteId",listData.get(position).getSuiteId());
-                intent.putExtra("from",from);
+                intent.putExtra("suiteId", listData.get(position).getSuiteId());
+                intent.putExtra("vendorId", listData.get(position).getVendorId());
+                intent.putExtra("from", mFrom);
                 startActivity(intent);
             }
+
             @Override
             public void onItemLongClick(View view, int position) {
 
@@ -107,6 +115,16 @@ public class SelectOperationSuiteActivity extends OatBaseActivity {
     private void findSuite(String term) {
         Map<String, String> map = new HashMap<>(1);
         map.put("term", term);
+        Log.e("SelectOperationSuiteAct","mFrom:" +mFrom);
+        Log.e("SelectOperationSuiteAct","OperationPlanFragment.mVendorId:" +OperationPlanFragment.mVendorId);
+        Log.e("SelectOperationSuiteAct","OperationUrgentFragment.mVendorId:" +OperationUrgentFragment.mVendorId);
+        if (mFrom != null && mFrom.equals("OperationPlanFragment") && !TextUtils.isEmpty(OperationPlanFragment.mVendorId)) {
+            //手术排班
+            map.put("vendorId", OperationPlanFragment.mVendorId);
+        }else if (mFrom != null && mFrom.equals("OperationUrgentFragment") && !TextUtils.isEmpty(OperationUrgentFragment.mVendorId)) {
+            //加急订单
+            map.put("vendorId", OperationUrgentFragment.mVendorId);
+        }
         OkGoUtil.getRequest(UrlPath.ORDER_FIND_SUITE, this, map,
                 new DialogCallback<FindSuiteResponseParam>(this) {
                     @Override
@@ -122,6 +140,7 @@ public class SelectOperationSuiteActivity extends OatBaseActivity {
                     }
                 });
     }
+
     /**
      * 选择套餐
      *

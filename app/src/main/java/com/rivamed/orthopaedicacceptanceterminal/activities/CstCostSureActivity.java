@@ -59,7 +59,7 @@ public class CstCostSureActivity extends OatBaseActivity {
     private List<FindCstDetailResponseParam.EliminationCstsBean> mCstCostDetailsEliminationData = new ArrayList<>();
     List<CstsBean> mListData = new ArrayList<CstsBean>();
     List<CstsBean> mListDataTemp = new ArrayList<CstsBean>();
-    private String mOrderId = "";
+    private String mOrderSuiteId = "";
 
     @Override
     protected int getContentLayoutId() {
@@ -72,7 +72,7 @@ public class CstCostSureActivity extends OatBaseActivity {
         btBottomRight.setText("确认提交");
         tvCenterTitle.setText("请确认计费耗材");
         Intent intent = getIntent();
-        mOrderId = intent.getStringExtra("orderId");
+        mOrderSuiteId = intent.getStringExtra("mOrderSuiteId");
         List<FindCstDetailResponseParam.AsepticCstsBean> cstCostDetailsSterilsData = (List<FindCstDetailResponseParam.AsepticCstsBean>) intent.getSerializableExtra("mCstCostDetailsSterilsFragmentListData");
         List<FindCstDetailResponseParam.EliminationCstsBean> cstCostDetailsEliminationData = (List<FindCstDetailResponseParam.EliminationCstsBean>) intent.getSerializableExtra("mCstCostDetailsEliminationFragmentListData");
         mCstCostDetailsSterilsData.addAll(cstCostDetailsSterilsData);
@@ -164,7 +164,7 @@ public class CstCostSureActivity extends OatBaseActivity {
                 break;
             case R.id.bt_bottom_right:
                 SubmitCostReqestAndResponseParam submitCostReqestAndResponseParam = new SubmitCostReqestAndResponseParam();
-                submitCostReqestAndResponseParam.setOrderId(mOrderId);
+                submitCostReqestAndResponseParam.setOrderSuiteId(mOrderSuiteId);
                 for (CstsBean cstsBean : mListDataTemp) {
                     SubmitCostReqestAndResponseParam.SuiteVosBean suiteVosBean = new SubmitCostReqestAndResponseParam.SuiteVosBean();
                     suiteVosBean.setCstId(cstsBean.getCstId());

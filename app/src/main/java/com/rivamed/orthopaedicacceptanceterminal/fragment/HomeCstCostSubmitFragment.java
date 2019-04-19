@@ -6,8 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ import com.rivamed.common.adapter.SimpleRecyclerAdapter;
 import com.rivamed.common.base.BaseFragment;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.JsonCallback;
+import com.rivamed.common.utils.BaseUtils;
 import com.rivamed.common.utils.EventBusUtils;
 import com.rivamed.common.utils.SPUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
@@ -27,6 +31,7 @@ import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderRequestParam;
 import com.rivamed.orthopaedicacceptanceterminal.bean.FindOrderResponseParam;
+import com.rivamed.orthopaedicacceptanceterminal.views.ListPopupWindow;
 import com.rivamed.orthopaedicacceptanceterminal.views.SearchView;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -40,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -72,9 +78,16 @@ public class HomeCstCostSubmitFragment extends BaseFragment {
     TextView mTvTopUsername;
     @BindView(R.id.rl_logout)
     RelativeLayout mRlLogout;
+    @BindView(R.id.tv_state)
+    TextView mTvState;
+    @BindView(R.id.ll_state)
+    LinearLayout mLlState;
+    Unbinder unbinder1;
     private SupRoomCheckOrderAdapter mSupRoomCheckOrderAdapter;
     List<FindOrderResponseParam.OciOrderVosBean> listData = new ArrayList<FindOrderResponseParam.OciOrderVosBean>();
     private String mContent;
+    private int mPosotion = 0;
+    List<String> listDataState = new ArrayList<String>();
 
     public static HomeCstCostSubmitFragment newInstance() {
         Bundle args = new Bundle();
@@ -91,6 +104,10 @@ public class HomeCstCostSubmitFragment extends BaseFragment {
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
         EventBusUtils.register(this);
+        listDataState.add("全部");
+        listDataState.add("待计费提报");
+        listDataState.add("已计费提报");
+        mTvState.setText(listDataState.get(0));
         mTvTopUsername.setText(SPUtils.getString(getContext(), Constants.ORTHOPAEDIC_USER_NNAME, ""));
         mRlLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +167,29 @@ public class HomeCstCostSubmitFragment extends BaseFragment {
                 mRefreshLayout.finishRefresh();
             }
         });
+
+        mLlState.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //选择状态
+                showPop();
+            }
+        });
+    }
+
+    private void showPop() {
+        new ListPopupWindow(getActivity(), listDataState, mLlState, new ListPopupWindow.IPopCallBack() {
+            @Override
+            public void callBack(String content, int posotion) {
+                mTvState.setText(content);
+                mPosotion = posotion;
+                findOrder(new FindOrderRequestParam());
+            }
+        })
+                .setWidthType(1)
+                .setRightDistence(BaseUtils.dip2px(getActivity(), 16))
+                .setTextSize(17)
+                .showPopup(2);
     }
 
     /**
@@ -158,7 +198,21 @@ public class HomeCstCostSubmitFragment extends BaseFragment {
      * @param findOrderRequestParam
      */
     private void findOrder(FindOrderRequestParam findOrderRequestParam) {
-        findOrderRequestParam.setStatus("16");
+        switch (mPosotion) {
+            case 0://全部
+                findOrderRequestParam.setStatus("16,12");
+                break;
+            case 1://待计费提报
+                findOrderRequestParam.setStatus("16");
+                break;
+            case 2://已计费提报
+                findOrderRequestParam.setStatus("12");
+                break;
+
+            default:
+                break;
+        }
+
         OkGoUtil.postJsonRequest(UrlPath.ACCOUNT_FIND_ORDER, this, findOrderRequestParam,
                 new JsonCallback<FindOrderResponseParam>() {
                     @Override
@@ -190,5 +244,19 @@ public class HomeCstCostSubmitFragment extends BaseFragment {
             findOrderRequestParam.setTerm(mContent);
             findOrder(findOrderRequestParam);
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder1 = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder1.unbind();
     }
 }

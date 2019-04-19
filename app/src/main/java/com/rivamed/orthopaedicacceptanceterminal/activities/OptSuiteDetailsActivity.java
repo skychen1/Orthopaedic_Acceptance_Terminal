@@ -67,6 +67,7 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
     private FragmentAdapter mFragmentAdapter;
     private FindByIdResponseParam mBody;
     private String mFrom = "";
+    private String vendorId;
 
     @Override
     protected int getContentLayoutId() {
@@ -80,6 +81,7 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
         tvCenterTitle.setText("套餐明细");
         btBottomLeft.setVisibility(View.GONE);
         String suiteId = getIntent().getStringExtra("suiteId");
+        vendorId = getIntent().getStringExtra("vendorId");
         mFrom = getIntent().getStringExtra("from");
         if (mFrom.contains("HckDeptUnExamineOrderFragment")) {
             //器械处审核订单--订单详情
@@ -168,6 +170,7 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
     public void onViewClicked() {
         if (mBody != null) {
             mBody.setFrom(mFrom);
+            mBody.setVendorId(vendorId);
             EventBusUtils.post(new Event.EventSelectSuit(mBody));
             finish();
         }

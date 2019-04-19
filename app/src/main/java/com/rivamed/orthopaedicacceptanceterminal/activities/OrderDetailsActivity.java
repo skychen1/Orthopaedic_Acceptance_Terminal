@@ -152,10 +152,12 @@ public class OrderDetailsActivity extends OatBaseActivity {
             btBottomRight.setText("通过");
         } else if (mFrom.equals("HomeNoseCheckOrderFragment")) {
             //护士处验收订单
-            mLlBottomRoot.setVisibility(View.GONE);
+            btBottomLeft.setText("拒绝");
+            btBottomRight.setText("通过");
         } else if (mFrom.equals("HomeSupRoomCheckOrderFragment")) {
             //供应室验收订单
-            mLlBottomRoot.setVisibility(View.GONE);
+            btBottomLeft.setText("拒绝");
+            btBottomRight.setText("通过");
         } else if (mFrom.equals("HomeOrderLookUpFragment")) {
             //订单查询
             btBottomLeft.setVisibility(View.GONE);
@@ -219,8 +221,15 @@ public class OrderDetailsActivity extends OatBaseActivity {
                     case "HomeHckDeptCheckOrderFragment"://器械处验收订单
                         operatorOrder("5");
                         break;
+                    case "HomeNoseCheckOrderFragment"://护士验收订单
+                        operatorOrder("9");
+                        break;
+                    case "HomeSupRoomCheckOrderFragment"://供应室验收订单
+                        operatorOrder("11");
+                        break;
                     default:
                         break;
+
                 }
                 break;
             case R.id.bt_bottom_right://通过
@@ -236,6 +245,12 @@ public class OrderDetailsActivity extends OatBaseActivity {
                         break;
                     case "HomeOrderLookUpFragment"://订单查询--撤销订单
                         operatorOrder("13");
+                        break;
+                    case "HomeNoseCheckOrderFragment"://护士验收订单
+                        operatorOrder("8");
+                        break;
+                    case "HomeSupRoomCheckOrderFragment"://供应室验收订单
+                        operatorOrder("10");
                         break;
                     default:
                         break;

@@ -114,7 +114,6 @@ public class HckDeptUnExamineOrderFragment extends BaseFragment {
             }
         });
 
-
         mSupRoomCheckOrderAdapter.setOnItemClickListener(new SimpleRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
