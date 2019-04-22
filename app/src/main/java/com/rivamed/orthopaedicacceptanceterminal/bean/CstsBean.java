@@ -35,6 +35,15 @@ public class CstsBean {
     private String cstNumber="0";
     private int num;
     private String cstId;
+    private String orderSuiteId = "";
+
+    public String getOrderSuiteId() {
+        return orderSuiteId;
+    }
+
+    public void setOrderSuiteId(String orderSuiteId) {
+        this.orderSuiteId = orderSuiteId;
+    }
 
     public String getCstId() {
         return cstId;

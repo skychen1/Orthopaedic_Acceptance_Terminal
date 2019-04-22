@@ -34,18 +34,18 @@ public class SubmitCostReqestAndResponseParam implements Parcelable {
      */
 
     private boolean operateSuccess;
+    private boolean finishOrder;
     private int id;
     private String msg;
     private String orderId;
-    private String orderSuiteId;
     private List<SuiteVosBean> suiteVos = new ArrayList<>();
 
-    public String getOrderSuiteId() {
-        return orderSuiteId;
+    public boolean isFinishOrder() {
+        return finishOrder;
     }
 
-    public void setOrderSuiteId(String orderSuiteId) {
-        this.orderSuiteId = orderSuiteId;
+    public void setFinishOrder(boolean finishOrder) {
+        this.finishOrder = finishOrder;
     }
 
     public boolean isOperateSuccess() {
@@ -114,7 +114,15 @@ public class SubmitCostReqestAndResponseParam implements Parcelable {
         private String cstType;
         private int num;
         private String orderDetailId;
+        private String orderSuiteId;
 
+        public String getOrderSuiteId() {
+            return orderSuiteId;
+        }
+
+        public void setOrderSuiteId(String orderSuiteId) {
+            this.orderSuiteId = orderSuiteId;
+        }
         public int getCstBoxCount() {
             return cstBoxCount;
         }

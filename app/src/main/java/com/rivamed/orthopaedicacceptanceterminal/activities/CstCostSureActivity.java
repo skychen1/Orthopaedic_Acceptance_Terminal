@@ -59,7 +59,7 @@ public class CstCostSureActivity extends OatBaseActivity {
     private List<FindCstDetailResponseParam.EliminationCstsBean> mCstCostDetailsEliminationData = new ArrayList<>();
     List<CstsBean> mListData = new ArrayList<CstsBean>();
     List<CstsBean> mListDataTemp = new ArrayList<CstsBean>();
-    private String mOrderSuiteId = "";
+    private String mOrderId;
 
     @Override
     protected int getContentLayoutId() {
@@ -69,10 +69,12 @@ public class CstCostSureActivity extends OatBaseActivity {
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
         btBottomLeft.setText("取消");
-        btBottomRight.setText("确认提交");
+        btBottomRight.setText("只提交不结束");
         tvCenterTitle.setText("请确认计费耗材");
+        btBottomMedium.setVisibility(View.VISIBLE);
+        btBottomMedium.setText("提交并结束订单");
         Intent intent = getIntent();
-        mOrderSuiteId = intent.getStringExtra("mOrderSuiteId");
+        mOrderId = intent.getStringExtra("mOrderId");
         List<FindCstDetailResponseParam.AsepticCstsBean> cstCostDetailsSterilsData = (List<FindCstDetailResponseParam.AsepticCstsBean>) intent.getSerializableExtra("mCstCostDetailsSterilsFragmentListData");
         List<FindCstDetailResponseParam.EliminationCstsBean> cstCostDetailsEliminationData = (List<FindCstDetailResponseParam.EliminationCstsBean>) intent.getSerializableExtra("mCstCostDetailsEliminationFragmentListData");
         mCstCostDetailsSterilsData.addAll(cstCostDetailsSterilsData);
@@ -135,6 +137,7 @@ public class CstCostSureActivity extends OatBaseActivity {
                 cstsBean.setNum(item.getNum());
                 cstsBean.setCstId(item.getCstId());
                 cstsBean.setOrderDetailId(item.getOrderDetailId());
+                cstsBean.setOrderSuiteId(item.getOrderSuiteId());
                 listData.add(cstsBean);
             }
         }
@@ -149,6 +152,7 @@ public class CstCostSureActivity extends OatBaseActivity {
                 cstsBean.setNum(item.getNum());
                 cstsBean.setCstId(item.getCstId());
                 cstsBean.setOrderDetailId(item.getOrderDetailId());
+                cstsBean.setOrderSuiteId(item.getOrderSuiteId());
                 listData.add(cstsBean);
             }
         }
@@ -156,28 +160,37 @@ public class CstCostSureActivity extends OatBaseActivity {
     }
 
 
-    @OnClick({R.id.bt_bottom_left, R.id.bt_bottom_right})
+    @OnClick({R.id.bt_bottom_left, R.id.bt_bottom_right, R.id.bt_bottom_medium})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_bottom_left:
                 finish();
                 break;
             case R.id.bt_bottom_right:
-                SubmitCostReqestAndResponseParam submitCostReqestAndResponseParam = new SubmitCostReqestAndResponseParam();
-                submitCostReqestAndResponseParam.setOrderSuiteId(mOrderSuiteId);
-                for (CstsBean cstsBean : mListDataTemp) {
-                    SubmitCostReqestAndResponseParam.SuiteVosBean suiteVosBean = new SubmitCostReqestAndResponseParam.SuiteVosBean();
-                    suiteVosBean.setCstId(cstsBean.getCstId());
-                    suiteVosBean.setNum(cstsBean.getNum());
-                    suiteVosBean.setOrderDetailId(cstsBean.getOrderDetailId());
-                    submitCostReqestAndResponseParam.getSuiteVos().add(suiteVosBean);
-                }
-                if (submitCostReqestAndResponseParam.getSuiteVos().size() == 0) {
-                    ToastUtils.showShort("没有要提交的耗材");
-                } else {
-                    submitCostData(submitCostReqestAndResponseParam);
-                }
+                submit(false);
                 break;
+            case R.id.bt_bottom_medium:
+                submit(true);
+                break;
+        }
+    }
+
+    private void submit(boolean isFinishOrder) {
+        SubmitCostReqestAndResponseParam submitCostReqestAndResponseParam = new SubmitCostReqestAndResponseParam();
+        submitCostReqestAndResponseParam.setOrderId(mOrderId);
+        submitCostReqestAndResponseParam.setFinishOrder(isFinishOrder);
+        for (CstsBean cstsBean : mListDataTemp) {
+            SubmitCostReqestAndResponseParam.SuiteVosBean suiteVosBean = new SubmitCostReqestAndResponseParam.SuiteVosBean();
+            suiteVosBean.setCstId(cstsBean.getCstId());
+            suiteVosBean.setNum(cstsBean.getNum());
+            suiteVosBean.setOrderSuiteId(cstsBean.getOrderSuiteId());
+            suiteVosBean.setOrderDetailId(cstsBean.getOrderDetailId());
+            submitCostReqestAndResponseParam.getSuiteVos().add(suiteVosBean);
+        }
+        if (submitCostReqestAndResponseParam.getSuiteVos().size() == 0) {
+            ToastUtils.showShort("没有要提交的耗材");
+        } else {
+            submitCostData(submitCostReqestAndResponseParam);
         }
     }
 
@@ -195,7 +208,7 @@ public class CstCostSureActivity extends OatBaseActivity {
                             ToastUtils.showShort("提交成功");
                             EventBusUtils.post(new Event.EventOrderOpt("CstCostSureActivity"));
                             finish();
-                        }else {
+                        } else {
                             ToastUtils.showShort("提交失败");
                         }
                     }

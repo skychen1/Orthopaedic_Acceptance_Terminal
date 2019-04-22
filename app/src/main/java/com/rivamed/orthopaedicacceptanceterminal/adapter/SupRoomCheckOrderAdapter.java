@@ -39,6 +39,7 @@ public class SupRoomCheckOrderAdapter extends SimpleRecyclerAdapter<FindOrderRes
         holder.tvPatientCaseId.setText(item.getCaseNo());
         holder.tvOrderId.setText(item.getOrderNo());
         holder.tvUseTime.setText(item.getCreateTime());
+        holder.mTvState.setText(item.getStatus());
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);
@@ -57,6 +58,8 @@ public class SupRoomCheckOrderAdapter extends SimpleRecyclerAdapter<FindOrderRes
         TextView tvOrderId;
         @BindView(R.id.tv_use_time)
         TextView tvUseTime;
+        @BindView(R.id.tv_state)
+        TextView mTvState;
 
         MyHolder(View itemView) {
             super(itemView);

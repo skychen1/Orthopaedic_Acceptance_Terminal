@@ -200,6 +200,7 @@ public class FindCstDetailResponseParam implements Serializable {
         private String cstCode = "";
         private String cstSpec = "";
         private String cstType = "";
+        private String orderSuiteId = "";
         private String expireDate = "--";
         private String batchNo = "";
         private String cstNumber = "0";
@@ -207,6 +208,14 @@ public class FindCstDetailResponseParam implements Serializable {
         private int num;
         private int maxNum;
         private String cstId;
+
+        public String getOrderSuiteId() {
+            return orderSuiteId;
+        }
+
+        public void setOrderSuiteId(String orderSuiteId) {
+            this.orderSuiteId = orderSuiteId;
+        }
 
         public int getMaxNum() {
             return maxNum;
@@ -353,6 +362,7 @@ public class FindCstDetailResponseParam implements Serializable {
         private String cstCode = "";
         private String cstSpec = "";
         private String cstType = "";
+        private String orderSuiteId = "";
         private String expireDate = "--";
         private String batchNo = "";
         private String orderDetailId = "";
@@ -360,6 +370,14 @@ public class FindCstDetailResponseParam implements Serializable {
         private int num;
         private int maxNum;
         private String cstId;
+
+        public String getOrderSuiteId() {
+            return orderSuiteId;
+        }
+
+        public void setOrderSuiteId(String orderSuiteId) {
+            this.orderSuiteId = orderSuiteId;
+        }
 
         public int getMaxNum() {
             return maxNum;
