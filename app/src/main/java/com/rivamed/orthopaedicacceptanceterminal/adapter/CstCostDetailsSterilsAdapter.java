@@ -27,7 +27,6 @@ import butterknife.BindView;
 public class CstCostDetailsSterilsAdapter extends SimpleRecyclerAdapter<FindCstDetailResponseParam.AsepticCstsBean,
         CstCostDetailsSterilsAdapter.MyHolder> {
 
-
     public CstCostDetailsSterilsAdapter(Context context) {
         super(context, R.layout.item_cstcost_details_sterils);
     }
@@ -42,6 +41,7 @@ public class CstCostDetailsSterilsAdapter extends SimpleRecyclerAdapter<FindCstD
         holder.tvCstModule.setText(item.getCstSpec());
         holder.tvCstBatch.setText(item.getBatchNo());
         holder.tvCstValidityTime.setText(item.getExpireDate());
+        holder.mTvCstAffordNum.setText(item.getFeeNum());
         holder.tvCstNumber.setAmount(item.getNum());
         holder.tvCstNumber.setMaxAmount(item.getMaxNum());
         holder.tvCstNumber.setOnAmountChangeListener(new AddAndSubAmountView.OnAmountChangeListener() {
@@ -71,6 +71,8 @@ public class CstCostDetailsSterilsAdapter extends SimpleRecyclerAdapter<FindCstD
         TextView tvCstValidityTime;
         @BindView(R.id.aas_cst_number)
         AddAndSubAmountView tvCstNumber;
+        @BindView(R.id.tv_cst_afford_num)
+        TextView mTvCstAffordNum;
 
         MyHolder(View itemView) {
             super(itemView);

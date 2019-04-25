@@ -25,8 +25,20 @@ import butterknife.BindView;
  */
 public class SupRoomCheckOrderAdapter extends SimpleRecyclerAdapter<FindOrderResponseParam.OciOrderVosBean,
         SupRoomCheckOrderAdapter.MyHolder> {
+
+    private int mType;
+
     public SupRoomCheckOrderAdapter(Context context) {
         super(context, R.layout.item_cstcost_submit);
+    }
+
+    /*
+     * 0 有状态列
+     * 1  无状态列
+     * */
+    public SupRoomCheckOrderAdapter(Context context, int type) {
+        super(context, R.layout.item_cstcost_submit);
+        mType = type;
     }
 
     @Override
@@ -45,6 +57,13 @@ public class SupRoomCheckOrderAdapter extends SimpleRecyclerAdapter<FindOrderRes
                 mOnItemClickListener.onItemClick(v, position);
             }
         });
+        if (mType == 1) {
+            holder.mTvState.setVisibility(View.GONE);
+            holder.mVStateLine.setVisibility(View.GONE);
+        } else {
+            holder.mTvState.setVisibility(View.VISIBLE);
+            holder.mVStateLine.setVisibility(View.VISIBLE);
+        }
     }
 
     static class MyHolder extends SimpleViewHolder {
@@ -60,6 +79,8 @@ public class SupRoomCheckOrderAdapter extends SimpleRecyclerAdapter<FindOrderRes
         TextView tvUseTime;
         @BindView(R.id.tv_state)
         TextView mTvState;
+        @BindView(R.id.v_state_line)
+        View mVStateLine;
 
         MyHolder(View itemView) {
             super(itemView);

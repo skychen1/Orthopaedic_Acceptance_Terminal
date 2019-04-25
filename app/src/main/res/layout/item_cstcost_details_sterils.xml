@@ -108,6 +108,20 @@
             android:layout_height="match_parent"
             android:background="#cccccc" />
 
+
+        <TextView
+            android:id="@+id/tv_cst_afford_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="55"
+            android:textColor="@color/text_gray_3"
+            tools:textSize="@dimen/font_size_16" />
+        <View
+            android:layout_width="@dimen/margin_1dp"
+            android:layout_height="match_parent"
+            android:background="#cccccc" />
     </LinearLayout>
 
     <View

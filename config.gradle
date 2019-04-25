@@ -10,8 +10,8 @@ ext {
     //版本号
     versions = [
             applicationId            : "com.wss.amd",        //应用ID
-            versionCode              : 1,                    //版本号
-            versionName              : "1.0.6",              //版本名称
+            versionCode              : 7,                    //版本号
+            versionName              : "1.0.6.1",              //版本名称
 
             compileSdkVersion        : 27,
             buildToolsVersion        : "27.1.1",

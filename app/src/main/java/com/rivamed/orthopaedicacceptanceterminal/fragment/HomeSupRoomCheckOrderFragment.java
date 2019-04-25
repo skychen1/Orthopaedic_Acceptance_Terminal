@@ -99,7 +99,7 @@ public class HomeSupRoomCheckOrderFragment extends BaseFragment {
             }
         });
         mTvCenterTitle.setText("供应室验收订单");
-        mSupRoomCheckOrderAdapter = new SupRoomCheckOrderAdapter(getContext());
+        mSupRoomCheckOrderAdapter = new SupRoomCheckOrderAdapter(getContext(),1);
         mSupRoomCheckOrderAdapter.setList(listData);
         mRvContext.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvContext.setAdapter(mSupRoomCheckOrderAdapter);

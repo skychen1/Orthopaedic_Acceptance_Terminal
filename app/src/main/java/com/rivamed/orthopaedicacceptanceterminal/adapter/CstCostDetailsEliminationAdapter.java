@@ -29,7 +29,7 @@ public class CstCostDetailsEliminationAdapter extends SimpleRecyclerAdapter<Find
 
 
     public CstCostDetailsEliminationAdapter(Context context) {
-        super(context, R.layout.item_cstcost_details_elimination);
+        super(context, R.layout.item_cstcost_details_sterils);
     }
 
     @Override

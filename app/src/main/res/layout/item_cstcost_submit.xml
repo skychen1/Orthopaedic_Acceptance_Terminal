@@ -103,6 +103,7 @@
             tools:textSize="@dimen/font_size_16" />
 
         <View
+            android:id="@+id/v_state_line"
             android:layout_width="@dimen/margin_1dp"
             android:layout_height="match_parent"
             android:background="#cccccc" />

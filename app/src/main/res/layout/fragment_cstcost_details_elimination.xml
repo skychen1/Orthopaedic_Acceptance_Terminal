@@ -74,14 +74,44 @@
             android:layout_width="@dimen/margin_1dp"
             android:layout_height="match_parent"
             android:background="@color/white" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="数量"
+            android:text="有效期"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_17" />
+
+        <View
+            android:layout_width="@dimen/margin_1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="可提报数量"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17" />
+
+        <View
+            android:layout_width="@dimen/margin_1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="已提报数量"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17" />
+
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

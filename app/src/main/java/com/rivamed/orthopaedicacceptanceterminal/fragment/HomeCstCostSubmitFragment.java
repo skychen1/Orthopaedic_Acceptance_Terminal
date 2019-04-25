@@ -116,7 +116,7 @@ public class HomeCstCostSubmitFragment extends BaseFragment {
             }
         });
         mTvCenterTitle.setText("耗材计费提报");
-        mSupRoomCheckOrderAdapter = new SupRoomCheckOrderAdapter(getContext());
+        mSupRoomCheckOrderAdapter = new SupRoomCheckOrderAdapter(getContext(),0);
         mSupRoomCheckOrderAdapter.setList(listData);
         mRvContext.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvContext.setAdapter(mSupRoomCheckOrderAdapter);
