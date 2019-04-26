@@ -39,7 +39,7 @@ import butterknife.BindView;
  * @ProjectName: Orthopaedic_Acceptance_Terminal
  * @Package: com.rivamed.orthopaedicacceptanceterminal.activities
  * @ClassName: selcetOperationSuiteActivti
- * @Description: 手术排班-选择套餐页面
+ * @Description: 订单申请-选择套餐页面
  * @Author: Amos_Bo
  * @Createate: 2019/2/26 11:03
  * @UpdateUser: 更新者

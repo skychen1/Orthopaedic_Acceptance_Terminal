@@ -37,7 +37,7 @@ public class SelectOperationSuiteAdapter extends SimpleRecyclerAdapter<FindSuite
             return;
         }
         holder.tvSuiteName.setText(item.getSuiteName());
-        holder.tvSuiteAlias.setText("--");
+        holder.tvSuiteAlias.setText(item.getSuiteAlias());
         holder.tvSupplierName.setText(item.getVendorName());
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {

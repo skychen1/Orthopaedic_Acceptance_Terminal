@@ -159,7 +159,6 @@ public class CstCostSureActivity extends OatBaseActivity {
         return listData;
     }
 
-
     @OnClick({R.id.bt_bottom_left, R.id.bt_bottom_right, R.id.bt_bottom_medium})
     public void onViewClicked(View view) {
         switch (view.getId()) {
