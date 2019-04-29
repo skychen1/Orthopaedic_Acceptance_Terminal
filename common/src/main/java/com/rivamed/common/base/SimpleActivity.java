@@ -445,8 +445,8 @@ public abstract class SimpleActivity<P extends IPresent> extends SupportActivity
         builder.setRight("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                startActivity(new Intent(mContext, cls));
                 BaseApplication.getInstance().removeALLActivity_();
+                startActivity(new Intent(mContext, cls));
                 dialog.dismiss();
             }
         });

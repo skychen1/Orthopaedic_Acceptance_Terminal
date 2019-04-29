@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="手术名称："
+            android:text="套餐名称："
             android:textColor="#000000"
             android:textSize="@dimen/font_size_19"
             android:textStyle="bold" />

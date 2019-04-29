@@ -28,6 +28,8 @@ import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeNoseCheckOrderFrag
 import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeOrderLookUpFragment;
 import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeOrderRequestFragment;
 import com.rivamed.orthopaedicacceptanceterminal.fragment.HomeSupRoomCheckOrderFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.OperationPlanFragment;
+import com.rivamed.orthopaedicacceptanceterminal.fragment.OperationUrgentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -201,6 +203,13 @@ public class HomeActivity extends SimpleActivity {
                     break;
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OperationPlanFragment.mVendorId="";
+        OperationUrgentFragment.mVendorId="";
     }
 
     /**

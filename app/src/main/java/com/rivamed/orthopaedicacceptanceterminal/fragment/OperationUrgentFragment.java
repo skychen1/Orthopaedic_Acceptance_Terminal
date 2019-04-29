@@ -76,6 +76,7 @@ public class OperationUrgentFragment extends BaseFragment {
 
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
+        mVendorId="";
         EventBusUtils.register(this);
         initView();
         mOperationPlanSuiteAdapter.setOnSelectSuitListener(new OperationPlanSuiteAdapter.OnClickSuitListener() {

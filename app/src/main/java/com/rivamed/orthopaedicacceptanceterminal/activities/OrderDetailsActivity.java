@@ -142,10 +142,14 @@ public class OrderDetailsActivity extends OatBaseActivity {
             }
         });
         //设置底部按钮
-        if (mFrom.contains("HckDeptUnExamineOrderFragment")) {
+        if (mFrom.equals("HckDeptUnExamineOrderFragment1")) {
             //器械处审核订单
             btBottomLeft.setText("拒绝");
             btBottomRight.setText("通过");
+        }else if (mFrom.equals("HckDeptUnExamineOrderFragment2")) {
+            //器械处审核订单
+            btBottomLeft.setText("拒绝撤销");
+            btBottomRight.setText("确认撤销");
         } else if (mFrom.equals("HomeHckDeptCheckOrderFragment")) {
             //器械处验收订单
             btBottomLeft.setText("拒绝");
