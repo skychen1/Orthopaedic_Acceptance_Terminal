@@ -136,7 +136,7 @@ public class HomeOrderLookUpFragment extends BaseFragment {
         mYear = mCa.get(Calendar.YEAR);
         mMonth = mCa.get(Calendar.MONTH);
         mDay = mCa.get(Calendar.DAY_OF_MONTH);
-        tvStartTime.setText(mYear + "-" + (mMonth + 1) + "-" + mDay);
+        tvStartTime.setText(BaseUtils.getOldDate(7));
         tvEndTime.setText(mYear + "-" + (mMonth + 1) + "-" + mDay);
         BaseUtils.setInputLenWithNoBlank(etSearchKey, 50);
         mOrderLookUpAdapter = new OrderLookUpAdapter(getContext());

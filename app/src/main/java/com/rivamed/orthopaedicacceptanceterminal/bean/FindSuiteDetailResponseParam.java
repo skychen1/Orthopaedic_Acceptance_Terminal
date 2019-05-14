@@ -3,6 +3,7 @@ package com.rivamed.orthopaedicacceptanceterminal.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,9 +55,9 @@ public class FindSuiteDetailResponseParam {
      * 无菌类耗材种类
      */
     private int eliminationCstCount;
-    private List<AsepticCstsBean> asepticCsts;
-    private List<InstrumentsBean> instruments;
-    private List<EliminationCstsBean> eliminationCsts;
+    private List<AsepticCstsBean> asepticCsts = new ArrayList<>();
+    private List<InstrumentsBean> instruments = new ArrayList<>();
+    private List<EliminationCstsBean> eliminationCsts = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -167,6 +168,7 @@ public class FindSuiteDetailResponseParam {
         private int cstCount;
         private int instrumentCount;
         private String cstName;
+        private String feeNum;
         /**
          * 耗材编码
          */
@@ -180,6 +182,14 @@ public class FindSuiteDetailResponseParam {
          */
         private String cstNumber;
         private int num;
+
+        public String getFeeNum() {
+            return feeNum;
+        }
+
+        public void setFeeNum(String feeNum) {
+            this.feeNum = feeNum;
+        }
 
         public int getCstBoxCount() {
             return cstBoxCount;
@@ -345,8 +355,17 @@ public class FindSuiteDetailResponseParam {
         private int cstCount;
         private int instrumentCount;
         private String name;
+        private String feeNum;
         private String code;
         private int num;
+
+        public String getFeeNum() {
+            return feeNum;
+        }
+
+        public void setFeeNum(String feeNum) {
+            this.feeNum = feeNum;
+        }
 
         public int getCstBoxCount() {
             return cstBoxCount;
@@ -470,10 +489,19 @@ public class FindSuiteDetailResponseParam {
         private String cstCode;
         private String cstSpec;
         private String cstType;
+        private String feeNum;
         private String expireDate;
         private String batchNo;
         private String cstNumber;
         private int num;
+
+        public String getFeeNum() {
+            return feeNum;
+        }
+
+        public void setFeeNum(String feeNum) {
+            this.feeNum = feeNum;
+        }
 
         public int getCstBoxCount() {
             return cstBoxCount;

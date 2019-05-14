@@ -91,9 +91,9 @@ abstract public class BaseApplication extends Application {
         //第三方的开源库，使用通知显示当前请求的log，不过在做文件下载的时候，这个库好像有问题，对文件判断不准确
         //builder.addInterceptor(new ChuckInterceptor(this));
         //超时时间设置，默认60秒
-        builder.readTimeout(10000, TimeUnit.MILLISECONDS);      //全局的读取超时时间
-        builder.writeTimeout(10000, TimeUnit.MILLISECONDS);     //全局的写入超时时间
-        builder.connectTimeout(10000, TimeUnit.MILLISECONDS);   //全局的连接超时时间
+        builder.readTimeout(15000, TimeUnit.MILLISECONDS);      //全局的读取超时时间
+        builder.writeTimeout(15000, TimeUnit.MILLISECONDS);     //全局的写入超时时间
+        builder.connectTimeout(15000, TimeUnit.MILLISECONDS);   //全局的连接超时时间
 
         //自动管理cookie（或者叫session的保持），以下几种任选其一就行
         //builder.cookieJar(new CookieJarImpl(new SPCookieStore(this)));

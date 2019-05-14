@@ -1,6 +1,7 @@
 package com.rivamed.orthopaedicacceptanceterminal.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,7 +39,11 @@ public class OrdLookUpSuiteDetailsCstSterilsAdapter extends SimpleRecyclerAdapte
         holder.tvSupplierModule.setText(item.getCstSpec());
         holder.tvCstBatch.setText(item.getBatchNo());
         holder.tvCstValidityTime.setText(item.getExpireDate());
-        holder.tvCstNumber.setText(item.getNum()+"");
+        if (!TextUtils.isEmpty(item.getFeeNum())) {
+            holder.tvCstNumber.setText(item.getFeeNum() + "");
+        } else {
+            holder.tvCstNumber.setText(item.getNum() + "");
+        }
         holder.mRoot.setOnClickListener((View v) -> {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(v, position);

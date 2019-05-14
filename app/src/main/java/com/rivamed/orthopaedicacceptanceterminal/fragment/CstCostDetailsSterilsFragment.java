@@ -30,7 +30,6 @@ import butterknife.BindView;
 @SuppressLint("ValidFragment")
 public class CstCostDetailsSterilsFragment extends BaseFragment {
 
-
     private final List<FindCstDetailResponseParam.AsepticCstsBean> listData = new ArrayList<>();
     @BindView(R.id.rv_context)
     RecyclerView rvContext;

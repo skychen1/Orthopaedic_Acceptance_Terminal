@@ -27,12 +27,12 @@ import butterknife.BindView;
 public class CstCostDetailsEliminationAdapter extends SimpleRecyclerAdapter<FindCstDetailResponseParam.EliminationCstsBean,
         CstCostDetailsEliminationAdapter.MyHolder> {
 
-
     public CstCostDetailsEliminationAdapter(Context context) {
         super(context, R.layout.item_cstcost_details_sterils);
     }
 
     @Override
+
     protected void convert(MyHolder holder, FindCstDetailResponseParam.EliminationCstsBean item, final int position) {
         if (item == null || holder == null) {
             return;
@@ -43,6 +43,8 @@ public class CstCostDetailsEliminationAdapter extends SimpleRecyclerAdapter<Find
         holder.tvCstBatch.setText(item.getBatchNo());
         holder.tvCstNumber.setAmount(item.getNum());
         holder.tvCstNumber.setMaxAmount(item.getMaxNum());
+        holder.mTvCstAffordNum.setText(item.getFeeNum());
+        holder.mTvCstValidityTime.setText(item.getExpireDate());
         holder.tvCstNumber.setOnAmountChangeListener(new AddAndSubAmountView.OnAmountChangeListener() {
             @Override
             public void OnAmountChange(int amount) {
@@ -68,6 +70,10 @@ public class CstCostDetailsEliminationAdapter extends SimpleRecyclerAdapter<Find
         TextView tvCstBatch;
         @BindView(R.id.aas_cst_number)
         AddAndSubAmountView tvCstNumber;
+        @BindView(R.id.tv_cst_afford_num)
+        TextView mTvCstAffordNum;
+        @BindView(R.id.tv_cst_validity_time)
+        TextView mTvCstValidityTime;
 
         MyHolder(View itemView) {
             super(itemView);

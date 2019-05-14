@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="北京圣亚佳杰科贸发展有限公司"
+            android:text="-"
             android:textColor="@color/text_gray_3"
             tools:textSize="@dimen/font_size_16" />
 
@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="北京圣亚佳杰科贸发展有限公司"
+            android:text="-"
             android:textColor="@color/text_gray_3"
             tools:textSize="@dimen/font_size_16" />
 
@@ -83,7 +83,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="北京圣亚佳杰科贸发展有限公司"
+            android:text="-"
             android:textColor="@color/text_gray_3"
             tools:textSize="@dimen/font_size_16" />
 
@@ -98,7 +98,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:gravity="center"
             android:textColor="@color/text_gray_3"
             android:textSize="@dimen/font_size_16" />
@@ -115,7 +115,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="55"
+            android:text=""
             android:textColor="@color/text_gray_3"
             tools:textSize="@dimen/font_size_16" />
         <View

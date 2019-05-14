@@ -110,7 +110,7 @@ public class CstCostDetailsActivity extends OatBaseActivity {
                 return true;
             }
         });
-        etSeach.setHint("请输入套餐名称、套餐别名、供应商");
+        etSeach.setHint("请输入耗材名称、编码、规格、批号");
         mViewTopSearch.setOnEmptyInputListener(new SearchView.OnEmptyInputListener() {
             @Override
             public void OnEmptyInput() {

@@ -217,7 +217,7 @@
         android:orientation="vertical">
 
         <com.rivamed.orthopaedicacceptanceterminal.views.SearchView
-            android:layout_width="350dp"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:id="@+id/view_top_search"
             android:layout_marginTop="@dimen/margin_10dp"

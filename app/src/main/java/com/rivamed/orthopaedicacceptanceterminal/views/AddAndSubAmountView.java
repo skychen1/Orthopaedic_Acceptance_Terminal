@@ -74,9 +74,9 @@ public class AddAndSubAmountView extends LinearLayout implements View.OnClickLis
                 obtainStyledAttributes.getDimensionPixelSize(R.styleable.AddAndSubAmountView_btnWidth, 44);
 
         int tvWidth =
-                obtainStyledAttributes.getDimensionPixelSize(R.styleable.AddAndSubAmountView_tvWidth, 80);
+                obtainStyledAttributes.getDimensionPixelSize(R.styleable.AddAndSubAmountView_tvWidth, 120);
         int tvTextSize =
-                obtainStyledAttributes.getDimensionPixelSize(R.styleable.AddAndSubAmountView_tvTextSize, 18);
+                obtainStyledAttributes.getDimensionPixelSize(R.styleable.AddAndSubAmountView_tvTextSize, 16);
         int btnTextSize =
                 obtainStyledAttributes.getDimensionPixelSize(R.styleable.AddAndSubAmountView_btnTextSize, 18);
         LayoutParams btnParams = new LayoutParams(btnWidth, LayoutParams.MATCH_PARENT);
@@ -86,8 +86,8 @@ public class AddAndSubAmountView extends LinearLayout implements View.OnClickLis
             mBtnSub.setTextSize(TypedValue.COMPLEX_UNIT_PX, btnTextSize);
             mBtnAdd.setTextSize(TypedValue.COMPLEX_UNIT_PX, btnTextSize);
         }
-        LayoutParams textParams = new LayoutParams(tvWidth, LayoutParams.MATCH_PARENT);
-        mTvAmount.setLayoutParams(textParams);
+//        LayoutParams textParams = new LayoutParams(tvWidth, LayoutParams.MATCH_PARENT);
+//        mTvAmount.setLayoutParams(textParams);
         if (tvTextSize != 0) {
             mTvAmount.setTextSize(tvTextSize);
         }

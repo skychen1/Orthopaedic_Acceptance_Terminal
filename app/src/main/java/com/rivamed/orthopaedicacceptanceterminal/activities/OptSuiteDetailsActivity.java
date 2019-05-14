@@ -15,6 +15,7 @@ import com.rivamed.common.adapter.FragmentAdapter;
 import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.common.utils.EventBusUtils;
+import com.rivamed.common.utils.ToastUtils;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
@@ -68,6 +69,8 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
     private FindByIdResponseParam mBody;
     private String mFrom = "";
     private String vendorId;
+    private List<FindByIdResponseParam.CstsBean> mCsts = new ArrayList<>();
+    private List<FindByIdResponseParam.InstrumentsBean> mInstruments = new ArrayList<>();
 
     @Override
     protected int getContentLayoutId() {
@@ -121,8 +124,12 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
     private void initFrag(FindByIdResponseParam body) {
         rbContentLeft.setText("耗材" + "【" + body.getCstCount() + "】");
         rbContentRight.setText("器械" + "【" + body.getInstrumentCount() + "】");
-        mFragments.add(new OptSuiteCstFragment(body.getCsts()));
-        mFragments.add(new OptSuiteApparatusFragment(body.getInstruments()));
+        mCsts.clear();
+        mInstruments.clear();
+        mCsts.addAll(body.getCsts());
+        mInstruments.addAll(body.getInstruments());
+        mFragments.add(new OptSuiteCstFragment(mCsts));
+        mFragments.add(new OptSuiteApparatusFragment(mInstruments));
 
         mFragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(),
                 mFragments);
@@ -168,6 +175,10 @@ public class OptSuiteDetailsActivity extends OatBaseActivity {
 
     @OnClick(R.id.bt_bottom_right)
     public void onViewClicked() {
+        if (mCsts.size() == 0 && mInstruments.size() == 0) {
+            ToastUtils.showShort("套餐内容为空， 确认失败！");
+            return;
+        }
         if (mBody != null) {
             mBody.setFrom(mFrom);
             mBody.setVendorId(vendorId);

@@ -17,6 +17,8 @@ import com.rivamed.common.http.OkGoUtil;
 import com.rivamed.common.http.callback.DialogCallback;
 import com.rivamed.common.utils.EventBusUtils;
 import com.rivamed.common.utils.ToastUtils;
+import com.rivamed.common.utils.UIUtils;
+import com.rivamed.common.views.EditTipDialog;
 import com.rivamed.orthopaedicacceptanceterminal.R;
 import com.rivamed.orthopaedicacceptanceterminal.app.UrlPath;
 import com.rivamed.orthopaedicacceptanceterminal.bean.Event;
@@ -74,6 +76,7 @@ public class SuiteDetailsActivity extends OatBaseActivity {
     private FindSuiteDetailResponseParam mBody;
     private String mFrom = "";
     private String mOrderId = "";
+    private String mReason = "";
 
     @Override
     protected int getContentLayoutId() {
@@ -198,23 +201,13 @@ public class SuiteDetailsActivity extends OatBaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_bottom_left://拒绝
-                switch (mFrom) {
-                    case "HomeHckDeptCheckOrderFragment"://器械处验收订单
-                        operatorOrder("5");
-                        break;
-                    case "HomeNoseCheckOrderFragment"://护士验收订单
-                        operatorOrder("9");
-                        break;
-                    case "HomeSupRoomCheckOrderFragment"://供应室验收订单
-                        operatorOrder("11");
-                        break;
-                    default:
-                        break;
-                }
+                if (UIUtils.isFastDoubleClick()) return;
+                showTip();
                 break;
             case R.id.bt_bottom_medium:
                 break;
             case R.id.bt_bottom_right://确认
+                if (UIUtils.isFastDoubleClick()) return;
                 switch (mFrom) {
                     case "HomeHckDeptCheckOrderFragment"://器械处验收订单
                         operatorOrder("4");
@@ -232,6 +225,47 @@ public class SuiteDetailsActivity extends OatBaseActivity {
         }
     }
 
+    private void showTip() {
+        EditTipDialog.Builder builder = new EditTipDialog.Builder(mContext, 1);
+        builder.setTwoMsg("");
+        builder.setMsg("请输入拒绝原因");
+        builder.setLeft("取消", new EditTipDialog.Builder.OnInputBackListener() {
+            @Override
+            public void OnInputBack(EditTipDialog dialog, String content) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.setRight("确认", new EditTipDialog.Builder.OnInputBackListener() {
+            @Override
+            public void OnInputBack(EditTipDialog dialog, String content) {
+                mReason = content.trim();
+                if (TextUtils.isEmpty(mReason)) {
+                    ToastUtils.showShort("内容不能为空");
+                } else {
+                    if (dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    switch (mFrom) {
+                        case "HomeHckDeptCheckOrderFragment"://器械处验收订单
+                            operatorOrder("5");
+                            break;
+                        case "HomeNoseCheckOrderFragment"://护士验收订单
+                            operatorOrder("9");
+                            break;
+                        case "HomeSupRoomCheckOrderFragment"://供应室验收订单
+                            operatorOrder("11");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        });
+        builder.create().show();
+    }
+
     /**
      * 订单操作
      *
@@ -241,6 +275,9 @@ public class SuiteDetailsActivity extends OatBaseActivity {
         Map<String, String> map = new HashMap<>(2);
         map.put("operator", operator);
         map.put("orderId", mOrderId);
+        if (!TextUtils.isEmpty(mReason)) {
+            map.put("reason", mReason);
+        }
         OkGoUtil.postJsonRequest(UrlPath.ACCOUNT_OPERATOR_ORDER, this, map,
                 new DialogCallback<SaveOrderResponseParam>(this) {
                     @Override

@@ -69,10 +69,8 @@ public class CstCostSureActivity extends OatBaseActivity {
     @Override
     public void initDataAndEvent(Bundle savedInstanceState) {
         btBottomLeft.setText("取消");
-        btBottomRight.setText("只提交不结束");
         tvCenterTitle.setText("请确认计费耗材");
         btBottomMedium.setVisibility(View.VISIBLE);
-        btBottomMedium.setText("提交并结束订单");
         Intent intent = getIntent();
         mOrderId = intent.getStringExtra("mOrderId");
         List<FindCstDetailResponseParam.AsepticCstsBean> cstCostDetailsSterilsData = (List<FindCstDetailResponseParam.AsepticCstsBean>) intent.getSerializableExtra("mCstCostDetailsSterilsFragmentListData");
@@ -82,6 +80,13 @@ public class CstCostSureActivity extends OatBaseActivity {
         List<CstsBean> listData = getListData(mCstCostDetailsSterilsData, mCstCostDetailsEliminationData);
         mListData.addAll(listData);
         mListDataTemp.addAll(listData);
+        if (mListData.size() > 0) {
+            btBottomMedium.setText("只提交不结束");
+            btBottomRight.setText("提交并结束订单");
+        } else {
+            btBottomMedium.setVisibility(View.GONE);
+            btBottomRight.setText("确认提交并关闭订单");
+        }
         mCstCostSureAdapter = new CstCostSureAdapter(getApplicationContext());
         mCstCostSureAdapter.setList(mListDataTemp);
         rvContext.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -166,10 +171,10 @@ public class CstCostSureActivity extends OatBaseActivity {
                 finish();
                 break;
             case R.id.bt_bottom_right:
-                submit(false);
+                submit(true);
                 break;
             case R.id.bt_bottom_medium:
-                submit(true);
+                submit(false);
                 break;
         }
     }
@@ -186,11 +191,7 @@ public class CstCostSureActivity extends OatBaseActivity {
             suiteVosBean.setOrderDetailId(cstsBean.getOrderDetailId());
             submitCostReqestAndResponseParam.getSuiteVos().add(suiteVosBean);
         }
-        if (submitCostReqestAndResponseParam.getSuiteVos().size() == 0) {
-            ToastUtils.showShort("没有要提交的耗材");
-        } else {
-            submitCostData(submitCostReqestAndResponseParam);
-        }
+        submitCostData(submitCostReqestAndResponseParam);
     }
 
     /**

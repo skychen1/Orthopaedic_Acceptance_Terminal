@@ -376,9 +376,18 @@ public class FindCstDetailResponseParam implements Serializable {
         private String batchNo = "";
         private String orderDetailId = "";
         private String cstNumber = "0";
+        private String feeNum = "0";
         private int num;
         private int maxNum;
         private String cstId;
+
+        public String getFeeNum() {
+            return feeNum;
+        }
+
+        public void setFeeNum(String feeNum) {
+            this.feeNum = feeNum;
+        }
 
         public String getOrderSuiteId() {
             return orderSuiteId;
